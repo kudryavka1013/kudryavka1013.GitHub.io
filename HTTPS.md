@@ -12,7 +12,7 @@ HTTP是明文传输的，在传输过程中容易被劫持，传输内容就完�
 
 一个密钥，可以**对信息进行加密**，也可以**对加密后的信息进行解密**
 
-![img](https://pic1.zhimg.com/v2-1252526c263ee50c47b7b49bd1c2ef44_r.jpg)
+![v2-1252526c263ee50c47b7b49bd1c2ef44_r](https://cdn.jsdelivr.net/gh/kudryavka1013/note-pic@master/note/20210408161134.jpg)
 
 通信双方持有同一个密钥，这样即使数据在传输过程被截获，也是密文不会暴露
 
@@ -24,7 +24,7 @@ HTTP是明文传输的，在传输过程中容易被劫持，传输内容就完�
 
 <u>一对</u>密钥，我们分别叫A和A'，**A加密的内容只能用A'解密，而A'加密的内容只能用A解密**。在数据传输时，我们一般把公开的某个密钥叫<u>公钥</u>，不公开的称为<u>私钥</u>
 
-![img](https://pic1.zhimg.com/v2-1589bbfab027eb9f52da03c02a837fd4_r.jpg)
+![v2-1589bbfab027eb9f52da03c02a837fd4_r](https://cdn.jsdelivr.net/gh/kudryavka1013/note-pic@master/note/20210408161151.jpg)
 
 服务器自己拥有一对非对称密钥，然后把公钥<u>明文</u>传给浏览器，而浏览器传输数据时都用公钥加密。这样，**浏览器 -> 服务器 的<u>单向</u>传输是安全的**（其实还有漏洞）
 
