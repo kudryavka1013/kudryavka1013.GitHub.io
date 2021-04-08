@@ -283,3 +283,12 @@ DH算法，采用DH算法后，Premaster secret不需要传递，双方只要交
 
 session ID的思想很简单，就是每一次对话都有一个编号（session ID），浏览器生成好密钥传给服务器后，服务器会把该密钥存到相应的session ID下。如果对话中断，下次重连的时候，浏览器请求会携带session ID，服务器会根据session ID找到相应的密钥并进行解密加密操作，这样就不必要每次重新制作、传输密钥了！
 
+
+
+
+
+#### 参考
+
+[彻底搞懂HTTPS的加密原理 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/43789231)
+
+[SSL/TLS协议运行机制的概述 - 阮一峰的网络日志 (ruanyifeng.com)](http://www.ruanyifeng.com/blog/2014/02/ssl_tls.html)
