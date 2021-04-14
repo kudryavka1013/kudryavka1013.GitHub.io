@@ -25,7 +25,7 @@
   </script>
 <meta name="description" content="缓存是什么东西？首先，缓冲就是一个资源副本。我们向服务器请求资源后，会根据情况将资源复制一份副本放在本地，以便下次读取。 和本地存储localStorage、cookie不同的是，本地存储一般是数据记录，存储量比较小。而缓存主要用途是为了减少资源请求，多用于存储文件，存储量比较大。 缓存有什么用呢？最根本的作用就是减少没有必要的请求。有的资源，很久才会发生一次改变，如果我们每次都去请求它，请求拿到">
 <meta property="og:type" content="article">
-<meta property="og:title" content="某垃圾的博客">
+<meta property="og:title" content="HTTPCache（强缓存和协商缓存）">
 <meta property="og:url" content="https://blog.kudryavka.xyz/2021/04/13/HTTPCache%EF%BC%88%E5%BC%BA%E7%BC%93%E5%AD%98%E5%92%8C%E5%8D%8F%E5%95%86%E7%BC%93%E5%AD%98%EF%BC%89/index.html">
 <meta property="og:site_name" content="某垃圾的博客">
 <meta property="og:description" content="缓存是什么东西？首先，缓冲就是一个资源副本。我们向服务器请求资源后，会根据情况将资源复制一份副本放在本地，以便下次读取。 和本地存储localStorage、cookie不同的是，本地存储一般是数据记录，存储量比较小。而缓存主要用途是为了减少资源请求，多用于存储文件，存储量比较大。 缓存有什么用呢？最根本的作用就是减少没有必要的请求。有的资源，很久才会发生一次改变，如果我们每次都去请求它，请求拿到">
@@ -46,9 +46,10 @@
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/kudryavka1013/note-pic@master/note/20210411194112.jpeg">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/kudryavka1013/note-pic@master/note/20210411195514.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/kudryavka1013/note-pic@master/note/20210411195526.png">
-<meta property="article:published_time" content="2021-04-13T12:16:44.557Z">
-<meta property="article:modified_time" content="2021-04-13T12:16:44.562Z">
+<meta property="article:published_time" content="2021-04-13T03:01:53.000Z">
+<meta property="article:modified_time" content="2021-04-14T03:03:23.313Z">
 <meta property="article:author" content="Kudryavka">
+<meta property="article:tag" content="HTTP相关">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/kudryavka1013/note-pic@master/note/20210411000747.webp">
 
@@ -65,7 +66,7 @@
     lang   : 'en'
   };
 </script>
-<title> | 某垃圾的博客</title>
+<title>HTTPCache（强缓存和协商缓存） | 某垃圾的博客</title>
   
 
 
@@ -177,9 +178,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-count">3</span>
           <span class="site-state-item-name">posts</span>
         </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">tags</span>
       </div>
   </nav>
 </div>
@@ -230,7 +235,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          
+          HTTPCache（强缓存和协商缓存）
         </h1>
 
         <div class="post-meta-container">
@@ -241,8 +246,15 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2021-04-13 20:16:44" itemprop="dateCreated datePublished" datetime="2021-04-13T20:16:44+08:00">2021-04-13</time>
+      <time title="Created: 2021-04-13 11:01:53" itemprop="dateCreated datePublished" datetime="2021-04-13T11:01:53+08:00">2021-04-13</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-04-14 11:03:23" itemprop="dateModified" datetime="2021-04-14T11:03:23+08:00">2021-04-14</time>
+      </span>
 
   
 </div>
@@ -334,6 +346,9 @@
     
 
     <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/HTTP%E7%9B%B8%E5%85%B3/" rel="tag"># HTTP相关</a>
+          </div>
 
         
 
@@ -341,8 +356,8 @@
             <div class="post-nav-item">
             </div>
             <div class="post-nav-item">
-                <a href="/2021/04/13/HTTPS%EF%BC%88SSL%E5%92%8CTLS%EF%BC%89/" rel="next" title="">
-                   <i class="fa fa-chevron-right"></i>
+                <a href="/2021/04/14/HTTPS%EF%BC%88SSL%E5%92%8CTLS%EF%BC%89/" rel="next" title="HTTPS（SSL和TLS）">
+                  HTTPS（SSL和TLS） <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
