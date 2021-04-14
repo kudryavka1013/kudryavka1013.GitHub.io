@@ -22,12 +22,12 @@
   <script src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.js"></script>
 
 <script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;blog.kudryavka.xyz&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Gemini&quot;,&quot;version&quot;:&quot;8.3.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:false,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:true,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;搜索...&quot;,&quot;empty&quot;:&quot;没有找到任何搜索结果：${query}&quot;,&quot;hits_time&quot;:&quot;找到 ${hits} 个搜索结果（用时 ${time} 毫秒）&quot;,&quot;hits&quot;:&quot;找到 ${hits} 个搜索结果&quot;}}</script>
-<meta name="description" content="前言HTTP是明文传输的，在传输过程中容易被劫持，传输内容就完全暴露了。 中间人攻击：劫持者篡改传输的信息并且不被双方察觉">
+<meta name="description" content="前言HTTP是明文传输的，在传输过程中容易被劫持，传输内容就完全暴露了。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="HTTPS（SSL和TLS）">
 <meta property="og:url" content="https://blog.kudryavka.xyz/2021/04/14/HTTPS%EF%BC%88SSL%E5%92%8CTLS%EF%BC%89/index.html">
 <meta property="og:site_name" content="摸鱼基地">
-<meta property="og:description" content="前言HTTP是明文传输的，在传输过程中容易被劫持，传输内容就完全暴露了。 中间人攻击：劫持者篡改传输的信息并且不被双方察觉">
+<meta property="og:description" content="前言HTTP是明文传输的，在传输过程中容易被劫持，传输内容就完全暴露了。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/kudryavka1013/note-pic@master/note/20210408161134.jpg">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/kudryavka1013/note-pic@master/note/20210408161151.jpg">
@@ -85,7 +85,7 @@
       <h1 class="site-title">摸鱼基地</h1>
       <i class="logo-line"></i>
     </a>
-      <p class="site-subtitle" itemprop="description">摸了</p>
+      <p class="site-subtitle" itemprop="description">摸鱼使我快乐</p>
   </div>
 
   <div class="site-nav-right">
@@ -99,10 +99,10 @@
 <nav class="site-nav">
   <ul class="main-menu menu">
         <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">0</span></a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">1</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">2</span></a></li>
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
-        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
-        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
   </ul>
 </nav>
 
