@@ -505,7 +505,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-04-14 11:03:23" itemprop="dateModified" datetime="2021-04-14T11:03:23+08:00">2021-04-14</time>
+        <time title="Modified: 2021-04-14 11:23:11" itemprop="dateModified" datetime="2021-04-14T11:23:11+08:00">2021-04-14</time>
       </span>
 
   
@@ -523,7 +523,7 @@
 <h4 id="缓存有什么用呢？"><a href="#缓存有什么用呢？" class="headerlink" title="缓存有什么用呢？"></a>缓存有什么用呢？</h4><p>最根本的作用就是<strong>减少没有必要的请求</strong>。有的资源，<u>很久才会发生一次改变</u>，如果我们每次都去请求它，请求拿到的东西又是一样的。一来一回，页面显示要的时间长了不说，频繁的服务器请求还给服务器增加压力。那我们把这个资源直接缓存到本地，那每次要用了就本地读取，不用再发起请求。</p>
 <p>这样，<strong>缓存减少页面显示需要的时间，提高了用户体验。同时，减少了服务器请求，减轻服务器压力。</strong></p>
 <h5 id="浏览器缓存机制"><a href="#浏览器缓存机制" class="headerlink" title="浏览器缓存机制"></a>浏览器缓存机制</h5><p>按浏览器读取优先级顺序依次为：Memory Cache、Service Worker Cache、<strong>HTTP Cache</strong>、Push Cache</p>
-<h3 id="HTTP-Cache"><a href="#HTTP-Cache" class="headerlink" title="HTTP Cache"></a>HTTP Cache</h3><p>浏览器与服务器通信的方式为应答模式，即是：浏览器发起HTTP请求 – 服务器响应该请求。那么浏览器<u>第一次</u>向服务器发起该请求后拿到请求结果，<strong>会根据响应报文中HTTP头的<u>缓存标识</u>，决定是否缓存结果</strong>，<u>是</u>则将请求结果和缓存标识存入浏览器缓存中</p>
+<h4 id="HTTP-Cache"><a href="#HTTP-Cache" class="headerlink" title="HTTP Cache"></a>HTTP Cache</h4><p>浏览器与服务器通信的方式为应答模式，即是：浏览器发起HTTP请求 – 服务器响应该请求。那么浏览器<u>第一次</u>向服务器发起该请求后拿到请求结果，<strong>会根据响应报文中HTTP头的<u>缓存标识</u>，决定是否缓存结果</strong>，<u>是</u>则将请求结果和缓存标识存入浏览器缓存中</p>
 <ul>
 <li>浏览器每次发起请求，都先在缓存中查找该请求的结果以及缓存标识</li>
 <li>浏览器每次拿到返回的请求结果，都会把结果和缓存标识存进浏览器缓存</li>
@@ -587,7 +587,7 @@
 <li>刷新按钮，F5刷新，网页右键重新加载<br>浏览器在这种操作下将 <code>cache-control</code> 的 <code>max-age</code> 直接设置成了 0，让缓存立即过期，直接走协商缓存路线<br><img src="https://cdn.jsdelivr.net/gh/kudryavka1013/note-pic@master/note/20210411195514.png" alt="image-20210411195514026"></li>
 <li>Ctrl + F5 强制刷新<br>浏览器会强行设置 <code>no-cache</code>，强制获取最新的资源，就连 <code>if-modified-since</code> 等其他缓存协议字段都会被忽略<br><img src="https://cdn.jsdelivr.net/gh/kudryavka1013/note-pic@master/note/20210411195526.png" alt="image-20210411195526562"></li>
 </ul>
-<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903593275817998">https://juejin.cn/post/6844903593275817998</a></p>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903593275817998">https://juejin.cn/post/6844903593275817998</a></p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qianyu6200430/article/details/115535067">https://blog.csdn.net/qianyu6200430/article/details/115535067</a></p>
 <p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/fb59c770160c">https://www.jianshu.com/p/fb59c770160c</a></p>
 
