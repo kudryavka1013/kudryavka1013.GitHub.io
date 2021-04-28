@@ -5,7 +5,7 @@
   --text-color: #555;
   --blockquote-color: #666;
   --link-color: #555;
-  --link-hover-color: #222;
+  --link-hover-color: #419488;
   --brand-color: #fff;
   --brand-hover-color: #fff;
   --table-row-odd-bg-color: #f9f9f9;
@@ -17,10 +17,10 @@
   --btn-default-hover-bg: #fc6423;
   --btn-default-hover-color: #fff;
   --btn-default-hover-border-color: #fc6423;
-  --highlight-background: #f0f0f0;
-  --highlight-foreground: #444;
-  --highlight-gutter-background: #dedede;
-  --highlight-gutter-foreground: #555;
+  --highlight-background: #f8f8f8;
+  --highlight-foreground: #333;
+  --highlight-gutter-background: #e4e4e4;
+  --highlight-gutter-foreground: #464646;
 }
 @media (prefers-color-scheme: dark) {
   :root {
@@ -30,7 +30,7 @@
     --text-color: #ccc;
     --blockquote-color: #bbb;
     --link-color: #ccc;
-    --link-hover-color: #eee;
+    --link-hover-color: #419488;
     --brand-color: #ddd;
     --brand-hover-color: #ddd;
     --table-row-odd-bg-color: #282828;
@@ -42,10 +42,10 @@
     --btn-default-hover-bg: #666;
     --btn-default-hover-color: #ccc;
     --btn-default-hover-border-color: #666;
-    --highlight-background: #1d1f21;
-    --highlight-foreground: #c5c8c6;
-    --highlight-gutter-background: #2d2f31;
-    --highlight-gutter-foreground: #b4b7b5;
+    --highlight-background: #2d2d2d;
+    --highlight-foreground: #ccc;
+    --highlight-gutter-background: #3c3c3c;
+    --highlight-gutter-foreground: #bcbcbc;
   }
   img {
     opacity: 0.75;
@@ -203,7 +203,7 @@ template {
   display: none;
 }
 ::selection {
-  background: #262a30;
+  background: #419488;
   color: #eee;
 }
 html,
@@ -213,7 +213,7 @@ body {
 body {
   background: var(--body-bg-color);
   color: var(--text-color);
-  font-family: Lato, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  font-family: Noto Serif SC, 'PingFang SC', 'Microsoft YaHei', sans-serif;
   font-size: 1em;
   line-height: 2;
   min-height: 100%;
@@ -232,7 +232,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: Lato, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  font-family: Noto Serif SC, 'PingFang SC', 'Microsoft YaHei', sans-serif;
   font-weight: bold;
   line-height: 1.5;
   margin: 20px 0 15px;
@@ -375,15 +375,13 @@ td {
   margin-top: 3px;
 }
 .toggle.toggle-arrow .toggle-line:first-child {
-  left: 50%;
   top: 2px;
-  transform: rotate(45deg);
+  transform: rotate(-45deg);
   width: 50%;
 }
 .toggle.toggle-arrow .toggle-line:last-child {
-  left: 50%;
   top: -2px;
-  transform: rotate(-45deg);
+  transform: rotate(45deg);
   width: 50%;
 }
 .toggle.toggle-close .toggle-line:nth-child(2) {
@@ -391,15 +389,15 @@ td {
 }
 .toggle.toggle-close .toggle-line:first-child {
   top: 5px;
-  transform: rotate(45deg);
+  transform: rotate(-45deg);
 }
 .toggle.toggle-close .toggle-line:last-child {
   top: -5px;
-  transform: rotate(-45deg);
+  transform: rotate(45deg);
 }
 /*
 
-Original highlight.js style (c) Ivan Sagalaev <maniac@softwaremaniacs.org>
+github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 
 */
 
@@ -407,87 +405,87 @@ Original highlight.js style (c) Ivan Sagalaev <maniac@softwaremaniacs.org>
   display: block;
   overflow-x: auto;
   padding: 0.5em;
-  background: #F0F0F0;
+  color: #333;
+  background: #f8f8f8;
 }
 
-
-/* Base color: saturation 0; */
-
-.hljs,
-.hljs-subst {
-  color: #444;
-}
-
-.hljs-comment {
-  color: #888888;
+.hljs-comment,
+.hljs-quote {
+  color: #998;
+  font-style: italic;
 }
 
 .hljs-keyword,
-.hljs-attribute,
 .hljs-selector-tag,
-.hljs-meta-keyword,
-.hljs-doctag,
-.hljs-name {
+.hljs-subst {
+  color: #333;
   font-weight: bold;
 }
 
-
-/* User color: hue: 0 */
-
-.hljs-type,
-.hljs-string,
 .hljs-number,
-.hljs-selector-id,
-.hljs-selector-class,
-.hljs-quote,
-.hljs-template-tag,
-.hljs-deletion {
-  color: #880000;
+.hljs-literal,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag .hljs-attr {
+  color: #008080;
+}
+
+.hljs-string,
+.hljs-doctag {
+  color: #d14;
 }
 
 .hljs-title,
-.hljs-section {
-  color: #880000;
+.hljs-section,
+.hljs-selector-id {
+  color: #900;
   font-weight: bold;
 }
 
-.hljs-regexp,
-.hljs-symbol,
-.hljs-variable,
-.hljs-template-variable,
-.hljs-link,
-.hljs-selector-attr,
-.hljs-selector-pseudo {
-  color: #BC6060;
+.hljs-subst {
+  font-weight: normal;
 }
 
+.hljs-type,
+.hljs-class .hljs-title {
+  color: #458;
+  font-weight: bold;
+}
 
-/* Language color: hue: 90; */
+.hljs-tag,
+.hljs-name,
+.hljs-attribute {
+  color: #000080;
+  font-weight: normal;
+}
 
-.hljs-literal {
-  color: #78A960;
+.hljs-regexp,
+.hljs-link {
+  color: #009926;
+}
+
+.hljs-symbol,
+.hljs-bullet {
+  color: #990073;
 }
 
 .hljs-built_in,
-.hljs-bullet,
-.hljs-code,
-.hljs-addition {
-  color: #397300;
+.hljs-builtin-name {
+  color: #0086b3;
 }
-
-
-/* Meta color: hue: 200 */
 
 .hljs-meta {
-  color: #1f7199;
+  color: #999;
+  font-weight: bold;
 }
 
-.hljs-meta-string {
-  color: #4d99bf;
+.hljs-deletion {
+  background: #fdd;
 }
 
-
-/* Misc effects */
+.hljs-addition {
+  background: #dfd;
+}
 
 .hljs-emphasis {
   font-style: italic;
@@ -498,15 +496,14 @@ Original highlight.js style (c) Ivan Sagalaev <maniac@softwaremaniacs.org>
 }
 
 @media (prefers-color-scheme: dark) {
-/* Tomorrow Night Theme */
-/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Tomorrow Night Eighties Theme */
 /* Original theme - https://github.com/chriskempson/tomorrow-theme */
 /* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
 
 /* Tomorrow Comment */
 .hljs-comment,
 .hljs-quote {
-  color: #969896;
+  color: #999999;
 }
 
 /* Tomorrow Red */
@@ -518,7 +515,7 @@ Original highlight.js style (c) Ivan Sagalaev <maniac@softwaremaniacs.org>
 .hljs-selector-class,
 .hljs-regexp,
 .hljs-deletion {
-  color: #cc6666;
+  color: #f2777a;
 }
 
 /* Tomorrow Orange */
@@ -530,12 +527,12 @@ Original highlight.js style (c) Ivan Sagalaev <maniac@softwaremaniacs.org>
 .hljs-params,
 .hljs-meta,
 .hljs-link {
-  color: #de935f;
+  color: #f99157;
 }
 
 /* Tomorrow Yellow */
 .hljs-attribute {
-  color: #f0c674;
+  color: #ffcc66;
 }
 
 /* Tomorrow Green */
@@ -543,26 +540,26 @@ Original highlight.js style (c) Ivan Sagalaev <maniac@softwaremaniacs.org>
 .hljs-symbol,
 .hljs-bullet,
 .hljs-addition {
-  color: #b5bd68;
+  color: #99cc99;
 }
 
 /* Tomorrow Blue */
 .hljs-title,
 .hljs-section {
-  color: #81a2be;
+  color: #6699cc;
 }
 
 /* Tomorrow Purple */
 .hljs-keyword,
 .hljs-selector-tag {
-  color: #b294bb;
+  color: #cc99cc;
 }
 
 .hljs {
   display: block;
   overflow-x: auto;
-  background: #1d1f21;
-  color: #c5c8c6;
+  background: #2d2d2d;
+  color: #cccccc;
   padding: 0.5em;
 }
 
@@ -574,6 +571,24 @@ Original highlight.js style (c) Ivan Sagalaev <maniac@softwaremaniacs.org>
   font-weight: bold;
 }
 
+}
+.highlight:hover .copy-btn,
+pre:hover .copy-btn {
+  opacity: 1;
+}
+.copy-btn {
+  color: #333;
+  cursor: pointer;
+  line-height: 1.6;
+  opacity: 0;
+  padding: 2px 6px;
+  position: absolute;
+  transition: opacity 0.2s ease-in-out;
+  background: #fff;
+  border: 0;
+  font-size: 0.8125em;
+  right: 0;
+  top: 0;
 }
 code,
 kbd,
@@ -1311,7 +1326,7 @@ pre code {
   color: var(--brand-hover-color);
 }
 .site-title {
-  font-family: Lato, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  font-family: Noto Serif SC, 'PingFang SC', 'Microsoft YaHei', sans-serif;
   font-size: 1.375em;
   font-weight: normal;
   margin: 0;
@@ -1417,73 +1432,6 @@ pre code {
 }
 .use-motion .menu-item {
   visibility: hidden;
-}
-.github-corner :hover .octo-arm {
-  animation: octocat-wave 560ms ease-in-out;
-}
-.github-corner svg {
-  color: #fff;
-  fill: #222;
-  position: absolute;
-  right: 0;
-  top: 0;
-  z-index: 1000;
-}
-@media (max-width: 991px) {
-  .github-corner svg {
-    color: #222;
-    fill: #fff;
-  }
-  .github-corner .github-corner:hover .octo-arm {
-    animation: none;
-  }
-  .github-corner .github-corner .octo-arm {
-    animation: octocat-wave 560ms ease-in-out;
-  }
-}
-@-moz-keyframes octocat-wave {
-  0%, 100% {
-    transform: rotate(0);
-  }
-  20%, 60% {
-    transform: rotate(-25deg);
-  }
-  40%, 80% {
-    transform: rotate(10deg);
-  }
-}
-@-webkit-keyframes octocat-wave {
-  0%, 100% {
-    transform: rotate(0);
-  }
-  20%, 60% {
-    transform: rotate(-25deg);
-  }
-  40%, 80% {
-    transform: rotate(10deg);
-  }
-}
-@-o-keyframes octocat-wave {
-  0%, 100% {
-    transform: rotate(0);
-  }
-  20%, 60% {
-    transform: rotate(-25deg);
-  }
-  40%, 80% {
-    transform: rotate(10deg);
-  }
-}
-@keyframes octocat-wave {
-  0%, 100% {
-    transform: rotate(0);
-  }
-  20%, 60% {
-    transform: rotate(-25deg);
-  }
-  40%, 80% {
-    transform: rotate(10deg);
-  }
 }
 .sidebar-inner {
   color: #999;
@@ -1647,11 +1595,11 @@ pre code {
   opacity: 0.6;
   position: fixed;
   z-index: 1300;
-  right: 30px;
+  left: 30px;
 }
 @media (max-width: 991px) {
   .sidebar-toggle {
-    right: 20px;
+    left: 20px;
   }
 }
 .sidebar-toggle:hover {
@@ -1667,15 +1615,13 @@ pre code {
 }
 @media (any-hover: hover) {
   body:not(.sidebar-active) .sidebar-toggle:hover .toggle-line:first-child {
-    left: 50%;
     top: 2px;
-    transform: rotate(45deg);
+    transform: rotate(-45deg);
     width: 50%;
   }
   body:not(.sidebar-active) .sidebar-toggle:hover .toggle-line:last-child {
-    left: 50%;
     top: -2px;
-    transform: rotate(-45deg);
+    transform: rotate(45deg);
     width: 50%;
   }
 }
@@ -1684,11 +1630,11 @@ pre code {
 }
 .sidebar-active .sidebar-toggle .toggle-line:first-child {
   top: 5px;
-  transform: rotate(45deg);
+  transform: rotate(-45deg);
 }
 .sidebar-active .sidebar-toggle .toggle-line:last-child {
   top: -5px;
-  transform: rotate(-45deg);
+  transform: rotate(45deg);
 }
 .post-toc {
   font-size: 0.875em;
@@ -1806,7 +1752,7 @@ pre code {
   width: 100%;
 }
 .with-love {
-  color: #607D8B;
+  color: #419488;
   display: inline-block;
   margin: 0 5px;
 }
@@ -1870,36 +1816,16 @@ pre code {
   font-size: 12px;
 }
 .back-to-top {
-  bottom: -100px;
-  box-sizing: border-box;
-  color: #fff;
-  padding: 0 6px;
-  transition: bottom 0.2s ease-in-out;
-  background: #222;
-  cursor: pointer;
-  opacity: 0.6;
-  position: fixed;
-  z-index: 1300;
-  right: 30px;
-}
-@media (max-width: 991px) {
-  .back-to-top {
-    right: 20px;
-  }
-}
-.back-to-top:hover {
-  opacity: 0.8;
-}
-@media (max-width: 991px) {
-  .back-to-top {
-    opacity: 0.8;
-  }
-}
-.back-to-top:hover {
-  color: #fc6423;
+  margin: 8px -10px -20px;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
 }
 .back-to-top.back-to-top-on {
-  bottom: 30px;
+  cursor: pointer;
+  opacity: 0.6;
+}
+.back-to-top.back-to-top-on:hover {
+  opacity: 0.8;
 }
 .noscript-warning {
   background-color: #f55;
@@ -1913,6 +1839,16 @@ pre code {
   top: 0;
   width: 100%;
   z-index: 1500;
+}
+.reading-progress-bar {
+  --progress: 0;
+  background: #419488;
+  height: 3px;
+  position: fixed;
+  z-index: 1500;
+  width: var(--progress);
+  left: 0;
+  top: 0;
 }
 .rtl.post-body p,
 .rtl.post-body a,
@@ -2052,7 +1988,7 @@ pre code {
   width: 4px;
 }
 .post-body {
-  font-family: Lato, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  font-family: Noto Serif SC, 'PingFang SC', 'Microsoft YaHei', sans-serif;
   overflow-wrap: break-word;
 }
 @media (min-width: 1200px) {
@@ -2178,12 +2114,43 @@ pre code {
   top: 0;
   width: 100%;
 }
-.post-body p a {
+.post-body h2,
+.post-body h3 {
+  color: #419488;
+  border-left: 6px solid #419488;
+  margin-left: 0px;
+  padding-left: 24px;
+  border-bottom: 1px solid #419488;
+  padding-bottom: 0.3em;
+  position: relative;
+}
+.post-body h4 {
+  color: #419488;
+  border-left: 5px solid #419488;
+  margin-left: 0px;
+  padding-left: 24px;
+  border-bottom: 1px solid #cfd8dc;
+  padding-bottom: 0.3em;
+  position: relative;
+}
+.post-body h5 {
+  color: #419488;
+  border-left: 4px solid #419488;
+  margin-left: 0px;
+  padding-left: 16px;
+  position: relative;
+}
+.post-body h6 {
+  color: #419488;
+}
+.post-body p a,
+.post-body li a {
   color: #0593d3;
   border-bottom: none;
   border-bottom: 1px solid #0593d3;
 }
-.post-body p a:hover {
+.post-body p a:hover,
+.post-body li a:hover {
   color: #fc6423;
   border-bottom: none;
   border-bottom: 1px solid #fc6423;
@@ -2232,7 +2199,7 @@ pre code {
   position: relative;
 }
 .posts-expand .post-title-link::before {
-  background: var(--link-color);
+  background: #419488;
   bottom: 0;
   content: '';
   height: 2px;
@@ -2241,6 +2208,9 @@ pre code {
   transform: scaleX(0);
   transition: transform 0.2s ease-in-out;
   width: 100%;
+}
+.posts-expand .post-title-link:hover {
+  color: #419488;
 }
 .posts-expand .post-title-link:hover::before {
   transform: scaleX(1);
@@ -2256,7 +2226,7 @@ pre code {
 }
 .posts-expand .post-meta-container {
   color: #999;
-  font-family: Lato, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  font-family: Noto Serif SC, 'PingFang SC', 'Microsoft YaHei', sans-serif;
   font-size: 0.75em;
   margin-top: 3px;
 }
@@ -2720,6 +2690,7 @@ ul.breadcrumb li:last-child {
   --width: calc(100% - 20px);
   margin: 0 calc((100vw - var(--width)) / 2);
   width: var(--width);
+  flex-direction: row-reverse;
 }
 @media (min-width: 1200px) {
   .main {
@@ -2749,7 +2720,7 @@ ul.breadcrumb li:last-child {
   }
 }
 .footer-inner {
-  padding-left: 252px;
+  padding-right: 252px;
 }
 @media (max-width: 991px) {
   .footer-inner {
@@ -2923,6 +2894,13 @@ ul.breadcrumb li:last-child {
 .links-of-author-item a:hover {
   background: var(--body-bg-color);
 }
+.back-to-top {
+  background: var(--body-bg-color);
+  margin: -4px -10px -18px;
+}
+.back-to-top.back-to-top-on {
+  margin-top: 16px;
+}
 .main-inner > .sub-menu,
 .main-inner > .post-block,
 .main-inner > .tabs-comment,
@@ -2972,10 +2950,10 @@ ul.breadcrumb li:last-child {
 }
 .post-body h1,
 .post-body h2 {
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #419488;
 }
 .post-body h3 {
-  border-bottom: 1px dotted #eee;
+  border-bottom: 1px solid #419488;
 }
 @media (min-width: 768px) and (max-width: 991px) {
   .main-inner {
