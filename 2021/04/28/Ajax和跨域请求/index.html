@@ -30,7 +30,7 @@
 <meta property="og:description" content="Ajax是什么？Ajax全称异步JavaScript和XML，这是一种能够向服务器请求额外数据而不用刷新页面的技术。它的核心是 XMLHttpRequest（XHR） 对象，这个对象提供了一些接口，能让我们以异步的方式从服务器获取信息，这意味着可以在不重新加载整个网页的情况下，对网页的某部分进行更新。也就是说可以用XHR对象取得新数据，然后通过DOM将新数据更新到页面上。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-04-28T07:50:17.000Z">
-<meta property="article:modified_time" content="2021-04-28T14:08:59.552Z">
+<meta property="article:modified_time" content="2021-05-09T13:16:50.096Z">
 <meta property="article:author" content="Kudryavka">
 <meta property="article:tag" content="Ajax">
 <meta name="twitter:card" content="summary">
@@ -111,7 +111,7 @@
         <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">3</span></a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">10</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">9</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">10</span></a></li>
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
   </ul>
 </nav>
@@ -159,7 +159,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-count">10</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -240,10 +240,16 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2021-04-28 15:50:17 / 修改时间：22:08:59" itemprop="dateCreated datePublished" datetime="2021-04-28T15:50:17+08:00">2021-04-28</time>
+      <time title="创建时间：2021-04-28 15:50:17" itemprop="dateCreated datePublished" datetime="2021-04-28T15:50:17+08:00">2021-04-28</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-05-09 21:16:50" itemprop="dateModified" datetime="2021-05-09T21:16:50+08:00">2021-05-09</time>
+      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -429,7 +435,7 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 请求头</span></span><br><span class="line">Origin</span><br><span class="line"></span><br><span class="line"><span class="comment">// 响应头</span></span><br><span class="line">Acess-Control-Allow-Origin（和请求头的相同）</span><br></pre></td></tr></table></figure>
 
 <p>复杂请求：先预检再正式</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 预检请求// 请求头OriginAccess-Control-Request-MethodAccess-Control-Request-Headers（可选）// 响应头Access-Control-Allow-Origin（和请求头的相同）Access-Control-Allow-MethodsAccess-Control-Allow-Headers（看请求头有没有）Access-Control-Max-Age// 正式请求 = 简单请求// 请求头Origin// 响应头Acess-Control-Allow-Origin（和请求头的相同）</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 预检请求</span></span><br><span class="line"><span class="comment">// 请求头</span></span><br><span class="line">Origin</span><br><span class="line">Access-Control-Request-Method</span><br><span class="line">Access-Control-Request-Headers（可选）</span><br><span class="line"><span class="comment">// 响应头</span></span><br><span class="line">Access-Control-Allow-Origin（和请求头的相同）</span><br><span class="line">Access-Control-Allow-Methods</span><br><span class="line">Access-Control-Allow-Headers（看请求头有没有）</span><br><span class="line">Access-Control-Max-Age</span><br><span class="line"></span><br><span class="line"><span class="comment">// 正式请求 = 简单请求</span></span><br><span class="line"><span class="comment">// 请求头</span></span><br><span class="line">Origin</span><br><span class="line"><span class="comment">// 响应头</span></span><br><span class="line">Acess-Control-Allow-Origin（和请求头的相同）</span><br></pre></td></tr></table></figure>
 
 
 
@@ -456,6 +462,9 @@
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/2021/05/09/HTTP0-9%E5%88%B02-0/" rel="next" title="HTTP从0.9到2.0">
+                  HTTP从0.9到2.0 <i class="fa fa-chevron-right"></i>
+                </a>
             </div>
           </div>
     </footer>
@@ -488,14 +497,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">27k</span>
+    <span title="站点总字数">32k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">1:07</span>
+    <span title="站点阅读时长">1:20</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
