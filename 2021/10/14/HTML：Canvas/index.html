@@ -33,8 +33,21 @@
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/kudryavka1013/note-pic@master/note/20211014202531.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/kudryavka1013/note-pic@master/note/20211014205924.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/kudryavka1013/note-pic@master/note/20211014210211.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/kudryavka1013/note-pic@master/note/20211014212606.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/kudryavka1013/note-pic@master/note/20211014212847.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/kudryavka1013/note-pic@master/note/20211014213242.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/kudryavka1013/note-pic@master/note/20211014213352.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/kudryavka1013/note-pic@master/note/20211014222153.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/kudryavka1013/note-pic@master/note/20211014223317.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/kudryavka1013/note-pic@master/note/20211014224348.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/kudryavka1013/note-pic@master/note/20211016153352.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/kudryavka1013/note-pic@master/note/20211016155948.jpeg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/kudryavka1013/note-pic@master/note/20211016165438.jpeg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/kudryavka1013/note-pic@master/note/20211016170134.jpeg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/kudryavka1013/note-pic@master/note/20211016184633.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/kudryavka1013/note-pic@master/note/20211016165245.png">
 <meta property="article:published_time" content="2021-10-14T13:09:08.000Z">
-<meta property="article:modified_time" content="2021-10-14T13:13:38.777Z">
+<meta property="article:modified_time" content="2021-10-16T13:24:06.205Z">
 <meta property="article:author" content="Kudryavka">
 <meta property="article:tag" content="JavaScript">
 <meta property="article:tag" content="HTML">
@@ -149,7 +162,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%A5%E7%94%BB%E7%94%BB%E4%BA%86%EF%BC%81"><span class="nav-number">1.</span> <span class="nav-text">该画画了！</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">基本用法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E9%93%BA%E4%B8%80%E5%BC%A0%E7%94%BB%E5%B8%83%EF%BC%9A%E5%88%9B%E5%BB%BA-canvas-%E5%85%83%E7%B4%A0"><span class="nav-number">2.1.</span> <span class="nav-text">1. 铺一张画布：创建 canvas 元素</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E6%8B%BF%E5%88%B0%E7%BB%98%E7%94%BB%E7%9A%84%E5%B7%A5%E5%85%B7%E7%AE%B1%EF%BC%9A%E8%8E%B7%E5%8F%96%E6%B8%B2%E6%9F%93%E4%B8%8A%E4%B8%8B%E6%96%87%EF%BC%88getContext%EF%BC%89"><span class="nav-number">2.2.</span> <span class="nav-text">2. 拿到绘画的工具箱：获取渲染上下文（getContext）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E7%94%BB%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E5%9B%BE%E5%BD%A2%EF%BC%9A%E7%9F%A9%E5%BD%A2%EF%BC%88Rect%EF%BC%89"><span class="nav-number">2.3.</span> <span class="nav-text">3. 画一个简单的图形：矩形（Rect）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E7%94%BB%E4%B8%80%E4%BA%9B%E7%A8%8D%E5%BE%AE%E5%A4%8D%E6%9D%82%E7%82%B9%E7%9A%84%E5%9B%BE%E5%BD%A2%EF%BC%9A%E8%B7%AF%E5%BE%84%EF%BC%88path%EF%BC%89"><span class="nav-number">2.4.</span> <span class="nav-text">4. 画一些稍微复杂点的图形：路径（path）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%94%BB%E7%9B%B4%E7%BA%BF%EF%BC%9AlineTo"><span class="nav-number">2.4.1.</span> <span class="nav-text">画直线：lineTo()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%94%BB%E6%9B%B2%E7%BA%BF%EF%BC%9Aarc-%EF%BC%8CarcTo-%EF%BC%8CquadraticCurveTo"><span class="nav-number">2.4.2.</span> <span class="nav-text">画曲线：arc() ，arcTo()，quadraticCurveTo()</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#arc-x-y-r-startAngle-endAngle-anticlockwise"><span class="nav-number">2.4.2.1.</span> <span class="nav-text">arc(x, y, r, startAngle, endAngle, anticlockwise)</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%A5%E7%94%BB%E7%94%BB%E4%BA%86%EF%BC%81"><span class="nav-number">1.</span> <span class="nav-text">该画画了！</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="nav-number">2.</span> <span class="nav-text">基本使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%93%BA%E4%B8%80%E5%BC%A0%E7%94%BB%E5%B8%83%EF%BC%9A%E5%88%9B%E5%BB%BA-canvas-%E5%85%83%E7%B4%A0"><span class="nav-number">2.1.</span> <span class="nav-text">铺一张画布：创建 canvas 元素</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8B%BF%E5%88%B0%E7%BB%98%E7%94%BB%E7%9A%84%E5%B7%A5%E5%85%B7%E7%AE%B1%EF%BC%9A%E8%8E%B7%E5%8F%96%E6%B8%B2%E6%9F%93%E4%B8%8A%E4%B8%8B%E6%96%87%EF%BC%88getContext%EF%BC%89"><span class="nav-number">2.2.</span> <span class="nav-text">拿到绘画的工具箱：获取渲染上下文（getContext）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%98%E5%88%B6%E5%9B%BE%E5%BD%A2"><span class="nav-number">3.</span> <span class="nav-text">绘制图形</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%BB%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E5%9B%BE%E5%BD%A2%EF%BC%9A%E7%9F%A9%E5%BD%A2%EF%BC%88Rect%EF%BC%89"><span class="nav-number">3.1.</span> <span class="nav-text">画一个简单的图形：矩形（Rect）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%BB%E4%B8%80%E4%BA%9B%E7%A8%8D%E5%BE%AE%E5%A4%8D%E6%9D%82%E7%82%B9%E7%9A%84%E5%9B%BE%E5%BD%A2%EF%BC%9A%E8%B7%AF%E5%BE%84%EF%BC%88path%EF%BC%89"><span class="nav-number">3.2.</span> <span class="nav-text">画一些稍微复杂点的图形：路径（path）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%94%BB%E7%9B%B4%E7%BA%BF%EF%BC%9AlineTo"><span class="nav-number">3.2.1.</span> <span class="nav-text">画直线：lineTo()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%94%BB%E6%9B%B2%E7%BA%BF%EF%BC%9Aarc-%EF%BC%8CarcTo-%EF%BC%8CquadraticCurveTo"><span class="nav-number">3.2.2.</span> <span class="nav-text">画曲线：arc() ，arcTo()，quadraticCurveTo()</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#arc-x-y-r-startAngle-endAngle-anticlockwise"><span class="nav-number">3.2.2.1.</span> <span class="nav-text">arc(x, y, r, startAngle, endAngle, anticlockwise)</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#arcTo-x1-y1-x2-y2-radius"><span class="nav-number">3.2.2.2.</span> <span class="nav-text">arcTo(x1, y1, x2, y2, radius)</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#quadraticCurveTo-cp1x-cp1y-x-y-%E3%80%81bezierCurveTo-cp1x-cp1y-cp2x-cp2y-x-y"><span class="nav-number">3.2.2.3.</span> <span class="nav-text">quadraticCurveTo(cp1x, cp1y, x, y)、bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y)</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E6%A0%B7%E5%BC%8F%E5%92%8C%E9%A2%9C%E8%89%B2"><span class="nav-number">4.</span> <span class="nav-text">设置样式和颜色</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%A8%E5%9C%BA%E9%80%8F%E6%98%8E%EF%BC%9AglobalAlpha"><span class="nav-number">4.1.</span> <span class="nav-text">全场透明：globalAlpha</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8D%A2%E4%B8%AA%E9%A2%9C%E8%89%B2%EF%BC%9AfillStyle%E3%80%81strokeStyle"><span class="nav-number">4.2.</span> <span class="nav-text">换个颜色：fillStyle、strokeStyle</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BA%BF%E6%9D%A1%E5%8F%98%E6%A0%B7%EF%BC%9AlineWidth%E3%80%81lineCap%E3%80%81lineJoin%E3%80%81setLineDash-%E5%92%8ClineDashOffset"><span class="nav-number">4.3.</span> <span class="nav-text">线条变样：lineWidth、lineCap、lineJoin、setLineDash()和lineDashOffset</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%98%E5%88%B6%E6%96%87%E6%9C%AC%E5%92%8C%E5%9B%BE%E7%89%87"><span class="nav-number">5.</span> <span class="nav-text">绘制文本和图片</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%BB%E5%B8%83%E5%BD%93%E7%84%B6%E8%83%BD%E5%86%99%E5%AD%97%EF%BC%9AfillText-%E3%80%81strokeText"><span class="nav-number">5.1.</span> <span class="nav-text">画布当然能写字：fillText()、strokeText()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BD%93%E7%84%B6%E4%B9%9F%E8%83%BD%E6%94%BE%E5%9B%BE%E7%89%87%EF%BC%9AdrawImage"><span class="nav-number">5.2.</span> <span class="nav-text">当然也能放图片：drawImage()</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%9D%E5%AD%98%E7%8A%B6%E6%80%81%E5%92%8C%E6%81%A2%E5%A4%8D"><span class="nav-number">6.</span> <span class="nav-text">保存状态和恢复</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%98%E5%BD%A2%EF%BC%88%E6%94%B9%E5%8F%98%E5%9D%90%E6%A0%87%E8%BD%B4%EF%BC%89"><span class="nav-number">7.</span> <span class="nav-text">变形（改变坐标轴）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#translate-x-y-%EF%BC%9A%E6%94%B9%E5%8F%98%E5%9D%90%E6%A0%87%E8%BD%B4%E5%8E%9F%E7%82%B9%E7%9A%84%E4%BD%8D%E7%BD%AE"><span class="nav-number">7.1.</span> <span class="nav-text">translate(x, y)：改变坐标轴原点的位置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#rotate-angle-%EF%BC%9A%E6%97%8B%E8%BD%AC%E5%9D%90%E6%A0%87%E8%BD%B4"><span class="nav-number">7.2.</span> <span class="nav-text">rotate(angle)：旋转坐标轴</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#scale-x-y-%EF%BC%9A%E7%BC%A9%E6%94%BE%E5%9D%90%E6%A0%87%E8%BD%B4"><span class="nav-number">7.3.</span> <span class="nav-text">scale(x, y)：缩放坐标轴</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#transform-a-b-c-d-e-f-%EF%BC%9A-%E5%8F%98%E5%BD%A2%E7%9F%A9%E9%98%B5"><span class="nav-number">7.4.</span> <span class="nav-text">transform(a, b, c, d, e, f)： 变形矩阵</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%88%E6%88%90%EF%BC%88%E6%8E%A7%E5%88%B6%E7%BB%98%E5%88%B6%E5%9B%BE%E5%BD%A2%E7%9A%84%E5%B1%82%E7%BA%A7%EF%BC%89"><span class="nav-number">8.</span> <span class="nav-text">合成（控制绘制图形的层级）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A3%81%E5%89%AA%E8%B7%AF%E5%BE%84%EF%BC%88%E9%81%AE%E7%BD%A9%EF%BC%89"><span class="nav-number">9.</span> <span class="nav-text">裁剪路径（遮罩）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A8%E7%94%BB"><span class="nav-number">10.</span> <span class="nav-text">动画</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">11.</span> <span class="nav-text">参考</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -246,10 +259,16 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2021-10-14 21:09:08 / 修改时间：21:13:38" itemprop="dateCreated datePublished" datetime="2021-10-14T21:09:08+08:00">2021-10-14</time>
+      <time title="创建时间：2021-10-14 21:09:08" itemprop="dateCreated datePublished" datetime="2021-10-14T21:09:08+08:00">2021-10-14</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-10-16 21:24:06" itemprop="dateModified" datetime="2021-10-16T21:24:06+08:00">2021-10-16</time>
+      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -268,14 +287,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>1.8k</span>
+      <span>5.8k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>5 分钟</span>
+      <span>15 分钟</span>
     </span>
 </div>
 
@@ -286,16 +305,17 @@
     
     <div class="post-body" itemprop="articleBody">
         <h3 id="该画画了！"><a href="#该画画了！" class="headerlink" title="该画画了！"></a>该画画了！</h3><p>HTML里要绘制图形，得用<code>&lt;canvas&gt;</code> 。它是H5新增的，用来绘制和展示图像的标签，得和 JS DOM 配合使用。除了用来画画，他也可以直接放一些图片（img）进去，并对图片做一些操作，甚至还可以配合循环计时器做出一些简单的动画。</p>
-<h3 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h3><p>绘图，最基础的无非就是直线和曲线，画线（直线），只需要两个点。在canvas里，我们为画布设立一个坐标轴就能确定点的位置。之后就能通过各种方式画我们的线，构出我们的图。</p>
-<h4 id="1-铺一张画布：创建-canvas-元素"><a href="#1-铺一张画布：创建-canvas-元素" class="headerlink" title="1. 铺一张画布：创建 canvas 元素"></a>1. 铺一张画布：创建 canvas 元素</h4><p>在HTML里创建它，它只有<code>width</code>，<code>height</code>属性，默认是 300(px) x 150(px)。虽然可以用CSS来设置宽高，但是如果宽高属性和初始比例不一致，则会变形，所以不要（也没有意义）用CSS来设置。</p>
+<p>这是简单的说明：Canvas 是由 HTML 代码配合高度和宽度属性而定义出的可绘制区域。JavaScript 代码可以访问该区域，类似于其他通用的二维 API，通过一套完整的绘图函数来动态生成图形。</p>
+<h3 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h3><p>绘图，最基础的无非就是直线和曲线，画线（直线），只需要两个点。在canvas里，我们为画布设立一个坐标轴就能确定点的位置。之后就能通过各种方式画我们的线，构出我们的图。</p>
+<h4 id="铺一张画布：创建-canvas-元素"><a href="#铺一张画布：创建-canvas-元素" class="headerlink" title="铺一张画布：创建 canvas 元素"></a>铺一张画布：创建 canvas 元素</h4><p>在HTML里创建它，它只有<code>width</code>，<code>height</code>属性，默认是 300(px) x 150(px)。虽然可以用CSS来设置宽高，但是如果宽高属性和初始比例不一致，则会变形，所以不要（也没有意义）用CSS来设置。</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">&quot;tutorial&quot;</span> <span class="attr">width</span>=<span class="string">&quot;300&quot;</span> <span class="attr">height</span>=<span class="string">&quot;300&quot;</span>&gt;</span></span><br><span class="line">    如果浏览器不支持canvas，则会显示这里的替代内容</span><br><span class="line">    <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;abc.jpg&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;&quot;</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<h4 id="2-拿到绘画的工具箱：获取渲染上下文（getContext）"><a href="#2-拿到绘画的工具箱：获取渲染上下文（getContext）" class="headerlink" title="2. 拿到绘画的工具箱：获取渲染上下文（getContext）"></a>2. 拿到绘画的工具箱：获取渲染上下文（getContext）</h4><p>前面说了，canvas得和 JS 配合使用。只有获取了画笔，才能在画布上绘画，DOM 获取到的canvas对象会暴露出<strong>渲染上下文</strong>，相当于绘画用的画笔，我们通过这个玩意来操作canvas对象，一般都是2D的，不搞3D的</p>
+<h4 id="拿到绘画的工具箱：获取渲染上下文（getContext）"><a href="#拿到绘画的工具箱：获取渲染上下文（getContext）" class="headerlink" title="拿到绘画的工具箱：获取渲染上下文（getContext）"></a>拿到绘画的工具箱：获取渲染上下文（getContext）</h4><p>前面说了，canvas得和 JS 配合使用。只有获取了画笔，才能在画布上绘画，DOM 获取到的canvas对象会暴露出<strong>渲染上下文</strong>，相当于绘画用的画笔，我们通过这个玩意来操作canvas对象，一般都是2D的，不搞3D的</p>
 <p>这个方法是 <strong>getContext(“2d”)</strong></p>
 <p>同样的，不是所有浏览器都支持，我们用之前要检测一下是否支持：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;tutorial&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (canvas.getContext)&#123;</span><br><span class="line">  <span class="comment">// 支持</span></span><br><span class="line">  <span class="comment">// 获得 2d 上下文对象</span></span><br><span class="line">  <span class="keyword">var</span> ctx = canvas.getContext(<span class="string">&#x27;2d&#x27;</span>);</span><br><span class="line">  <span class="comment">// 开始绘画</span></span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  <span class="comment">// 不支持，干点别的</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h4 id="3-画一个简单的图形：矩形（Rect）"><a href="#3-画一个简单的图形：矩形（Rect）" class="headerlink" title="3. 画一个简单的图形：矩形（Rect）"></a>3. 画一个简单的图形：矩形（Rect）</h4><p>如果我们把 canvas 画布想象成一个个格子组成，每一个格子的长宽都是1px，为它设定一个坐标轴，原点是画布的左上角。这样我们就能轻松地使用坐标来表示各个点的位置。实际上，我们画图都是基于这个坐标轴来的，坐标轴也是可以移动、旋转甚至缩放的，它存在的意义就是为了我们能够准确地把图形放置在我们想要的位置上。渲染上下文提供的各种方法也是通过坐标轴来实现定位的。</p>
+<h3 id="绘制图形"><a href="#绘制图形" class="headerlink" title="绘制图形"></a>绘制图形</h3><h4 id="画一个简单的图形：矩形（Rect）"><a href="#画一个简单的图形：矩形（Rect）" class="headerlink" title="画一个简单的图形：矩形（Rect）"></a>画一个简单的图形：矩形（Rect）</h4><p>如果我们把 canvas 画布想象成一个个格子组成，每一个格子的长宽都是1px，为它设定一个坐标轴，原点是画布的左上角。这样我们就能轻松地使用坐标来表示各个点的位置。实际上，我们画图都是基于这个坐标轴来的，坐标轴也是可以移动、旋转甚至缩放的，它存在的意义就是为了我们能够准确地把图形放置在我们想要的位置上。渲染上下文提供的各种方法也是通过坐标轴来实现定位的。</p>
 <p><img src="https://cdn.jsdelivr.net/gh/kudryavka1013/note-pic@master/note/20211014194751.png" alt="img"></p>
 <p>我们先画一个简单的图形：矩形。事实上，canvas原生方法只有画矩形（一步到位的那种），任何其它的图形都需要自己一根线一根线画。</p>
 <p>绘制矩形的三个方法：</p>
@@ -310,7 +330,7 @@
 
 <p><img src="https://cdn.jsdelivr.net/gh/kudryavka1013/note-pic@master/note/20211014202531.png" alt="image-20211014202531010"></p>
 <p>就，挺合理的</p>
-<h4 id="4-画一些稍微复杂点的图形：路径（path）"><a href="#4-画一些稍微复杂点的图形：路径（path）" class="headerlink" title="4. 画一些稍微复杂点的图形：路径（path）"></a>4. 画一些稍微复杂点的图形：路径（path）</h4><p>路径的定义是这样的：路径是通过不同颜色和宽度的线段或曲线相连形成的不同形状的点的集合</p>
+<h4 id="画一些稍微复杂点的图形：路径（path）"><a href="#画一些稍微复杂点的图形：路径（path）" class="headerlink" title="画一些稍微复杂点的图形：路径（path）"></a>画一些稍微复杂点的图形：路径（path）</h4><p>路径的定义是这样的：路径是通过不同颜色和宽度的线段或曲线相连形成的不同形状的点的集合</p>
 <p>说人话就是，描出一个轮廓，设定好哪条线用什么颜色，画多粗，描出来的图形要不要填充颜色。这里要注意的是，<strong>路径是闭合的</strong>，无论画什么，就算是一根线，路径也总会从起点出发，最后又回到起点。</p>
 <p>路径绘制图形的步骤如下：</p>
 <ol>
@@ -341,13 +361,116 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">drawLine</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">&quot;tutorial&quot;</span>)</span><br><span class="line">    <span class="keyword">if</span>(!canvas.getContext) <span class="keyword">return</span></span><br><span class="line">    <span class="keyword">var</span> ctx = canvas.getContext(<span class="string">&quot;2d&quot;</span>)</span><br><span class="line">    <span class="comment">// 新建路径</span></span><br><span class="line">    ctx.beginPath()</span><br><span class="line">    <span class="comment">// 移动到指定坐标</span></span><br><span class="line">    ctx.moveTo(<span class="number">50</span>,<span class="number">50</span>)</span><br><span class="line">    <span class="comment">// 画条线</span></span><br><span class="line">    ctx.lineTo(<span class="number">50</span>,<span class="number">200</span>)</span><br><span class="line">    ctx.closePath()</span><br><span class="line">    ctx.stroke()</span><br><span class="line">&#125;</span><br><span class="line">drawLine()</span><br></pre></td></tr></table></figure>
 
 <p><img src="https://cdn.jsdelivr.net/gh/kudryavka1013/note-pic@master/note/20211014205924.png" alt="image-20211014205924712"></p>
-<p>其实这里的线来回画了两次，应该不难理解。你可以试试将 <code>ctx.closePath()</code> 去掉，看看有什么不同。如果还不能理解，你看看下面这个</p>
+<p>其实这里的线来回画了两次，应该不难理解。你可以试试将 <code>ctx.closePath()</code> 去掉，看看有什么不同。如果还不能理解，你看看下面这个：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">drawTriangle</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">&quot;tutorial&quot;</span>)</span><br><span class="line">    <span class="keyword">if</span>(!canvas.getContext) <span class="keyword">return</span></span><br><span class="line">    <span class="keyword">var</span> ctx = canvas.getContext(<span class="string">&quot;2d&quot;</span>)</span><br><span class="line">    <span class="comment">// 新建路径</span></span><br><span class="line">    ctx.beginPath()</span><br><span class="line">    <span class="comment">// 移动到指定坐标</span></span><br><span class="line">    ctx.moveTo(<span class="number">50</span>,<span class="number">50</span>)</span><br><span class="line">    <span class="comment">// 画条线</span></span><br><span class="line">    ctx.lineTo(<span class="number">50</span>,<span class="number">200</span>)</span><br><span class="line">    ctx.lineTo(<span class="number">200</span>,<span class="number">200</span>)</span><br><span class="line">    ctx.closePath()</span><br><span class="line">    ctx.stroke()</span><br><span class="line">&#125;</span><br><span class="line">drawTriangle()</span><br></pre></td></tr></table></figure>
 
 <p><img src="https://cdn.jsdelivr.net/gh/kudryavka1013/note-pic@master/note/20211014210211.png" alt="image-20211014210211712"></p>
 <p>填充的三角形是同理，注意 fill() 会自动闭合路径</p>
-<h5 id="画曲线：arc-，arcTo-，quadraticCurveTo"><a href="#画曲线：arc-，arcTo-，quadraticCurveTo" class="headerlink" title="画曲线：arc() ，arcTo()，quadraticCurveTo()"></a>画曲线：arc() ，arcTo()，quadraticCurveTo()</h5><p>画曲线，最先想到的是<strong>圆弧</strong>，也就是前两个方法。如果要画更复杂的曲线，就要使用后一种<strong>贝赛尔曲线</strong></p>
-<h6 id="arc-x-y-r-startAngle-endAngle-anticlockwise"><a href="#arc-x-y-r-startAngle-endAngle-anticlockwise" class="headerlink" title="arc(x, y, r, startAngle, endAngle, anticlockwise)"></a>arc(x, y, r, startAngle, endAngle, anticlockwise)</h6>
+<h5 id="画曲线：arc-，arcTo-，quadraticCurveTo"><a href="#画曲线：arc-，arcTo-，quadraticCurveTo" class="headerlink" title="画曲线：arc() ，arcTo()，quadraticCurveTo()"></a>画曲线：arc() ，arcTo()，quadraticCurveTo()</h5><p>画曲线，最先想到的是<strong>圆弧</strong>，也就是前两个方法。如果要画更复杂的曲线，就要使用后一种<strong>贝塞尔曲线</strong></p>
+<h6 id="arc-x-y-r-startAngle-endAngle-anticlockwise"><a href="#arc-x-y-r-startAngle-endAngle-anticlockwise" class="headerlink" title="arc(x, y, r, startAngle, endAngle, anticlockwise)"></a>arc(x, y, r, startAngle, endAngle, anticlockwise)</h6><p>以 (x, y) 为圆心，以 r 为半径，从 startAngle 弧度开始到 endAngle 弧度结束。anticlosewise 是布尔值， true 表示逆时针，false 表示顺时针（默认是顺时针），注意这里是弧度不是度数，0弧度指x轴正方向</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">drawArc</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">&quot;tutorial&quot;</span>)</span><br><span class="line">    <span class="keyword">if</span>(!canvas.getContext) <span class="keyword">return</span></span><br><span class="line">    <span class="keyword">var</span> ctx = canvas.getContext(<span class="string">&quot;2d&quot;</span>)</span><br><span class="line"></span><br><span class="line">    ctx.beginPath()</span><br><span class="line">    ctx.arc(<span class="number">100</span>,<span class="number">100</span>,<span class="number">40</span>,<span class="number">0</span>,<span class="built_in">Math</span>.PI/<span class="number">2</span>,<span class="literal">true</span>)</span><br><span class="line">    ctx.stroke()</span><br><span class="line"></span><br><span class="line">    ctx.beginPath()</span><br><span class="line">    ctx.arc(<span class="number">100</span>,<span class="number">100</span>,<span class="number">40</span>,<span class="number">0</span>,<span class="built_in">Math</span>.PI/<span class="number">2</span>,<span class="literal">false</span>)</span><br><span class="line">    ctx.fill()</span><br><span class="line">&#125;</span><br><span class="line">drawArc()</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/kudryavka1013/note-pic@master/note/20211014212606.png" alt="image-20211014212606233"></p>
+<h6 id="arcTo-x1-y1-x2-y2-radius"><a href="#arcTo-x1-y1-x2-y2-radius" class="headerlink" title="arcTo(x1, y1, x2, y2, radius)"></a>arcTo(x1, y1, x2, y2, radius)</h6><p>根据起始点和给定的两个控制点以及半径画一段圆弧，最后再以直线连接两个控制点</p>
+<p>这个方法可以这样理解。绘制的弧形是由两条切线所决定。</p>
+<p>第 1 条切线：起始点和控制点1决定的直线。</p>
+<p>第 2 条切线：控制点1 和控制点2决定的直线。</p>
+<p><strong>其实绘制的圆弧就是与这两条直线相切的圆弧</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/kudryavka1013/note-pic@master/note/20211014212847.png" alt="image-20211014212847059"></p>
+<h6 id="quadraticCurveTo-cp1x-cp1y-x-y-、bezierCurveTo-cp1x-cp1y-cp2x-cp2y-x-y"><a href="#quadraticCurveTo-cp1x-cp1y-x-y-、bezierCurveTo-cp1x-cp1y-cp2x-cp2y-x-y" class="headerlink" title="quadraticCurveTo(cp1x, cp1y, x, y)、bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y)"></a>quadraticCurveTo(cp1x, cp1y, x, y)、bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y)</h6><p>贝塞尔曲线，一般就找个网站先模拟出想要的图形，再直接套用参数就行了</p>
+<p>二次贝塞尔曲线，quadraticCurveTo(cp1x, cp1y, x, y)，参数是控制点的坐标和终点的坐标</p>
+<p><img src="https://cdn.jsdelivr.net/gh/kudryavka1013/note-pic@master/note/20211014213242.png" alt="image-20211014213242136"></p>
+<p>三次贝塞尔曲线，bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y)，参数是两个控制点的坐标和终点的坐标</p>
+<p><img src="https://cdn.jsdelivr.net/gh/kudryavka1013/note-pic@master/note/20211014213352.png" alt="image-20211014213352618"></p>
+<p>不多说了，我也怎么没用过，反正很强大就对了。</p>
+<h3 id="设置样式和颜色"><a href="#设置样式和颜色" class="headerlink" title="设置样式和颜色"></a>设置样式和颜色</h3><h4 id="全场透明：globalAlpha"><a href="#全场透明：globalAlpha" class="headerlink" title="全场透明：globalAlpha"></a>全场透明：globalAlpha</h4><p><strong>globalAlpha = transparencyValue</strong>: 这个属性影响到 canvas 里<strong>所有图形</strong>的透明度，有效的值范围是 0.0 （完全透明）到 1.0（完全不透明），默认是 1.0。</p>
+<p>在需要绘制大量拥有相同透明度的图形时候相当高效。不过，使用rgba()设置透明度更加好一些</p>
+<h4 id="换个颜色：fillStyle、strokeStyle"><a href="#换个颜色：fillStyle、strokeStyle" class="headerlink" title="换个颜色：fillStyle、strokeStyle"></a>换个颜色：fillStyle、strokeStyle</h4><p><strong>fillStyle = color</strong> 设置图形的填充颜色</p>
+<p><strong>strokeStyle = color</strong> 设置图形轮廓的颜色</p>
+<p>color 可以是表示<u>css 颜色值的字符串、渐变对象或者图案对象</u></p>
+<p>一旦设置了 strokeStyle 或者 fillStyle 的值，那么这个新值就会成为新绘制的图形的默认值。如果要给每个图形上不同的颜色，需要重新设置</p>
+<h4 id="线条变样：lineWidth、lineCap、lineJoin、setLineDash-和lineDashOffset"><a href="#线条变样：lineWidth、lineCap、lineJoin、setLineDash-和lineDashOffset" class="headerlink" title="线条变样：lineWidth、lineCap、lineJoin、setLineDash()和lineDashOffset"></a>线条变样：lineWidth、lineCap、lineJoin、setLineDash()和lineDashOffset</h4><p><strong>lineWidth</strong>，线宽，只能是正数，单位px，由线的轴先向两边延伸</p>
+<p><strong>lineCap</strong>，线末端的样式，有三种样式</p>
+<p><img src="https://cdn.jsdelivr.net/gh/kudryavka1013/note-pic@master/note/20211014222153.png" alt="image-20211014222153311"></p>
+<p><strong>lineJoin</strong>，线条与线条间接合处的样式，三种样式</p>
+<p><img src="https://cdn.jsdelivr.net/gh/kudryavka1013/note-pic@master/note/20211014223317.png" alt="image-20211014223317332"></p>
+<p><strong>setLineDash()<strong>和</strong>lineDashOffset</strong>，设置虚线样式，setLineDash() 方法接受一个数组，来指定线段与间隙的交替的长度；lineDashOffset 属性设置起始偏移量</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">drawDotRect</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">&quot;tutorial&quot;</span>)</span><br><span class="line">    <span class="keyword">if</span>(!canvas.getContext) <span class="keyword">return</span></span><br><span class="line">    <span class="keyword">var</span> ctx = canvas.getContext(<span class="string">&quot;2d&quot;</span>)</span><br><span class="line"></span><br><span class="line">    ctx.setLineDash([<span class="number">20</span>, <span class="number">5</span>]);  <span class="comment">// [实线长度, 间隙长度]</span></span><br><span class="line">    ctx.lineDashOffset = <span class="number">5</span>; <span class="comment">// 正数为逆时针偏移，负数为顺时针</span></span><br><span class="line">    ctx.strokeRect(<span class="number">50</span>, <span class="number">50</span>, <span class="number">200</span>, <span class="number">200</span>);</span><br><span class="line">&#125;</span><br><span class="line">drawDotRect()</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/kudryavka1013/note-pic@master/note/20211014224348.png" alt="image-20211014224348244"></p>
+<h3 id="绘制文本和图片"><a href="#绘制文本和图片" class="headerlink" title="绘制文本和图片"></a>绘制文本和图片</h3><h4 id="画布当然能写字：fillText-、strokeText"><a href="#画布当然能写字：fillText-、strokeText" class="headerlink" title="画布当然能写字：fillText()、strokeText()"></a>画布当然能写字：fillText()、strokeText()</h4><p>**fillText(text, x, y, maxWidth)**，在指定位置放指定文本，设定最大宽度（可选的参数）</p>
+<p><strong>strokeText(text, x, y, maxWidth)<strong>，在指定位置放指定文本，只不过是给</strong>文字描边</strong>，设定最大宽度（可选的参数）</p>
+<p>添加样式：font（字体）、textAlign（文本对齐方式）、textBaseline（基线对齐方式）、direction（文本方向）</p>
+<p>基本上就可以理解为在某位置创建一个文本框，放进文字，所以才会有一些对齐方式，坐标和宽度的参数就是设置文本框用的</p>
+<p><img src="https://cdn.jsdelivr.net/gh/kudryavka1013/note-pic@master/note/20211016153352.png" alt="image-20211016153352743"></p>
+<h4 id="当然也能放图片：drawImage"><a href="#当然也能放图片：drawImage" class="headerlink" title="当然也能放图片：drawImage()"></a>当然也能放图片：drawImage()</h4><p>canvas 可以放 JS 直接创建的 Image 元素（<code>new Image()</code>），也可以从页面里的标签取 img 元素（<code>&lt;img&gt;</code>），基本都是一样的</p>
+<p><strong>drawImage(image, x, y, width, height)<strong>：image为图片元素，x 和 y 是绘制的坐标，width 和 height 是</strong>可选的参数</strong>，控制图片绘制时的大小，没入参就是图片原本的大小</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">drawDotRect</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">&quot;tutorial&quot;</span>)</span><br><span class="line">    <span class="keyword">if</span>(!canvas.getContext) <span class="keyword">return</span></span><br><span class="line">    <span class="keyword">var</span> ctx = canvas.getContext(<span class="string">&quot;2d&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 直接创建加载图片</span></span><br><span class="line">    <span class="keyword">var</span> img = <span class="keyword">new</span> Image()</span><br><span class="line">    img.src = <span class="string">&quot;myImage.png&quot;</span></span><br><span class="line">    <span class="comment">// DOM获取图片</span></span><br><span class="line">    <span class="keyword">var</span> img = <span class="built_in">document</span>.getElementById(<span class="string">&quot;image&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 绘制图片</span></span><br><span class="line">    ctx.drawImage(img,<span class="number">0</span>,<span class="number">0</span>)</span><br><span class="line">&#125;</span><br><span class="line">drawDotRect()</span><br></pre></td></tr></table></figure>
+
+<p><strong>drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)<strong>：还可以再多参数，这可以将图片</strong>裁剪</strong>后画在canvas画布上。第一个参数是相同的，sx 和 sy 是图片源要裁切的起点，sWidth 和 sHeight 是裁切的大小，dx 和 dy 是裁剪后的图片绘制位置，dWidth 和 dHeight 是裁剪后的图片的大小。注意原本的完整的图片就不会绘制了。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/kudryavka1013/note-pic@master/note/20211016155948.jpeg" alt="img"></p>
+<h3 id="保存状态和恢复"><a href="#保存状态和恢复" class="headerlink" title="保存状态和恢复"></a>保存状态和恢复</h3><p><strong>save()</strong> 和 <strong>restore()</strong> 两个方法，用来保存和读取状态。<code>Canvas</code> 的状态就是当前画面应用的所有样式和变形的一个快照，它存放在一个<strong>栈</strong>里，每次读取和保存就是出栈（pop）和进栈（push）</p>
+<p>状态包括这些东西：</p>
+<ul>
+<li>当前应用的变形（即移动，旋转和缩放）</li>
+<li><code>strokeStyle</code>, <code>fillStyle</code>, <code>globalAlpha</code>, <code>lineWidth</code>, <code>lineCap</code>, <code>lineJoin</code>, <code>miterLimit</code>, <code>shadowOffsetX</code>, <code>shadowOffsetY</code>, <code>shadowBlur</code>, <code>shadowColor</code>, <code>globalCompositeOperation</code></li>
+<li>当前的裁切路径（<code>clipping path</code>）</li>
+</ul>
+<p>当我们要画很多复杂图形的时候，这个东西就显得十分有用，我们就不必反复设置各种样式和坐标轴</p>
+<h3 id="变形（改变坐标轴）"><a href="#变形（改变坐标轴）" class="headerlink" title="变形（改变坐标轴）"></a>变形（改变坐标轴）</h3><h4 id="translate-x-y-：改变坐标轴原点的位置"><a href="#translate-x-y-：改变坐标轴原点的位置" class="headerlink" title="translate(x, y)：改变坐标轴原点的位置"></a>translate(x, y)：改变坐标轴原点的位置</h4><p><img src="https://cdn.jsdelivr.net/gh/kudryavka1013/note-pic@master/note/20211016165438.jpeg" alt="img"></p>
+<h4 id="rotate-angle-：旋转坐标轴"><a href="#rotate-angle-：旋转坐标轴" class="headerlink" title="rotate(angle)：旋转坐标轴"></a>rotate(angle)：旋转坐标轴</h4><p>坐标轴绕原点<strong>顺时针</strong>方向旋转，参数单位是弧度，度数记得要转换</p>
+<p><img src="https://cdn.jsdelivr.net/gh/kudryavka1013/note-pic@master/note/20211016170134.jpeg" alt="img"></p>
+<h4 id="scale-x-y-：缩放坐标轴"><a href="#scale-x-y-：缩放坐标轴" class="headerlink" title="scale(x, y)：缩放坐标轴"></a>scale(x, y)：缩放坐标轴</h4><p>参数都是正数，比 1 小则缩小，比 1 大则放大，是放大 / 缩小的倍数</p>
+<h4 id="transform-a-b-c-d-e-f-：-变形矩阵"><a href="#transform-a-b-c-d-e-f-：-变形矩阵" class="headerlink" title="transform(a, b, c, d, e, f)： 变形矩阵"></a>transform(a, b, c, d, e, f)： 变形矩阵</h4><p>参数分别是：scaleX，<strong>skewH</strong>，<strong>skewV</strong>，scaleY，moveX，moveY，注意顺序</p>
+<p>这玩意有点复杂，事实上，前面所有的变形方式都可以用它来实现</p>
+<p>scaleX 和 scaleY 同理是 1 的倍数做缩放，moveX 和 moveY 是原点离画布左上角的距离</p>
+<p>我们要注意的是 skewX 和 skewY，可以简单地理解成 <strong>skewH 将 X 轴绕着原点向 Y 轴旋转，图形也会跟着变形，同理 skewV 将 Y 轴绕着原点向 X 轴旋转</strong>。倾斜的角度是传入的参数的**反正切值 atan(x)**，即如果传入参数 1，那么 atan(1) = 45度 = Math.PI/4 = 0.785398，即要转 45 度</p>
+<p>具体看这里：<a target="_blank" rel="noopener" href="https://www.twle.cn/l/yufei/canvas/canvas-basic-geometric-skew.html">Canvas 斜拉 - Canvas 基础教程</a></p>
+<p>实现出来的效果就可以是这样，一个矩形被斜拉变形</p>
+<p><img src="https://cdn.jsdelivr.net/gh/kudryavka1013/note-pic@master/note/20211016184633.png" alt="image-20211016184633673"></p>
+<p>**setTransform()**：将当前转换重置为单位矩阵（恢复初始坐标系），然后运行 transform()</p>
+<h3 id="合成（控制绘制图形的层级）"><a href="#合成（控制绘制图形的层级）" class="headerlink" title="合成（控制绘制图形的层级）"></a>合成（控制绘制图形的层级）</h3><p><strong>globalCompositeOperation</strong>，有以下取值：</p>
+<ul>
+<li>source-over：默认，新图像会覆盖在原有图像</li>
+<li>source-in：仅出现新图像与原来图像重叠的部分，其他区域都变成透明的</li>
+<li>source-out：仅显示新图像与老图像没有重叠的部分，其余部分全部透明</li>
+<li>source-atop：新图像仅显示与老图像重叠区域。老图像仍然可以显示</li>
+<li>destination-over：新图像会在老图像的下面</li>
+<li>destination-in：仅仅新老图像重叠部分的老图像被显示，其他区域全部透明</li>
+<li>destination-out：仅仅老图像与新图像没有重叠的部分。 注意显示的是老图像的部分区域</li>
+<li>destination-atop：老图像仅仅显示重叠部分，新图像会显示在老图像的下面</li>
+<li>lighter：新老图像都显示，但是重叠区域的颜色做<strong>加</strong>处理（十六进制的每个颜色位进行加法）</li>
+<li>darken：保留重叠部分最黑的像素。（十六进制的每个颜色位进行比较，得到最小的）</li>
+<li>lighten：保留重叠部分最量的像素。（十六进制的每个颜色位进行比较，得到最大的）</li>
+<li>xor：重叠部分会变成透明</li>
+<li>copy：只有新图像会被保留，其余的全部被清除</li>
+</ul>
+<p>看起来很难记是吗？其实很简单，只要记住下面几条：</p>
+<ol>
+<li>source 表示层级：新图形 &gt; 老图形，destination 表示层级：新图形 &lt; 新图形</li>
+<li>over 表示新旧图形正常覆盖，in 表示只显示<strong>重叠</strong>部分，out 表示只显示<strong>不重叠</strong>部分，atop表示只显示<strong>重叠</strong>部分和<strong>层级在下面</strong>的图形</li>
+</ol>
+<h3 id="裁剪路径（遮罩）"><a href="#裁剪路径（遮罩）" class="headerlink" title="裁剪路径（遮罩）"></a>裁剪路径（遮罩）</h3><p>**clip()**，把创建好的路径变成裁剪路径，只会显示路径闭合生成的区域，外面的区域会被隐藏</p>
+<p>只会隐藏调用 clip() 之后绘制的图片</p>
+<p><img src="https://cdn.jsdelivr.net/gh/kudryavka1013/note-pic@master/note/20211016165245.png" alt="img"></p>
+<h3 id="动画"><a href="#动画" class="headerlink" title="动画"></a>动画</h3><p>到这里，我们基本的绘图操作就都学会了。在开头说到可以搭配循环计时器等东西来实现动画效果。本质上就是不断地重绘图而已。</p>
+<p>需要用到的循环工具就是这个函数：<strong>requestAnimationFrame()</strong></p>
+<p>使用时，在绘图函数里调用该函数，并传入绘图函数，实现自我调用，达成循环更新图像，即：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">draw</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="comment">// 绘图代码</span></span><br><span class="line">    <span class="comment">// .....</span></span><br><span class="line">    </span><br><span class="line">    requestAnimationFrame(draw);</span><br><span class="line">&#125;</span><br><span class="line">draw()</span><br></pre></td></tr></table></figure>
+
+<p>当然你也可以用常规的定时器 <code>setInterval()</code> 和 <code>setTimeout()</code>，不过由于他们的执行和屏幕的刷新并不一致，很容易就引起丢帧。而 <code>requestAnimationFrame()</code> 是由系统来决定回调函数的执行时机，<strong>它能保证回调函数在屏幕每一次的刷新间隔中只被执行一次</strong>，从而避免了丢帧现象</p>
+<p>在写绘图代码时，要有一定的章法，基本遵循以下步骤：</p>
+<ol>
+<li><strong>清空 canvas</strong>：绘制每一帧动画之前，需要清空画布。清空最简单的做法就是 <code>clearRect()</code> 方法。</li>
+<li><strong>保存 canvas 状态</strong>：如果在绘制的过程中会更改 <code>canvas</code> 的状态（颜色、移动了坐标原点等），又在绘制每一帧时都是原始状态的话，则最好保存下 <code>canvas</code> 的状态</li>
+<li><strong>绘制动画图形</strong>：这一步才是真正的绘制动画帧</li>
+<li><strong>恢复 canvas 状态</strong>：如果你前面保存了 <code>canvas</code> 状态，则应该在绘制完成一帧之后恢复 <code>canvas</code> 状态</li>
+</ol>
+<hr>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a target="_blank" rel="noopener" href="https://www.runoob.com/w3cnote/html5-canvas-intro.html">学习 HTML5 Canvas 这一篇文章就够了 | 菜鸟教程 (runoob.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.twle.cn/l/yufei/canvas/canvas-basic-geometric-skew.html">Canvas 斜拉 - Canvas 基础教程 - 简单教程，简单编程 (twle.cn)</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/VhWfR2u02Q/article/details/79492303">深入理解 requestAnimationFrame_前端大全-CSDN博客</a></p>
+
     </div>
 
     
@@ -401,14 +524,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">41k</span>
+    <span title="站点总字数">45k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">1:43</span>
+    <span title="站点阅读时长">1:54</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
