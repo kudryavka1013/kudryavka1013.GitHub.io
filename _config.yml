@@ -3,7 +3,7 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: 听
+title: 林夕
 subtitle: to the sky
 description: ''
 keywords:
@@ -25,7 +25,7 @@ source_dir: source
 public_dir: public
 tag_dir: tags
 archive_dir: archives
-category_dir: categories
+category_dir: ''
 code_dir: downloads/code
 i18n_dir: :lang
 skip_render:
@@ -68,6 +68,8 @@ index_generator:
 # Category & Tag
 default_category: uncategorized
 category_map:
+  生活: life
+  笔记: notes
 tag_map:
 
 # Metadata elements
@@ -126,7 +128,6 @@ live2d:
   tagMode: false
   debug: false
   model:
-    # use: https://cdn.jsdelivr.net/gh/kudryavka1013/kudryavka1013.GitHub.io@main/live2d_models/aoba/aoba.model.json
     use: aoba
   display:
     position: right

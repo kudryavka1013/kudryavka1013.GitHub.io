@@ -24,7 +24,7 @@ custom_file_path:
   #sidebar: source/_data/sidebar.njk
   #postMeta: source/_data/post-meta.njk
   #postBodyEnd: source/_data/post-body-end.njk
-  # footer: source/_data/footer.njk
+  #footer: source/_data/footer.njk
   #bodyEnd: source/_data/body-end.njk
   #variable: source/_data/variables.styl
   #mixin: source/_data/mixins.styl
@@ -35,14 +35,8 @@ custom_file_path:
 # Scheme Settings
 # ---------------------------------------------------------------
 
-# Schemes
-# scheme: Muse
-# scheme: Mist
-scheme: Pisces
-# scheme: Gemini
-
-# Dark Mode
-darkmode: false
+scheme: Gemini
+darkmode: true
 
 
 # ---------------------------------------------------------------
@@ -96,10 +90,11 @@ open_graph:
 # External url should start with http:// or https://
 menu:
   home: / || fa fa-home # 主页
-  about: /about/ || fa fa-user # 关于
-  tags: /tags/ || fa fa-tags # 标签
-  categories: /categories/ || fa fa-th # 分类
-  archives: /archives/ || fa fa-archive # 归档
+  # about: /about/ || fa fa-user # 关于
+  # tags: /tags/ || fa fa-tags # 标签
+  life: /life/ || fa fa-th # 生活
+  notes: /notes/ || fa fa-archive # 笔记
+
 
 # Enable / Disable menu icons / item badges.
 menu_settings:
