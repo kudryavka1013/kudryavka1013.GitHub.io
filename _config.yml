@@ -3,9 +3,9 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: 林夕
-subtitle: 沦陷在春日晚风里
-description: ''
+title: 晚风
+subtitle: 优美落霞记得多少
+description: '二次元 / 口琴 / 游戏'
 keywords:
 author: Kudryavka
 language: zh-CN
@@ -69,7 +69,8 @@ index_generator:
 default_category: uncategorized
 category_map:
   生活: life
-  笔记: notes
+  知否: notes
+  一言: oneword
 tag_map:
 
 # Metadata elements
@@ -117,6 +118,13 @@ symbols_count_time:
   exclude_codeblock: true      # 排除代码字数统计
   awl: 2                   # Average Word Length
   wpm: 200                 # Words Per Minute（每分钟阅读词数）
+
+# 文章摘要
+excerpt:
+  depth: 2
+  excerpt_excludes: []
+  more_excludes: []
+  hideWholePostExcerpts: true
 
 # live2d配置
 live2d:

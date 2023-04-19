@@ -1,4 +1,6 @@
 zh-CN:
   menu:
-    life: 生活 # 碎片
-    notes: 笔记 # 笔记本
+    life: 生活 # 生活
+    notes: 知否 # 笔记本
+    archives: 荏苒 # 归档时间线
+    oneword: 一言 # 短句
