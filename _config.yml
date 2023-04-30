@@ -3,8 +3,8 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: 晚风
-subtitle: 优美落霞记得多少
+title: 渐渐
+subtitle: 几多优美落霞记得多少
 description: '二次元 / 口琴 / 游戏'
 keywords:
 author: Kudryavka
@@ -128,7 +128,7 @@ excerpt:
 
 # live2d配置
 live2d:
-  enable: true
+  enable: false
   scriptFrom: local
   pluginRootPath: live2dw/
   pluginJsPath: lib/
