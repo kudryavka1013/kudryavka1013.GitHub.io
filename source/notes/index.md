@@ -1,5 +1,3 @@
 ---
-title: 知否
-date: 2023-04-04 00:44:48
-type: "archives"
+title: 笔记
 ---
