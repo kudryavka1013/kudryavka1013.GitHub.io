@@ -4,7 +4,7 @@
 
 # Site
 title: 渐渐
-subtitle: 几多优美落霞记得多少
+subtitle: 幾多優美落霞記得多少
 description: '二次元 / 口琴 / 游戏'
 keywords:
 author: Kudryavka
@@ -62,14 +62,14 @@ prismjs:
 # order_by: Posts order. (Order by date descending by default)
 index_generator:
   path: ''
-  per_page: 10
+  per_page: 5
   order_by: -date
 
 # Category & Tag
 default_category: uncategorized
 category_map:
   生活: life
-  知否: notes
+  笔记: notes
   一言: oneword
 tag_map:
 
