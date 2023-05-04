@@ -44,14 +44,14 @@ darkmode: true
 # ---------------------------------------------------------------
 
 favicon:
-  small: /images/favicon-16x16-next.png
-  medium: /images/favicon-32x32-next.png
-  apple_touch_icon: /images/apple-touch-icon-next.png
-  safari_pinned_tab: /images/logo.svg
+  small: /resources/favicon/logo.svg
+  medium: /resources/favicon/logo.svg
+  apple_touch_icon: /resources/favicon/logo.svg
+  safari_pinned_tab: /resources/favicon/logo.svg
   #android_manifest: /manifest.json
 
 # Custom Logo (Warning: Do not support scheme Mist)
-custom_logo: #/uploads/custom-logo.png
+# custom_logo: /resources/favicon/logo.svg
 
 # Creative Commons 4.0 International License.
 # See: https://creativecommons.org/about/cclicenses/
@@ -59,7 +59,7 @@ creative_commons:
   # Available values: by | by-nc | by-nc-nd | by-nc-sa | by-nd | by-sa | cc-zero
   license: by-nc-sa
   # Available values: big | small
-  size: small
+  size: big
   sidebar: false
   post: true
   # You can set a language value if you prefer a translated version of CC license, e.g. deed.zh
