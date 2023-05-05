@@ -26,7 +26,7 @@ custom_file_path:
   #postBodyEnd: source/_data/post-body-end.njk
   footer: source/_data/footer.njk
   #bodyEnd: source/_data/body-end.njk
-  #variable: source/_data/variables.styl
+  variable: source/_data/variables.styl
   #mixin: source/_data/mixins.styl
   style: source/_data/styles.styl
 
@@ -239,10 +239,10 @@ read_more_btn: true
 
 # Post meta display settings
 post_meta:
-  item_text: true
+  item_text: false
   created_at: true
   updated_at:
-    enable: true
+    enable: false
     another_day: true
   categories: true
 
@@ -357,7 +357,7 @@ back2top:
   # Back to top in sidebar.
   sidebar: false
   # Scroll percent label in b2t button.
-  scrollpercent: false
+  scrollpercent: true
 
 # Reading progress bar
 reading_progress:
@@ -369,20 +369,6 @@ reading_progress:
   reversed: false
   color: "#37c6c0"
   height: 3px
-
-# Bookmark Support
-bookmark:
-  enable: false
-  # Customize the color of the bookmark.
-  color: "#222"
-  # If auto, save the reading progress when closing the page or clicking the bookmark-icon.
-  # If manual, only save it by clicking the bookmark-icon.
-  save: auto
-
-# `Follow me on GitHub` banner in the top-right corner.
-github_banner:
-  enable: false
-  permalink: https://github.com/yourname
 
 
 # ---------------------------------------------------------------
@@ -411,30 +397,30 @@ font:
   # Global font settings used for all elements inside <body>.
   global:
     external: false
-    family: LXGW WenKai Lite
+    family: LXGW WenKai
     size:
 
   # Font settings for site title (.site-title).
   title:
     external: true
-    family:
+    family: LXGW WenKai
     size:
 
   # Font settings for headlines (<h1> to <h6>).
   headings:
     external: true
-    family:
+    family: LXGW WenKai
     size:
 
   # Font settings for posts (.post-body).
   posts:
     external: true
-    family:
+    family: LXGW WenKai
 
   # Font settings for <code> and code blocks.
   codes:
     external: true
-    family:
+    family: LXGW WenKai
 
 
 # ---------------------------------------------------------------
@@ -572,7 +558,7 @@ lazyload: false
 # Use Animate.css to animate everything.
 # For more information: https://animate.style
 motion:
-  enable: true
+  enable: false
   async: false
   transition:
     # All available transition variants: https://theme-next.js.org/animate/
