@@ -1,8 +1,8 @@
 ---
 title: Hexo设置文章摘要以及阅读全文按钮
 date: 2021-04-19 11:07:18
-tags: [教程,Hexo]
-categories: 博客搭建
+tags: [Hexo,博客搭建]
+categories: [笔记,博客搭建]
 ---
 #### 前言
 
@@ -16,7 +16,7 @@ categories: 博客搭建
 
 #### Step1
 
-安装相关插件。博客根目录下运行 `npm install hexo-excerpt --save` 
+安装相关插件。博客根目录下运行 `npm install hexo-excerpt --save`
 
 #### Step2
 
@@ -46,4 +46,3 @@ excerpt_description: true
 # If true, the read more button will be displayed in excerpt section.
 read_more_btn: true
 ```
-

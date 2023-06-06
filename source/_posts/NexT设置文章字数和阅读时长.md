@@ -1,8 +1,8 @@
 ---
 title: NexT设置文章字数和阅读时长
 date: 2021-04-19 13:54:51
-tags: [教程,Hexo]
-categories: 博客搭建
+tags: [博客搭建,Hexo]
+categories: [笔记,博客搭建]
 ---
 #### 前言
 

@@ -1,8 +1,8 @@
 ---
 title: NexT主题下一些样式调整的记录
 date: 2021-04-16 21:59:45
-tags: [教程,Hexo,NexT]
-categories: 博客搭建
+tags: [博客搭建,Hexo]
+categories: [笔记,博客搭建]
 ---
 #### 前言
 

@@ -1,8 +1,8 @@
 ---
 title: NexT主题下的Canvas_Nest使用教程
 date: 2021-04-14 23:52:08
-tags: [教程,Hexo,NexT]
-categories: 博客搭建
+tags: [博客搭建,Hexo]
+categories: [笔记,博客搭建]
 ---
 #### 前言
 

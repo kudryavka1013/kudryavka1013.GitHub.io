@@ -2,7 +2,7 @@
 title: 来看看小鲸鱼Docker
 date: 2021-05-12 23:04:06
 tags: [Docker]
-categories: 开发工具
+categories: [笔记]
 ---
 #### 写在前面
 

@@ -2,7 +2,7 @@
 title: Promise.all和Promise.race的实现
 date: 2021-09-19 22:58:49
 tags: [JavaScript]
-categories: 前端
+categories: [笔记,前端]
 ---
 
 #### 前言
@@ -92,7 +92,7 @@ pAll([p1,p2,p3,p4]).then((res)=>{
    所以才会有这么一句 `Promise.resolve(promises[i]).then(...)` 保证无论数组里放的是什么，都能正常运行
 2. 然后是执行的过程，这个for循环里循环变量是let，绝对不能是var，当然你非要用var就得换个写法了。原因不用多说了吧，用var会导致每一个 `results[i] = res` 里的 i 是同一个
 3. 最后是保存的结果，必须是按照接收参数的顺序来存放结果。因为并不能确定Promise完成的先后顺序，所以我们不使用push或是其它的方法，而是使用下标来存放。这个比较好理解
-4. 还有这么一行代码 ` if(length === 0){resolve([])}`，其实啊，如果给Promise.all()传一个空数组[]，那么返回的Promise会直接完成，这里是和原生的all函数保持返回内容一致罢了
+4. 还有这么一行代码 `if(length === 0){resolve([])}`，其实啊，如果给Promise.all()传一个空数组[]，那么返回的Promise会直接完成，这里是和原生的all函数保持返回内容一致罢了
 
 ---
 
@@ -153,4 +153,3 @@ pRace([p1,p3]).then(res=>{
 同理要注意的地方，一个是对于普通数据的转换，使用 `Promise.resolve()`，执行Promise时的循环变量用 let
 
 事实上，如果给原生的race()传入一个空数组 []，那这个Promise永远都不会完成。这里也一样就保持一致不多处理了。
-

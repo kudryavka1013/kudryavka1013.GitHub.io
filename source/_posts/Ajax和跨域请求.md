@@ -2,7 +2,7 @@
 title: Ajax和跨域请求
 date: 2021-04-28 15:50:17
 tags: [Ajax]
-categories: 前端
+categories: [笔记,前端]
 ---
 #### Ajax是什么？
 

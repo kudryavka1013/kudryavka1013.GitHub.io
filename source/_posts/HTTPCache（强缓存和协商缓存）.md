@@ -1,8 +1,8 @@
 ---
 title: HTTPCache（强缓存和协商缓存）
 date: 2021-04-13 11:01:53
-tags: [HTTP,HTTP缓存]
-categories: HTTP相关
+tags: [HTTP/HTTPS]
+categories: [笔记,计算机]
 ---
 #### 缓存是什么东西？
 

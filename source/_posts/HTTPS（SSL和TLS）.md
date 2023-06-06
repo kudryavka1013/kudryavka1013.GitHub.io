@@ -1,8 +1,8 @@
 ---
 title: HTTPS（SSL和TLS）
 date: 2021-04-14 11:01:53
-tags: [HTTPS,HTTP,SSL/TLS]
-categories: HTTP相关
+tags: [HTTP/HTTPS]
+categories: [笔记,计算机]
 ---
 #### 前言
 

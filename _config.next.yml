@@ -93,7 +93,7 @@ menu:
   # about: /about/ || fa fa-user # 关于
   # tags: /tags/ || fa fa-tags # 标签
   life: /life/ || fa fa-paper-plane # 生活
-  notes: /notes/ || fa fa-scroll # 笔记
+  notes: /notes/ || fa fa-book # 笔记
   # archives: /archives/ ||  # 时间线
 
 
