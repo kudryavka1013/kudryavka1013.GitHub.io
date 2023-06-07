@@ -92,9 +92,9 @@ menu:
   # home: / || fa fa-home # 主页
   # about: /about/ || fa fa-user # 关于
   # tags: /tags/ || fa fa-tags # 标签
-  life: /life/ || fa fa-paper-plane # 生活
-  notes: /notes/ || fa fa-book # 笔记
-  # archives: /archives/ ||  # 时间线
+  life: /life/ || fa fa-mug-saucer # 生活
+  notes: /notes/ || fa fa-feather-pointed # 笔记
+  archives: /archives/ || fa fa-paper-plane # 时间线
 
 
 # Enable / Disable menu icons / item badges.

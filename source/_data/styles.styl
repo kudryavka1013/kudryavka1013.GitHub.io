@@ -15,6 +15,12 @@
 /* 侧边圆角 */
 .header, .sidebar-inner {
   border-radius: $common-radius;
+
+  .site-brand-container {
+    border-top-left-radius: $common-radius;
+    border-top-right-radius: $common-radius;
+    background-color: #5698c3;
+  }
 }
 
 /* 文章卡片 */
@@ -67,9 +73,25 @@
 }
 
 /* 文章标题 */
-.index .post-title,
-.post .post-title {
+.index .post-title, .post .post-title {
   text-align: left;
   // border-left: $btn-default-bg 8px solid;
   // padding-left: 10px;
+}
+
+body {
+  background-image: linear-gradient(to right top, #ccd3dd, #bcc9d6, #abc0cf, #9ab7c8, #87aebf);
+  // background-image: linear-gradient(to right top, #73b0b6, #6bb1c1, #67b0cc, #68afd6, #71addf, #71addf, #71addf, #71addf, #68afd6, #67b0cc, #6bb1c1, #73b0b6);
+  // background-image: linear-gradient(to left bottom, #86a8e7, #72b6ed, #63c3ed, #60cee9, #6bd8e1, #78dce2, #85e1e3, #91e5e4, #9be6ed, #a8e7f4, #b5e8f8, #c2e9fb);
+  // background-image: linear-gradient(to right top, #73b0b6, #6bb1c1, #67b0cc, #68afd6, #71addf, #6fb3e7, #6cb9f0, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1);
+  background-repeat: repeat;
+  background-attachment: fixed;
+
+  @media (prefers-color-scheme: dark) {
+    background-image: none;
+  }
+}
+
+.post-content .post-header {
+  margin-bottom: 30px;
 }

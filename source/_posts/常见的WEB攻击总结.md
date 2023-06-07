@@ -2,7 +2,7 @@
 title: 常见的WEB攻击总结
 date: 2021-08-13 17:43:48
 tags: [网络安全]
-categories: Web
+categories: [笔记,前端]
 ---
 #### 前言
 
