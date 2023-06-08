@@ -1,4 +1,4 @@
-/* **** 全局样式 **** */
+/* 全局 */
 /* 隐藏顶部线条 */
 .headband {
   display: none;
@@ -12,17 +12,34 @@
 }
 
 /* 侧边栏 */
-/* 侧边圆角 */
-.header, .sidebar-inner {
+.header,
+.sidebar-inner {
   border-radius: $common-radius;
 
   .site-brand-container {
-    border-top-left-radius: $common-radius;
-    border-top-right-radius: $common-radius;
-    background-color: #5698c3;
+    border-radius: $common-radius $common-radius 0 0;
+    background: url($site-brand-bg-url);
+    background-size: cover
+
+    @media (prefers-color-scheme: dark) {
+      background: url($site-brand-bg-url-dark);
+      background-position: 0 70%;
+    }
+    
+    +mobile() {
+      border-radius: 0 0 $common-radius $common-radius;
+    }  
+
+    .site-subtitle{
+      font-size: .85em;
+      @media (prefers-color-scheme: light){
+        color: $brand-color;
+      }
+    }
   }
 }
 
+/* 首页 */
 /* 文章卡片 */
 .post-block {
   border-radius: $common-radius !important;
@@ -36,7 +53,9 @@
 }
 
 /* 页码按钮 */
-.pagination .prev, .pagination .next, .pagination .page-number {
+.pagination .prev,
+.pagination .next,
+.pagination .page-number {
   border: none;
   border-radius: $common-radius;
 
@@ -68,12 +87,14 @@
 }
 
 /* 文章信息栏 */
-.index .post-meta, .post .post-meta {
+.index .post-meta,
+.post .post-meta {
   justify-content: left;
 }
 
 /* 文章标题 */
-.index .post-title, .post .post-title {
+.index .post-title,
+.post .post-title {
   text-align: left;
   // border-left: $btn-default-bg 8px solid;
   // padding-left: 10px;
