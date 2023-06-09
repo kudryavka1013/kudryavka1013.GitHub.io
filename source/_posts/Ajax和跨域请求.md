@@ -1,8 +1,12 @@
 ---
 title: Ajax和跨域请求
+tags:
+  - Ajax
+categories:
+  - 笔记
+  - 前端
+abbrlink: 2a3e9eb4
 date: 2021-04-28 15:50:17
-tags: [Ajax]
-categories: [笔记,前端]
 ---
 #### Ajax是什么？
 
@@ -127,8 +131,8 @@ xhr.send(null);
 
 ```javascript
 function addURLParam(url, name, value){
-	url += (url.indexOf("?") == -1 ? "?" : "&");
-	url += encodeURIComponent(name) + "=" + encodeURIComponent(value);
+ url += (url.indexOf("?") == -1 ? "?" : "&");
+ url += encodeURIComponent(name) + "=" + encodeURIComponent(value);
     return url;
 }
 ```
@@ -205,8 +209,6 @@ xhr.send(data)
 - totalSize：预期字节数（其实就是总长），它是根据Content-Length响应头信息确定的
 
 有了这些信息，我们可以做一个进度指示器出来：`event.position + "/" + event.totalSize + "bytes"`。另外，为了保证正常执行，<u>onprogress事件处理程序必须放在open()方法之前</u>
-
-
 
 #### 跨域源资源共享
 
@@ -310,8 +312,6 @@ Origin
 // 响应头
 Acess-Control-Allow-Origin（和请求头的相同）
 ```
-
-
 
 #### 参考
 

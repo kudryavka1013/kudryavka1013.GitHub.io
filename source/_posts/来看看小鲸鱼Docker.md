@@ -1,8 +1,11 @@
 ---
 title: 来看看小鲸鱼Docker
+tags:
+  - Docker
+categories:
+  - 笔记
+abbrlink: ad6f3514
 date: 2021-05-12 23:04:06
-tags: [Docker]
-categories: [笔记]
 ---
 #### 写在前面
 
@@ -37,15 +40,11 @@ Volume：数据卷，存放数据
 
 在灶台（Docker）上，我们使用菜谱和原材料（image）来做饭菜（container），同时我们可以用纸笔（dockerfile）来写我们自己的菜谱
 
-
-
 #### Docker安装
 
 看这个不好吗？
 
 [安装 Docker - Docker —— 从入门到实践 (gitbook.io)](https://yeasy.gitbook.io/docker_practice/install)
-
-
 
 #### 镜像 Image
 
@@ -60,8 +59,6 @@ Volume：数据卷，存放数据
 删除本地镜像：`docker image rm imageName`
 
 使用这些命令，一般都要附带一些选项参数，上面的只是最基本、最简单的用法
-
-
 
 #### 容器 Container
 
@@ -79,8 +76,6 @@ Docker会检查本地有没有该镜像，如果不存在对应镜像，就会�
 删除一个容器：`docker container rm containerName`
 
 同样的，我们一般都需要一些额外的选项参数，比如给容器命名，映射端口等
-
-
 
 #### 用 Dockerfile 定制镜像
 
@@ -164,9 +159,8 @@ docker build -t 镜像名称 .
 
 #### 参考
 
-[什么是 Docker - Docker —— 从入门到实践](https://yeasy.gitbook.io/docker_practice/introduction/what) 
+[什么是 Docker - Docker —— 从入门到实践](https://yeasy.gitbook.io/docker_practice/introduction/what)
 
 [Docker 入门教程 - 阮一峰的网络日志 (ruanyifeng.com)](https://www.ruanyifeng.com/blog/2018/02/docker-tutorial.html)
 
 [Docker 微服务教程 - 阮一峰的网络日志 (ruanyifeng.com)](https://ruanyifeng.com/blog/2018/02/docker-wordpress-tutorial.html)
-

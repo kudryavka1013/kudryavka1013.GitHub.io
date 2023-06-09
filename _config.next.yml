@@ -1,12 +1,5 @@
-# ===============================================================
-# It's recommended to use Alternate Theme Config to configure NexT
-# Modifying this file may result in merge conflict
-# See: https://theme-next.js.org/docs/getting-started/configuration
-# ===============================================================
-
 # ---------------------------------------------------------------
 # Theme Core Configuration Settings
-# See: https://theme-next.js.org/docs/theme-settings/
 # ---------------------------------------------------------------
 
 # Allow to cache content generation.
@@ -14,10 +7,9 @@ cache:
   enable: true
 
 # Remove unnecessary files after hexo generate.
-minify: false
+minify: true
 
 # Define custom file paths.
-# Create your custom files in site directory `source/_data` and uncomment needed files below.
 custom_file_path:
   #head: source/_data/head.njk
   header: source/_data/header.njk
@@ -29,7 +21,6 @@ custom_file_path:
   variable: source/_data/variables.styl
   #mixin: source/_data/mixins.styl
   style: source/_data/styles.styl
-
 
 # ---------------------------------------------------------------
 # Scheme Settings
@@ -50,20 +41,13 @@ favicon:
   safari_pinned_tab: /resources/favicon/logo.svg
   #android_manifest: /manifest.json
 
-# Custom Logo (Warning: Do not support scheme Mist)
-# custom_logo: /resources/favicon/logo.svg
-
-# Creative Commons 4.0 International License.
-# See: https://creativecommons.org/about/cclicenses/
+# License
 creative_commons:
   # Available values: by | by-nc | by-nc-nd | by-nc-sa | by-nd | by-sa | cc-zero
   license: by-nc-sa
-  # Available values: big | small
   size: big
   sidebar: false
   post: true
-  # You can set a language value if you prefer a translated version of CC license, e.g. deed.zh
-  # CC licenses are available in 39 languages, you can find the specific and correct abbreviation you need on https://creativecommons.org
   language: zh-CN
 
 # Open graph settings
@@ -83,11 +67,6 @@ open_graph:
 # ---------------------------------------------------------------
 # Menu Settings
 # ---------------------------------------------------------------
-
-# Usage: `Key: /link/ || icon`
-# Key is the name of menu item. If the translation for this item is available, the translated text will be loaded, otherwise the Key name will be used. Key is case-sensitive.
-# Value before `||` delimiter is the target link, value after `||` delimiter is the name of Font Awesome icon.
-# External url should start with http:// or https://
 menu:
   # home: / || fa fa-home # 主页
   # about: /about/ || fa fa-user # 关于
@@ -96,8 +75,6 @@ menu:
   notes: /notes/ || fa fa-feather-pointed # 笔记
   archives: /archives/ || fa fa-paper-plane # 时间线
 
-
-# Enable / Disable menu icons / item badges.
 menu_settings:
   icons: true
   badges: false
@@ -110,10 +87,6 @@ menu_settings:
 
 sidebar:
   position: left
-
-  # Manual define the sidebar width. If commented, will be default for:
-  # Muse | Mist: 320
-  # Pisces | Gemini: 240
   #width: 300
 
   # Sidebar Display (only for Muse | Mist), available values:
@@ -165,7 +138,7 @@ links:
 toc:
   enable: true
   # Automatically add list number to toc.
-  number: true
+  number: false
   # If true, all words will placed on next lines if header width longer then sidebar width.
   wrap: false
   # If true, all level of TOC in a post will be displayed, rather than the activated part of it.
@@ -238,12 +211,6 @@ symbols_count_time:
 # Use icon instead of the symbol # to indicate the tag at the bottom of the post
 tag_icon: false
 
-# Related popular posts
-# Dependencies: https://github.com/sergeyzwezdin/hexo-related-posts
-related_posts:
-  enable: false
-  icon: fa fa-signs-post
-
 # Show previous post and next post in post footer if exists
 # Available values: left | right | false
 post_navigation: left
@@ -255,8 +222,8 @@ post_navigation: left
 
 # TagCloud settings for tags page.
 tagcloud:
-  min: 12 # Minimum font size in px
-  max: 30 # Maximum font size in px
+  min: 16 # Minimum font size in px
+  max: 32 # Maximum font size in px
   amount: 200 # Total amount of tags
   orderby: name # Order of tags
   order: 1 # Sort order

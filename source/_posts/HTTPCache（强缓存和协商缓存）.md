@@ -1,8 +1,12 @@
 ---
 title: HTTPCache（强缓存和协商缓存）
+tags:
+  - HTTP/HTTPS
+categories:
+  - 笔记
+  - 计算机
+abbrlink: d3098c13
 date: 2021-04-13 11:01:53
-tags: [HTTP/HTTPS]
-categories: [笔记,计算机]
 ---
 #### 缓存是什么东西？
 
@@ -10,21 +14,15 @@ categories: [笔记,计算机]
 
 和本地存储localStorage、cookie不同的是，本地存储一般是**数据记录**，存储量比较小。而缓存主要用途是为了<u>减少资源请求</u>，多用于<u>存储文件</u>，存储量比较大。
 
-
-
 #### 缓存有什么用呢？
 
 最根本的作用就是**减少没有必要的请求**。有的资源，<u>很久才会发生一次改变</u>，如果我们每次都去请求它，请求拿到的东西又是一样的。一来一回，页面显示要的时间长了不说，频繁的服务器请求还给服务器增加压力。那我们把这个资源直接缓存到本地，那每次要用了就本地读取，不用再发起请求。
 
 这样，**缓存减少页面显示需要的时间，提高了用户体验。同时，减少了服务器请求，减轻服务器压力。**
 
-
-
 ##### 浏览器缓存机制
 
 按浏览器读取优先级顺序依次为：Memory Cache、Service Worker Cache、**HTTP Cache**、Push Cache
-
-
 
 #### HTTP Cache
 
@@ -33,16 +31,12 @@ categories: [笔记,计算机]
 - 浏览器每次发起请求，都先在缓存中查找该请求的结果以及缓存标识
 - 浏览器每次拿到返回的请求结果，都会把结果和缓存标识存进浏览器缓存
 
-
-
 ![img](https://cdn.jsdelivr.net/gh/kudryavka1013/note-pic@master/note/20210411000747.webp)
 
 缓存标识分为**强缓存**，**协商缓存**，优先级最高的是强缓存，命中强缓存失败时，才会去走协商缓存
 
 - 强缓存：在**本地**读取比对，而<u>不去请求服务器</u>，返回状态码为<u>200</u>
 - 协商缓存：把本地缓存发送到**服务器**进行比对，若<u>没有改变</u>才直接读取本地缓存，返回状态码为<u>304</u>
-
-
 
 #### 强缓存（强制缓存）
 
@@ -97,8 +91,6 @@ Cache-Control 是 HTTP/1.1 中新增的属性，解决了Expires的问题，它�
 
 ![image-20210411161926027](https://cdn.jsdelivr.net/gh/kudryavka1013/note-pic@master/note/20210411161926.png)
 
-
-
 #### 协商缓存
 
 协商缓存就是强制缓存失效（包括设置不走强缓存）后，同时设置了相关属性，浏览器携带缓存标识向服务器发起请求，由**服务器根据缓存标识决定是否使用缓存**的过程
@@ -142,15 +134,11 @@ ETag就解决了上面的问题，它**基于资源的内容编码生成一串�
 
 ETag 又有强弱校验之分，如果 hash 码是以 "W/" 开头的一串字符串，说明此时协商缓存的校验是**弱校验**的，<u>只有服务器上的文件差异（根据 ETag 计算方式来决定）达到能够触发 hash 值后缀变化的时候，才会真正地请求资源</u>，否则返回 304 并加载浏览器缓存
 
-
-
 #### 总结
 
 ![img](https://cdn.jsdelivr.net/gh/kudryavka1013/note-pic@master/note/20210411194112.jpeg)
 
 强制缓存优先于协商缓存进行，若强制缓存（Expires和Cache-Control）生效则直接使用缓存，若不生效则进行协商缓存（Last-Modified / If-Modified-Since和Etag / If-None-Match），协商缓存由服务器决定是否使用缓存，若协商缓存失效，那么代表该请求的缓存失效，重新获取请求结果，再存入浏览器缓存中；生效则返回304，继续使用缓存。
-
-
 
 #### 访问/刷新时，会进行怎样的缓存访问？
 
@@ -163,12 +151,10 @@ ETag 又有强弱校验之分，如果 hash 码是以 "W/" 开头的一串字符
   浏览器会强行设置 `no-cache`，强制获取最新的资源，就连 `if-modified-since` 等其他缓存协议字段都会被忽略
   ![image-20210411195526562](https://cdn.jsdelivr.net/gh/kudryavka1013/note-pic@master/note/20210411195526.png)
 
-
-
 #### 参考
 
-https://juejin.cn/post/6844903593275817998
+<https://juejin.cn/post/6844903593275817998>
 
-https://blog.csdn.net/qianyu6200430/article/details/115535067
+<https://blog.csdn.net/qianyu6200430/article/details/115535067>
 
-https://www.jianshu.com/p/fb59c770160c
+<https://www.jianshu.com/p/fb59c770160c>

@@ -1,12 +1,17 @@
 ---
 title: 常见的WEB攻击总结
+tags:
+  - 网络安全
+categories:
+  - 笔记
+  - 前端
+abbrlink: d0503d2f
 date: 2021-08-13 17:43:48
-tags: [网络安全]
-categories: [笔记,前端]
 ---
 #### 前言
 
 面试的时候被问到了，没想起来几个，事后找了几篇文章看了一下，总结了几个常见的Web攻击
+
 #### SQL注入
 
 ##### 原理
@@ -162,4 +167,3 @@ TCP三次握手：
 [前端安全系列之二：如何防止CSRF攻击？ - SegmentFault 思否](https://segmentfault.com/a/1190000016659945)
 
 [DDoS的攻击及防御 - SegmentFault 思否](https://segmentfault.com/a/1190000016584829#articleHeader19)
-

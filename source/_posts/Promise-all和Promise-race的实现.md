@@ -1,8 +1,12 @@
 ---
 title: Promise.all和Promise.race的实现
+tags:
+  - JavaScript
+categories:
+  - 笔记
+  - 前端
+abbrlink: dc59d321
 date: 2021-09-19 22:58:49
-tags: [JavaScript]
-categories: [笔记,前端]
 ---
 
 #### 前言

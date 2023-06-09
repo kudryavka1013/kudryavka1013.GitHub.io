@@ -1,8 +1,13 @@
 ---
 title: Hexo设置文章摘要以及阅读全文按钮
+tags:
+  - Hexo
+  - 博客搭建
+categories:
+  - 笔记
+  - 博客搭建
+abbrlink: 520638b1
 date: 2021-04-19 11:07:18
-tags: [Hexo,博客搭建]
-categories: [笔记,博客搭建]
 ---
 #### 前言
 

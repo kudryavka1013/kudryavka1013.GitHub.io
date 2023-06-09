@@ -1,8 +1,13 @@
 ---
 title: NexT主题下一些样式调整的记录
+tags:
+  - 博客搭建
+  - Hexo
+categories:
+  - 笔记
+  - 博客搭建
+abbrlink: 7095b7d6
 date: 2021-04-16 21:59:45
-tags: [博客搭建,Hexo]
-categories: [笔记,博客搭建]
 ---
 #### 前言
 
@@ -183,6 +188,7 @@ $btn-default-hover-border-color-dark   = $grey-dim;
   }
 }
 ```
+
 #### 修改文章内h1、h2、h3等标签的样式
 
 > 参考文章：

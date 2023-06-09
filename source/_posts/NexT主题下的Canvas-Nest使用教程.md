@@ -1,8 +1,13 @@
 ---
 title: NexT主题下的Canvas_Nest使用教程
+tags:
+  - 博客搭建
+  - Hexo
+categories:
+  - 笔记
+  - 博客搭建
+abbrlink: f1fab66b
 date: 2021-04-14 23:52:08
-tags: [博客搭建,Hexo]
-categories: [笔记,博客搭建]
 ---
 #### 前言
 
@@ -55,4 +60,3 @@ custom_file_path:
 ```
 
 然后你就可以用 `hexo server` 看下效果如何了
-
