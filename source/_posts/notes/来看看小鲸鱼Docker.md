@@ -1,10 +1,9 @@
 ---
-title: 来看看小鲸鱼Docker
+title: 看看Docker
 tags:
   - Docker
 categories:
   - 笔记
-abbrlink: ad6f3514
 date: 2021-05-12 23:04:06
 ---
 #### 写在前面

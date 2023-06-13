@@ -23,7 +23,7 @@
     background-size: cover;
 
     @media (prefers-color-scheme: dark) {
-      background: url($site-brand-bg-url-dark);
+      background: url($site-brand-bg-dark-url);
       background-position: 0 70%;
       background-size: cover;
     }
@@ -44,8 +44,8 @@
 
 /* 返回顶部按钮 */
 .back-to-top {
-  background: $secondary-color;
-  opacity: 0.8;
+  background: $minor-color;
+  opacity: 0.9;
   border-radius: 1em;
   color: $default-white-color;
 
@@ -55,8 +55,13 @@
   }
 
   &:hover {
-    color: $text-color-dark;
+    color: $third-color;
   }
+}
+
+::selection {
+  background: $third-color;
+  color: $default-white-color;
 }
 
 /* ************************* */
@@ -77,16 +82,17 @@
     border: none;
     border-radius: $common-radius;
 
-    &:hover {
-      color: white;
-      // background: $btn-default-hover-bg;
-      // btn-shadow-hover-only();
+    @media (prefers-color-scheme: light) {
+      &:hover {
+        color: white;
+        // background: $btn-default-hover-bg;
+        // btn-shadow-hover-only();
+      }
     }
   }
 
   .page-number.current {
-    // background: $btn-default-bg;
-    // btn-shadow-only();
+
   }
 }
 
@@ -102,11 +108,15 @@
 /* 文章标题 */
 .index .post-title, .post .post-title {
   text-align: left;
-  border-left: $secondary-color 8px solid;
+  border-left: $minor-color 8px solid;
   padding-left: 10px;
   font-weight: 700;
   line-height: 1.2em;
   margin: 0.3em 0 0.3em;
+
+  @media (prefers-color-scheme: dark) {
+    border-left: $minor-color-dark 8px solid;
+  }
 }
 
 body {
