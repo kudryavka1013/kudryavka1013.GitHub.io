@@ -13,6 +13,12 @@
   }
 }
 
+@media (min-width: 1600px) {
+  .main {
+    width: 1160px;
+  }
+}
+
 /* 侧边栏 */
 .header, .sidebar-inner {
   border-radius: $common-radius;
@@ -48,6 +54,7 @@
   opacity: 0.9;
   border-radius: 1em;
   color: $default-white-color;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1);
 
   span {
     font-weight: bold;
@@ -55,13 +62,26 @@
   }
 
   &:hover {
-    color: $third-color;
+    color: #052630;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    background: $minor-color-dark;
+
+    &:hover {
+      color: $default-white-color;
+    }
   }
 }
 
 ::selection {
   background: $third-color;
   color: $default-white-color;
+
+  @media (prefers-color-scheme: dark) {
+    background: $minor-color-dark;
+    color: $default-white-color;
+  }
 }
 
 /* ************************* */
@@ -84,15 +104,21 @@
 
     @media (prefers-color-scheme: light) {
       &:hover {
-        color: white;
-        // background: $btn-default-hover-bg;
-        // btn-shadow-hover-only();
+        color: $default-white-color;
       }
     }
   }
 
   .page-number.current {
+    background-color: $minor-color;
+    border-color: $minor-color;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
 
+    @media (prefers-color-scheme: dark) {
+      color: $default-white-color;
+      background-color: $content-bg-color-dark;
+      border-color: $content-bg-color-dark;
+    }
   }
 }
 
