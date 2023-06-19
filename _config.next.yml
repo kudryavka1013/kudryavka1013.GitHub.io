@@ -318,30 +318,12 @@ font:
   # Global font settings used for all elements inside <body>.
   global:
     external: false
-    family: LXGW WenKai
-    size:
-
-  # Font settings for site title (.site-title).
-  title:
-    external: true
-    family: LXGW WenKai
-    size:
-
-  # Font settings for headlines (<h1> to <h6>).
-  headings:
-    external: true
-    family: LXGW WenKai
-    size:
-
-  # Font settings for posts (.post-body).
-  posts:
-    external: true
-    family: LXGW WenKai
+    family: LXGW WenKai Lite
 
   # Font settings for <code> and code blocks.
   codes:
-    external: true
-    family: LXGW WenKai
+    external: false
+    family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace
 
 
 # ---------------------------------------------------------------

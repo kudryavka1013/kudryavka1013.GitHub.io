@@ -6,6 +6,10 @@
   display: none;
 }
 
+a {
+  border-bottom: none;
+}
+
 /* 顶部边距 */
 @media (min-width: 991px) {
   .main {
@@ -125,6 +129,7 @@
 /* 文章信息栏 */
 .index .post-meta, .post .post-meta {
   justify-content: left;
+  white-space: nowrap;
 
   time {
     border-bottom: none;
@@ -136,7 +141,6 @@
   text-align: left;
   border-left: $minor-color 8px solid;
   padding-left: 10px;
-  font-weight: 700;
   line-height: 1.2em;
   margin: 0.3em 0 0.3em;
 
