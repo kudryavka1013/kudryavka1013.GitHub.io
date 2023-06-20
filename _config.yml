@@ -72,6 +72,8 @@ index2_generator:
     order_by: -date
     include:
       - category 生活
+  - layout: "tags"
+    path: "tags"
 
 # Category & Tag
 default_category: uncategorized
