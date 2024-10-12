@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/resources/favicon/logo.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon/logo.svg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon/logo.svg">
+  <link rel="mask-icon" href="/resources/favicon/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.kudryavka.site","root":"/","images":"/resources/images/","scheme":"Gemini","darkmode":true,"version":"8.14.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"flat"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="最近遇到了一个怪怪需求，产品同学想要在 A 系统一键同时复制一段文本和图片，然后在 B 聊天系统粘贴并作为消息发送。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="记一次复制图片到剪贴板的实现">
+<meta property="og:url" content="https://blog.kudryavka.site/posts/51e63ad22e4f/index.html">
+<meta property="og:site_name" content="渐渐">
+<meta property="og:description" content="最近遇到了一个怪怪需求，产品同学想要在 A 系统一键同时复制一段文本和图片，然后在 B 聊天系统粘贴并作为消息发送。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/kudryavka1013/note-pic@master/note/Cut-copy-and-paste-images.jpg">
+<meta property="article:published_time" content="2024-01-26T06:10:20.000Z">
+<meta property="article:modified_time" content="2024-02-21T08:40:55.000Z">
+<meta property="article:author" content="Kudryavka">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://fastly.jsdelivr.net/gh/kudryavka1013/note-pic@master/note/Cut-copy-and-paste-images.jpg">
+
+
+<link rel="canonical" href="https://blog.kudryavka.site/posts/51e63ad22e4f/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://blog.kudryavka.site/posts/51e63ad22e4f/","path":"/posts/51e63ad22e4f/","title":"记一次复制图片到剪贴板的实现"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>记一次复制图片到剪贴板的实现 | 渐渐</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">渐渐</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">如重温往日邮寄</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-life"><a href="/life/" rel="section"><i class="fa fa-mug-saucer fa-fw"></i>随笔</a></li><li class="menu-item menu-item-notes"><a href="/notes/" rel="section"><i class="fa fa-feather-pointed fa-fw"></i>学习</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-paper-plane fa-fw"></i>归档</a></li><li class="menu-item menu-item-collection"><a href="/collection/" rel="section"><i class="fa fa-guitar fa-fw"></i>收藏</a></li>
+  </ul>
+</nav>
+
+
+
+
+<link href="https://cdn.bootcdn.net/ajax/libs/aplayer/1.10.1/APlayer.min.css" rel="stylesheet" />
+
+<link rel="stylesheet" href="https://registry.npmmirror.com/lxgw-wenkai-screen-web/latest/files/style.css"/>
+  <script>
+    var meting_api = 'https://api.injahow.cn/meting/?server=:server&type=:type&id=:id&auth=:auth&r=:r';
+  </script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/aplayer/1.10.1/APlayer.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/meting/1.2.0/Meting.min.js"></script>
+  <div
+    class="aplayer"
+    data-id="8201666696"
+    data-server="netease"
+    data-type="playlist"
+    data-fixed="true"
+    data-autoplay="false"
+    data-order="random"
+    data-volume="0.2"
+    data-theme="#4C5E87"
+    data-preload="auto"
+    data-lrc-type="0"></div>
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%9F%E7%90%86"><span class="nav-text">原理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%9B%BE%E7%89%87"><span class="nav-text">获取图片</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%89%AA%E8%B4%B4%E6%9D%BF%E8%BF%BD%E5%8A%A0%E5%86%85%E5%AE%B9"><span class="nav-text">剪贴板追加内容</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8D%E5%A5%BD%EF%BC%8C%E6%9C%89%E5%9D%91%EF%BC%81"><span class="nav-text">不好，有坑！</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%A6%E4%B8%80%E7%A7%8D%E6%80%9D%E8%B7%AF"><span class="nav-text">另一种思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8B%93%E5%B1%95"><span class="nav-text">拓展</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Kudryavka"
+      src="https://avatars.githubusercontent.com/u/50348668?v=4">
+  <p class="site-author-name" itemprop="name">Kudryavka</p>
+  <div class="site-description" itemprop="description">Gamer / Harmonica / Front-End</div>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kudryavka1013" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kudryavka1013" rel="noopener me" target="_blank"><i class="fa-brands fa-github fa-lg fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/22735925" title="bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;22735925" rel="noopener me" target="_blank"><i class="fa-brands fa-bilibili fa-lg fa-fw"></i></a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.kudryavka.site/posts/51e63ad22e4f/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/50348668?v=4">
+      <meta itemprop="name" content="Kudryavka">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="渐渐">
+      <meta itemprop="description" content="Gamer / Harmonica / Front-End">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="记一次复制图片到剪贴板的实现 | 渐渐">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          记一次复制图片到剪贴板的实现
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-01-26 14:10:20" itemprop="dateCreated datePublished" datetime="2024-01-26T14:10:20+08:00">2024-01-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/notes/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/notes/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p><img src="https://fastly.jsdelivr.net/gh/kudryavka1013/note-pic@master/note/Cut-copy-and-paste-images.jpg" alt="banner"></p>
+<p>最近遇到了一个怪怪需求，产品同学想要在 A 系统一键同时复制一段文本和图片，然后在 B 聊天系统粘贴并作为消息发送。</p>
+<p>我们一看，在 A 系统上复制自然是有办法实现。但是粘贴行为就不是 A 系统能控制的，得在 B 系统上适配。想了想其实粘贴也好办，如果仅需要支持特定格式，那在复制时带上一个特殊标签，两端约定好格式，那么在粘贴时识别该标签，特殊处理就行。</p>
+<p>下面说说实现的原理和一些踩坑。</p>
+<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>把大象放进冰箱需要几步？我们拆分一下需求，确定功能点</p>
+<ol>
+<li>把一段文本放进剪贴板；如果有图片，则下一步</li>
+<li>获取图片，用某种方式把图片二进制变成 base64 格式</li>
+<li>将图片内容追加到文本内容后面<br>复制文本老生常谈了，这里直接略过</li>
+</ol>
+<h4 id="获取图片"><a href="#获取图片" class="headerlink" title="获取图片"></a>获取图片</h4><p>可以用 fetch 或者 xhr 获取图片，然后手动转成 base64 格式。</p>
+<pre class="line-numbers language-typescript" data-language="typescript"><code class="language-typescript"><span class="token comment">/**
+ * @description 图片url转base64字符串
+ * @param &#123;string&#125; url 图片url地址
+ * @return &#123;Promise&lt;string>&#125;
+ */</span>
+<span class="token keyword">const</span> <span class="token function-variable function">convertImageToBase64</span> <span class="token operator">=</span> <span class="token punctuation">(</span>url<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name"><span class="token builtin">Promise</span><span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token operator">></span></span><span class="token punctuation">(</span><span class="token keyword">async</span> <span class="token punctuation">(</span>resolve<span class="token punctuation">,</span> reject<span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
+      <span class="token keyword">const</span> response <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">fetch</span><span class="token punctuation">(</span>url<span class="token punctuation">,</span> <span class="token punctuation">&#123;</span> mode<span class="token operator">:</span> <span class="token string">'cors'</span> <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">const</span> blob <span class="token operator">=</span> <span class="token keyword">await</span> response<span class="token punctuation">.</span><span class="token function">blob</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">const</span> reader <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">FileReader</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      reader<span class="token punctuation">.</span><span class="token function-variable function">onload</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>result <span class="token operator">?</span> <span class="token function">resolve</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>result <span class="token keyword">as</span> <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">reject</span><span class="token punctuation">(</span><span class="token string">'convertImage failed: no result'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+      reader<span class="token punctuation">.</span><span class="token function">readAsDataURL</span><span class="token punctuation">(</span>blob<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span>e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      <span class="token function">reject</span><span class="token punctuation">(</span><span class="token string">'convertImage failed: '</span> <span class="token operator">+</span> e<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>一通操作下来，我们得到了图片 base64 字符串。</p>
+<h4 id="剪贴板追加内容"><a href="#剪贴板追加内容" class="headerlink" title="剪贴板追加内容"></a>剪贴板追加内容</h4><p>然后就是读取剪贴板，并把内容追加在已有内容后面，都是常规操作了。</p>
+<pre class="line-numbers language-typescript" data-language="typescript"><code class="language-typescript"><span class="token keyword">const</span> <span class="token function-variable function">addImageToClipboard</span> <span class="token operator">=</span> <span class="token keyword">async</span> <span class="token punctuation">(</span>url<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">const</span> clipboardItems <span class="token operator">=</span> <span class="token keyword">await</span> navigator<span class="token punctuation">.</span>clipboard<span class="token punctuation">.</span><span class="token function">read</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// 追加图片base64的img标签到剪贴板 text/html 内容后</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>clipboardItems<span class="token punctuation">.</span>length <span class="token operator">&amp;&amp;</span> clipboardItems<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      <span class="token keyword">const</span> types <span class="token operator">=</span> clipboardItems<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>types<span class="token punctuation">;</span>
+      <span class="token keyword">const</span> dataBlobs<span class="token operator">:</span> Record<span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token punctuation">,</span> Blob<span class="token operator">></span> <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+      <span class="token keyword">await</span> <span class="token builtin">Promise</span><span class="token punctuation">.</span><span class="token function">all</span><span class="token punctuation">(</span>
+        types<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token keyword">async</span> <span class="token punctuation">(</span>type<span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+          <span class="token keyword">const</span> blob <span class="token operator">=</span> <span class="token keyword">await</span> clipboardItems<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">getType</span><span class="token punctuation">(</span>type<span class="token punctuation">)</span><span class="token punctuation">;</span>
+          dataBlobs<span class="token punctuation">[</span>type<span class="token punctuation">]</span> <span class="token operator">=</span> blob<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+      <span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">const</span> dataHtmlText <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">await</span> dataBlobs<span class="token punctuation">[</span><span class="token string">'text/html'</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">text</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">??</span> <span class="token string">''</span><span class="token punctuation">;</span>
+      <span class="token comment">//请求该地址，返回图片的base64数据</span>
+      <span class="token keyword">const</span> imageBase64 <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">convertImageToBase64</span><span class="token punctuation">(</span>url<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">const</span> newClipboardItem <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ClipboardItem</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+        <span class="token operator">...</span>dataBlobs<span class="token punctuation">,</span>
+        <span class="token string-property property">'text/html'</span><span class="token operator">:</span> <span class="token keyword">new</span> <span class="token class-name">Blob</span><span class="token punctuation">(</span><span class="token punctuation">[</span>dataHtmlText <span class="token operator">+</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">&lt;img src="</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>imageBase64<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">"/></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span>
+          type<span class="token operator">:</span> <span class="token string">'text/html'</span><span class="token punctuation">,</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+      <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      navigator<span class="token punctuation">.</span>clipboard<span class="token punctuation">.</span><span class="token function">write</span><span class="token punctuation">(</span><span class="token punctuation">[</span>newClipboardItem<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span>e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">throw</span> e<span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="不好，有坑！"><a href="#不好，有坑！" class="headerlink" title="不好，有坑！"></a>不好，有坑！</h3><p>实际调试过程中自然没这么顺利。在页面上接入该功能后，发现会有莫名其妙的跨域问题，图片没法下载。但是咱们的图片都是放在私有 oss 上的，链路已经打通，不存在什么无法访问一说。</p>
+<p>那问题出在哪呢？我尝试直接在代码中写死一个图片链接，控制台输出剪贴板内容，测试这两个方法，结果却没什么异常。后面又看了成功和失败两次请求，发现他们的响应头不太一样？！失败的响应头里没有 <code>Access-Control-Allow-Origin</code>。</p>
+<p>这就很骚了，原来是打开系统页面时，第一次加载图片用的是 <code>&lt;img&gt;</code> 标签，没有配置相应参数，也就没有 <code>Access-Control-Allow-Origin</code>。点击复制时，由于浏览器缓存的原因，仍是使用了前一个请求的响应，所以在页面上测试时会失败，单独请求时却没这问题。强制停用缓存后，不出意外能够成功复制了。</p>
+<p>问题原因找到后，解决就很简单了。给请求的 URL 加上一个随机参数就行，这个方法也常常用于用于判断网站版本更新。用户此前访问过某网站后，此时网站更新了，但是资源文件仍然是同名的情况下。由于浏览器的缓存的原因，没有重新请求资源，用户刷新网站后看到的仍然是旧版本。</p>
+<p><strong>给请求加上参数，这个参数可以是无意义随机数或者干脆就是当前时间，如此每次请求都是不同的，就不会触发浏览器的缓存机制，浏览器就会重新到后端去请求资源。</strong></p>
+<h3 id="另一种思路"><a href="#另一种思路" class="headerlink" title="另一种思路"></a>另一种思路</h3><p>获取图片 base64 也可以用 canvas 来实现，要留意跨域问题。</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">convertImageToBase64</span><span class="token punctuation">(</span><span class="token parameter">url<span class="token punctuation">,</span> callback</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">var</span> img <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Image</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">// 这个配置很重要</span>
+  img<span class="token punctuation">.</span>crossOrigin <span class="token operator">=</span> <span class="token string">'Anonymous'</span><span class="token punctuation">;</span>
+
+  img<span class="token punctuation">.</span><span class="token function-variable function">onload</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">var</span> canvas <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">'canvas'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    canvas<span class="token punctuation">.</span>width <span class="token operator">=</span> img<span class="token punctuation">.</span>width<span class="token punctuation">;</span>
+    canvas<span class="token punctuation">.</span>height <span class="token operator">=</span> img<span class="token punctuation">.</span>height<span class="token punctuation">;</span>
+
+    <span class="token keyword">var</span> ctx <span class="token operator">=</span> canvas<span class="token punctuation">.</span><span class="token function">getContext</span><span class="token punctuation">(</span><span class="token string">'2d'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    ctx<span class="token punctuation">.</span><span class="token function">drawImage</span><span class="token punctuation">(</span>img<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">var</span> dataURL <span class="token operator">=</span> canvas<span class="token punctuation">.</span><span class="token function">toDataURL</span><span class="token punctuation">(</span><span class="token string">'image/png'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">var</span> base64 <span class="token operator">=</span> dataURL<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">^data:image\/(png|jpg);base64,</span><span class="token regex-delimiter">/</span></span><span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">callback</span><span class="token punctuation">(</span>base64<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+  img<span class="token punctuation">.</span><span class="token function-variable function">onerror</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token function">callback</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+  img<span class="token punctuation">.</span>src <span class="token operator">=</span> url<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h3><p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6903698870694313991">如履薄冰的复制粘贴-clipboard详解 - 掘金</a>，让我想起了之前做富文本编辑器的痛苦时光</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+  <div class="license cc">
+  
+    <div class="license-title">记一次复制图片到剪贴板的实现</div>
+    <div class="license-link">
+      <a href="https://blog.kudryavka.site/posts/51e63ad22e4f/">https://blog.kudryavka.site/posts/51e63ad22e4f/</a>
+    </div>
+    <div class="license-meta">
+      <div class="license-meta-item">
+        <div class="license-meta-title">本文作者</div>
+        <div class="license-meta-text">
+          Kudryavka
+        </div>
+      </div>
+        <div class="license-meta-item">
+          <div class="license-meta-title">发布于</div>
+          <div class="license-meta-text">
+            2024-01-26
+          </div>
+        </div>
+        <div class="license-meta-item">
+          <div class="license-meta-title">更新于</div>
+          <div class="license-meta-text">
+            2024-02-21
+          </div>
+        </div>
+      <div class="license-meta-item">
+        <div class="license-meta-title">许可协议</div>
+        <div class="license-meta-text">
+          
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank">
+              <i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA 4.0</a>
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-statement">
+        转载或引用本文时，请遵守上述许可协议，注明出处，不得用于商业用途！
+      
+    </div>
+  </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/f9500920bb7f/" rel="prev" title="匹配含有脱敏符号的字符串">
+                  <i class="fa fa-chevron-left"></i> 匹配含有脱敏符号的字符串
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Kudryavka</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">31k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">2:36</span>
+  </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

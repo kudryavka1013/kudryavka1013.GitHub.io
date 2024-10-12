@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/resources/favicon/logo.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon/logo.svg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon/logo.svg">
+  <link rel="mask-icon" href="/resources/favicon/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.kudryavka.site","root":"/","images":"/resources/images/","scheme":"Gemini","darkmode":true,"version":"8.14.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"flat"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="HTTP是什么？超文本传输协议（Hypertext Transfer Protocol，HTTP），是应用层协议，基于请求-响应模式，无状态，运行在TCP之上（3.0版本改成了UDP），默认使用80端口（HTTPS是443端口）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTTP从0.9到2.0">
+<meta property="og:url" content="https://blog.kudryavka.site/posts/fb5fec7f0210/index.html">
+<meta property="og:site_name" content="渐渐">
+<meta property="og:description" content="HTTP是什么？超文本传输协议（Hypertext Transfer Protocol，HTTP），是应用层协议，基于请求-响应模式，无状态，运行在TCP之上（3.0版本改成了UDP），默认使用80端口（HTTPS是443端口）">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/kudryavka1013/note-pic@master/note/20170516223641344.jpeg">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/kudryavka1013/note-pic@master/note/562880-20161126171020846-132545577.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/kudryavka1013/note-pic@master/note/view.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/kudryavka1013/note-pic@master/note/20210413001134.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/kudryavka1013/note-pic@master/note/20210413003646.webp">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/kudryavka1013/note-pic@master/note/20210413115901.webp">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/kudryavka1013/note-pic@master/note/HOL_blocking.png">
+<meta property="article:published_time" content="2021-05-09T13:17:28.000Z">
+<meta property="article:modified_time" content="2024-02-21T08:40:55.000Z">
+<meta property="article:author" content="Kudryavka">
+<meta property="article:tag" content="HTTP&#x2F;HTTPS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://fastly.jsdelivr.net/gh/kudryavka1013/note-pic@master/note/20170516223641344.jpeg">
+
+
+<link rel="canonical" href="https://blog.kudryavka.site/posts/fb5fec7f0210/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://blog.kudryavka.site/posts/fb5fec7f0210/","path":"/posts/fb5fec7f0210/","title":"HTTP从0.9到2.0"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>HTTP从0.9到2.0 | 渐渐</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">渐渐</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">如重温往日邮寄</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-life"><a href="/life/" rel="section"><i class="fa fa-mug-saucer fa-fw"></i>随笔</a></li><li class="menu-item menu-item-notes"><a href="/notes/" rel="section"><i class="fa fa-feather-pointed fa-fw"></i>学习</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-paper-plane fa-fw"></i>归档</a></li><li class="menu-item menu-item-collection"><a href="/collection/" rel="section"><i class="fa fa-guitar fa-fw"></i>收藏</a></li>
+  </ul>
+</nav>
+
+
+
+
+<link href="https://cdn.bootcdn.net/ajax/libs/aplayer/1.10.1/APlayer.min.css" rel="stylesheet" />
+
+<link rel="stylesheet" href="https://registry.npmmirror.com/lxgw-wenkai-screen-web/latest/files/style.css"/>
+  <script>
+    var meting_api = 'https://api.injahow.cn/meting/?server=:server&type=:type&id=:id&auth=:auth&r=:r';
+  </script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/aplayer/1.10.1/APlayer.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/meting/1.2.0/Meting.min.js"></script>
+  <div
+    class="aplayer"
+    data-id="8201666696"
+    data-server="netease"
+    data-type="playlist"
+    data-fixed="true"
+    data-autoplay="false"
+    data-order="random"
+    data-volume="0.2"
+    data-theme="#4C5E87"
+    data-preload="auto"
+    data-lrc-type="0"></div>
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#HTTP%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-text">HTTP是什么？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HTTP-0-9"><span class="nav-text">HTTP 0.9</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HTTP-1-0"><span class="nav-text">HTTP 1.0</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#HTTP%E6%8A%A5%E6%96%87%E8%B6%8B%E4%BA%8E%E5%AE%8C%E6%95%B4"><span class="nav-text">HTTP报文趋于完整</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8F%90%E4%BE%9B%E4%BA%86%E5%AF%B9%E4%B8%8D%E5%90%8C%E7%B1%BB%E5%9E%8B%E8%B5%84%E6%BA%90%E7%9A%84%E6%94%AF%E6%8C%81"><span class="nav-text">提供了对不同类型资源的支持</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%A2%9E%E5%8A%A0%E4%BA%86%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6"><span class="nav-text">增加了缓存机制</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AD%98%E5%9C%A8%E7%9A%84%E7%BC%BA%E9%99%B7"><span class="nav-text">存在的缺陷</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HTTP-1-1"><span class="nav-text">HTTP 1.1</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%95%BF%E9%93%BE%E6%8E%A5%E5%92%8C%E7%AE%A1%E7%BA%BF%E5%8C%96"><span class="nav-text">长链接和管线化</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%8A%82%E7%BA%A6%E5%B8%A6%E5%AE%BD"><span class="nav-text">节约带宽</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%96%B0%E5%A2%9E%E7%BC%93%E5%AD%98%E7%AD%96%E7%95%A5"><span class="nav-text">新增缓存策略</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%A2%9E%E5%8A%A0%E4%BA%86%E6%9B%B4%E5%A4%9A%E7%9A%84%E5%A4%B4%E9%83%A8%E5%AD%97%E6%AE%B5%E6%9D%A5%E6%89%A9%E5%85%85%E5%8A%9F%E8%83%BD"><span class="nav-text">增加了更多的头部字段来扩充功能</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%A2%9E%E5%8A%A0%E4%BA%86%E6%96%B0%E7%9A%84%E8%AF%B7%E6%B1%82%E6%96%B9%E6%B3%95"><span class="nav-text">增加了新的请求方法</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E8%AF%B7%E6%B1%82%E6%96%B9%E6%B3%95"><span class="nav-text">常用请求方法</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AD%98%E5%9C%A8%E7%9A%84%E7%BC%BA%E9%99%B7-1"><span class="nav-text">存在的缺陷</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BC%98%E5%8C%96%E6%96%B9%E6%A1%88"><span class="nav-text">优化方案</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SPDY%EF%BC%9AHTTP-1-1-%E7%9A%84%E5%A2%9E%E5%BC%BA%E7%89%88%EF%BC%8CHTTP-2-0-%E7%9A%84%E9%A2%84%E8%A7%88%E7%89%88"><span class="nav-text">SPDY：HTTP 1.1 的增强版，HTTP 2.0 的预览版</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%99%8D%E4%BD%8E%E5%BB%B6%E8%BF%9F"><span class="nav-text">降低延迟</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8F%90%E5%8D%87%E5%AE%89%E5%85%A8%E6%80%A7"><span class="nav-text">提升安全性</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HTTP-2-0"><span class="nav-text">HTTP 2.0</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%88%86%E5%B8%A7"><span class="nav-text">二进制分帧</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8"><span class="nav-text">多路复用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%A4%B4%E9%83%A8%E5%8E%8B%E7%BC%A9"><span class="nav-text">头部压缩</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%8E%8B%E7%BC%A9%E5%8E%9F%E7%90%86"><span class="nav-text">压缩原理</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E4%BC%98%E5%85%88%E7%BA%A7"><span class="nav-text">请求优先级</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E7%AB%AF%E6%8E%A8%E9%80%81"><span class="nav-text">服务端推送</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#HTTP-2-0%E5%92%8CSPDY%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-text">HTTP 2.0和SPDY的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%80%A7%E8%83%BD%E7%93%B6%E9%A2%88"><span class="nav-text">性能瓶颈</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E9%98%9F%E9%A6%96%E9%98%BB%E5%A1%9E%EF%BC%88Head-of-Line-Blocking%EF%BC%8CHOL%EF%BC%89"><span class="nav-text">队首阻塞（Head-of-Line Blocking，HOL）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-text">参考</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Kudryavka"
+      src="https://avatars.githubusercontent.com/u/50348668?v=4">
+  <p class="site-author-name" itemprop="name">Kudryavka</p>
+  <div class="site-description" itemprop="description">Gamer / Harmonica / Front-End</div>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kudryavka1013" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kudryavka1013" rel="noopener me" target="_blank"><i class="fa-brands fa-github fa-lg fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/22735925" title="bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;22735925" rel="noopener me" target="_blank"><i class="fa-brands fa-bilibili fa-lg fa-fw"></i></a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.kudryavka.site/posts/fb5fec7f0210/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/50348668?v=4">
+      <meta itemprop="name" content="Kudryavka">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="渐渐">
+      <meta itemprop="description" content="Gamer / Harmonica / Front-End">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="HTTP从0.9到2.0 | 渐渐">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          HTTP从0.9到2.0
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-05-09 21:17:28" itemprop="dateCreated datePublished" datetime="2021-05-09T21:17:28+08:00">2021-05-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/notes/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/notes/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h4 id="HTTP是什么？"><a href="#HTTP是什么？" class="headerlink" title="HTTP是什么？"></a>HTTP是什么？</h4><p>超文本传输协议（Hypertext Transfer Protocol，HTTP），是<u>应用层</u>协议，基于请求-响应模式，无状态，运行在TCP之上（3.0版本改成了UDP），默认使用80端口（HTTPS是443端口）</p>
+<h4 id="HTTP-0-9"><a href="#HTTP-0-9" class="headerlink" title="HTTP 0.9"></a>HTTP 0.9</h4><p>最传统的 request - response 模式</p>
+<p>0.9版本极其简单，就只支持一个 <code>GET</code> 方法，没有什么格式</p>
+<p><code>GET /index.html</code></p>
+<h4 id="HTTP-1-0"><a href="#HTTP-1-0" class="headerlink" title="HTTP 1.0"></a>HTTP 1.0</h4><p>1.0版本拓展了报文结构相关一些东西</p>
+<h5 id="HTTP报文趋于完整"><a href="#HTTP报文趋于完整" class="headerlink" title="HTTP报文趋于完整"></a>HTTP报文趋于完整</h5><ul>
+<li>在请求中加入了HTTP版本号，比如：<code>GET /coolshell/index.html HTTP/1.0</code>，同时可以使用<code>POST</code>和<code>HEAD</code>了</li>
+<li>不管是request还是response，都有头部（header）了</li>
+<li>相应的也增加了HTTP Status Code 标识相关的状态码</li>
+</ul>
+<p>到目前为止，HTTP报文就有了基本完整的结构</p>
+<table>
+<thead>
+<tr>
+<th>请求报文</th>
+<th>响应报文</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>请求行</td>
+<td>状态行</td>
+</tr>
+<tr>
+<td>请求头</td>
+<td>响应头</td>
+</tr>
+<tr>
+<td>请求体</td>
+<td>响应体</td>
+</tr>
+</tbody></table>
+<h5 id="提供了对不同类型资源的支持"><a href="#提供了对不同类型资源的支持" class="headerlink" title="提供了对不同类型资源的支持"></a>提供了对不同类型资源的支持</h5><ul>
+<li>增加了 <code>Content-Type</code>，<code>Content-Encoding</code></li>
+</ul>
+<p>从此，不仅可以传输文字，还可以传输图像、视频、二进制文件等各种各样格式的内容了</p>
+<h5 id="增加了缓存机制"><a href="#增加了缓存机制" class="headerlink" title="增加了缓存机制"></a>增加了缓存机制</h5><ul>
+<li>现在，HTTP能够使用Last-Modified&#x2F;If-Modified-Since（协商缓存）和Expires（强缓存）策略来判断缓存了</li>
+</ul>
+<h5 id="存在的缺陷"><a href="#存在的缺陷" class="headerlink" title="存在的缺陷"></a>存在的缺陷</h5><p>此时的浏览器和服务器之间的链接都是<u>短链接</u>，<strong>每请求一个资源就要新建一个TCP链接，传输完后就关闭</strong>。而我们往往需要多次请求，这样就需要反复建立&#x2F;断开TCP链接。同时HTTP 1.0是<strong>串行请求</strong>，很容易造成队头堵塞问题</p>
+<h4 id="HTTP-1-1"><a href="#HTTP-1-1" class="headerlink" title="HTTP 1.1"></a>HTTP 1.1</h4><h5 id="长链接和管线化"><a href="#长链接和管线化" class="headerlink" title="长链接和管线化"></a>长链接和管线化</h5><ul>
+<li><p>可以设置在头部设置 <code>Connection:Keep-Alive</code> 来让HTTP<strong>重用TCP链接</strong>。</p>
+<p>这就解决了1.0的问题，不必每次请求都要进行TCP链接，毕竟每一个TCP链接都要经过三次握手四次挥手，开销巨大。这就是所谓的“<strong>HTTP 长链接</strong>” 或是 “<strong>请求响应式的HTTP 持久链接</strong>”（HTTP Persistent connection），只要任意一端没有明确提出断开连接，则保持TCP连接状态（使用<code>Connection: close</code> 来断开）。</p>
+<p>HTTP 1.1中，服务器和客户端都是默认使用长链接。如果不想使用长链接的话就要在header里指明 <code>Connection: close</code></p>
+</li>
+<li><p>支持 pipeline （管线化）网络传输，<strong>不用等待响应即可直接发送下一个请求</strong>（原本发送请求后需要等待并接收响应）。可以减少整体的响应时间。</p>
+</li>
+</ul>
+<p>根据以上两个新特性，HTTP 1.1可以在一次链接中处理多个请求，并且这些请求的过程可以重叠进行，但服务器端必须按照接收到客户端请求的<strong>先后顺序</strong>依次回送响应结果，以保证客户端能够区分出每次请求的响应内容<br><img src="https://fastly.jsdelivr.net/gh/kudryavka1013/note-pic@master/note/20170516223641344.jpeg" alt="img"></p>
+<h5 id="节约带宽"><a href="#节约带宽" class="headerlink" title="节约带宽"></a>节约带宽</h5><ul>
+<li><p>加入了新的状态码 100（Continue）</p>
+<p>如果客户端想要发送数据量很大的请求时，先发送一个<strong>只有请求头</strong>的报文，看服务器是否接受。服务器允许则会返回状态码 100的响应报文（拒绝则是401），然后客户端就可以发送大的请求报文了</p>
+<p>客户端request的header中加入<code>Expect: 100-continue</code>字段</p>
+</li>
+<li><p>加入了新的状态码 206（Partial Content）</p>
+<p>1.0中，如果客户端只是需要某个对象的一部分，而服务器却将整个对象送过来了，并且不支持断点续传功能。</p>
+<p>1.1中，在请求头中加入range，允许只请求资源的某个部分，如果服务器能够正常响应的话，服务器会返回 206， 如果不能处理这种Range的话，就会返回整个资源，响应状态码为 200。</p>
+<p>可以通过这个来实现分段下载，断点续传。</p>
+</li>
+</ul>
+<h5 id="新增缓存策略"><a href="#新增缓存策略" class="headerlink" title="新增缓存策略"></a>新增缓存策略</h5><ul>
+<li>强缓存增加 Cache-Control</li>
+<li>协商缓存增加 Etag &#x2F; If-None-Match</li>
+</ul>
+<h5 id="增加了更多的头部字段来扩充功能"><a href="#增加了更多的头部字段来扩充功能" class="headerlink" title="增加了更多的头部字段来扩充功能"></a>增加了更多的头部字段来扩充功能</h5><ul>
+<li>协议头中增加了 <code>Language</code>, <code>Encoding</code>, <code>Type</code> 等等头，让客户端可以跟服务器端进行更多的协商</li>
+<li>正式加入了一个很重要的请求头字段： <code>HOST</code> 。这样的话，服务器就知道你要请求哪个网站了。因为<u>可以有多个域名解析到同一个IP上</u>，要<strong>区分用户是请求的哪个域名</strong>，就需要在HTTP的协议中加入域名的信息，而不是被DNS转换过的IP信息</li>
+</ul>
+<h5 id="增加了新的请求方法"><a href="#增加了新的请求方法" class="headerlink" title="增加了新的请求方法"></a>增加了新的请求方法</h5><ul>
+<li>正式加入了 <code>OPTIONS</code> 方法，其主要用于 CORS – Cross Origin Resource Sharing 应用</li>
+</ul>
+<h6 id="常用请求方法"><a href="#常用请求方法" class="headerlink" title="常用请求方法"></a>常用请求方法</h6><ul>
+<li>GET 请求获取Request-URI所标识的资源</li>
+<li>POST 在Request-URI所标识的资源后附加新的数据</li>
+<li>HEAD 请求获取由Request-URI所标识的资源的响应消息报头</li>
+<li>PUT 请求服务器存储一个资源，并用Request-URI作为其标识</li>
+<li>DELETE 请求服务器删除Request-URI所标识的资源</li>
+<li>TRACE 请求服务器回送收到的请求信息，主要用于测试或诊断</li>
+<li>CONNECT 保留将来使用</li>
+<li>OPTIONS 请求查询服务器的性能，或者查询与资源相关的选项和需求</li>
+</ul>
+<h5 id="存在的缺陷-1"><a href="#存在的缺陷-1" class="headerlink" title="存在的缺陷"></a>存在的缺陷</h5><p>虽然1.1能够复用TCP连接了，但是仍然是<strong>串行</strong>发送请求的。同一个TCP连接里面，所有的数据通信按次序进行。服务器只有处理完一个回应，才会进行下一个回应。要是前面的回应特别慢，后面就会有许多请求排队等着。所以跟1.0一样，有”<strong>队头堵塞</strong>“现象（HOLB）</p>
+<h5 id="优化方案"><a href="#优化方案" class="headerlink" title="优化方案"></a>优化方案</h5><ul>
+<li>减少请求数量（比如把脚本和样式表合并、将图片嵌入CSS里）</li>
+<li>同时多开持久链接</li>
+</ul>
+<h4 id="SPDY：HTTP-1-1-的增强版，HTTP-2-0-的预览版"><a href="#SPDY：HTTP-1-1-的增强版，HTTP-2-0-的预览版" class="headerlink" title="SPDY：HTTP 1.1 的增强版，HTTP 2.0 的预览版"></a>SPDY：HTTP 1.1 的增强版，HTTP 2.0 的预览版</h4><p>Google提出来的这个方案（speedy），优化了请求延迟，解决了安全性问题。</p>
+<p>在HTTP和TCP之间插入一个协议，只是优化了性能，没有对HTTP做很大的改动</p>
+<p><img src="https://fastly.jsdelivr.net/gh/kudryavka1013/note-pic@master/note/562880-20161126171020846-132545577.png" alt="img"></p>
+<h5 id="降低延迟"><a href="#降低延迟" class="headerlink" title="降低延迟"></a>降低延迟</h5><ul>
+<li>采取<strong>多路复用</strong>，多个请求stream共享一个TCP连接，避免了创建多个TCP带来的延迟</li>
+<li>引入<strong>请求优先级</strong>，重要的请求优先响应，避免关键数据被阻塞</li>
+<li>使用<strong>头部压缩</strong>，header很多时候都是重复多余的，使用压缩算法（HPACK）减小大小。</li>
+<li>支持<strong>服务端推送</strong>，服务端主动推送文件给客户端，让它先缓存起来</li>
+</ul>
+<h5 id="提升安全性"><a href="#提升安全性" class="headerlink" title="提升安全性"></a>提升安全性</h5><ul>
+<li>强制使用<strong>HTTPS</strong>协议，禁止明文传输</li>
+</ul>
+<h4 id="HTTP-2-0"><a href="#HTTP-2-0" class="headerlink" title="HTTP 2.0"></a>HTTP 2.0</h4><p>虽然1.1加入了重用TCP这种操作，但是<u>请求仍然是<strong>串行</strong>发送</u>的，需要保证顺序。但是对于日益复杂的网页，资源类的东西越来越多，它们占据了所有HTTP请求中最多的传输数据量。如果能想办法<u>让这些请求<strong>并行</strong>发送</u>，就能提高网络吞吐和性能</p>
+<p>此外，HTTP 1.1传输数据时，会进行内容编码，也就是<u>压缩报文内容</u>（常用gzip），它消耗客户端和服务器的CPU资源。</p>
+<p>HTTP 2.0 在 SPDY的基础上发展而来，吸收它的许多优点和思想，大幅提高了HTTP的性能</p>
+<h5 id="二进制分帧"><a href="#二进制分帧" class="headerlink" title="二进制分帧"></a>二进制分帧</h5><p>所有传输信息都会被分割，并使用二进制格式编码。为了保证HTTP不受影响，那就需要在应用层（HTTP2.0）和传输层（TCP or UDP）之间增加一个二进制分帧层。在二进制分帧层上，HTTP2.0会将所有传输的信息分为更小的消息和帧，并采用二进制格式编码，其中HTTP1.x的首部信息会被封装到Headers帧，而Request Body则封装到Data帧</p>
+<p><img src="https://fastly.jsdelivr.net/gh/kudryavka1013/note-pic@master/note/view.png" alt="preview"></p>
+<ul>
+<li><p>帧：2.0里数据通信的最小单位</p>
+<p>包含类型（Type），长度（Length），标记（Flags），流标识（Stream Identifier）和有效载荷（frame payload）</p>
+<p>流标识：标识该帧属于哪个流</p>
+<p>标记：标识该帧组装时在整个消息中应在的位置</p>
+</li>
+<li><p>消息：指的是HTTP一个完整的请求或响应，<strong>消息由一个或多个帧组成</strong></p>
+</li>
+<li><p>流：连接中的一个虚拟信道，可以承载双向信息传输<br>每个流都有一个唯一的整数ID。为了避免两端流ID冲突，客户端发起的流是奇数ID，服务器发起的流是偶数ID</p>
+</li>
+</ul>
+<h5 id="多路复用"><a href="#多路复用" class="headerlink" title="多路复用"></a>多路复用</h5><p><strong>一个</strong>HTTP 2.0 连接上可以有<strong>多个并发</strong>打开的流，每个数据流以消息的形式发送，而这些消息由一个或多个帧组成，这些帧可以乱序发送，然后在接收端根据每个帧首部的流标识符和标记重新组装</p>
+<p><img src="https://fastly.jsdelivr.net/gh/kudryavka1013/note-pic@master/note/20210413001134.png" alt="img"></p>
+<p>简单的说，就是将原本完整的一个消息，拆分成几个帧，然后这几个帧有自己的流标识，有自己的标记，所以可以和其它消息的帧混在一起发送，到达目的地后组装起来又成为完整的消息。</p>
+<p><strong>HTTP性能的关键在于低延迟而不是高带宽！</strong>大多数HTTP 连接的时间都很短，而且是突发性的，但TCP 只在长时间连接传输大块数据时效率才最高（慢启动策略）。HTTP 2.0 通过让所有数据流共用同一个连接，可以更有效地使用TCP 连接，让高带宽也能真正的服务于HTTP的性能提升。</p>
+<h5 id="头部压缩"><a href="#头部压缩" class="headerlink" title="头部压缩"></a>头部压缩</h5><p>HTTP 1.x的头带有大量信息，而且每次都要<u>重复发送</u>。HTTP 2.0使用encoder来减少需要传输的header大小，通讯双方各自缓存一份头部字段表，既避免了重复header的传输，又减小了需要传输的大小。</p>
+<p><strong>对于相同的头部，每次请求和响应不会多次发送</strong>，因为<u>通信期间几乎不会改变通用键-值对</u>（用户代理、可接受的媒体类型，等等）所以只需要发送一次就够了。</p>
+<p>事实上,如果请求中不包含首部（例如对同一资源的轮询请求），那么首部开销就是零字节，此时所有首部都自动使用之前请求发送的首部。</p>
+<p>如果首部发生了变化，则只需将变化的部分加入到header帧中，改变的部分会加入到头部字段表中，首部表在 http 2.0 的连接存续期内始终存在，由客户端和服务器共同渐进地更新</p>
+<h6 id="压缩原理"><a href="#压缩原理" class="headerlink" title="压缩原理"></a>压缩原理</h6><p>HTTP 2.0 使用HPACK算法专门处理头部字段</p>
+<p>它使用一份索引表来定义常用的HTTP Header，把常用的 HTTP Header 存放在表里，请求的时候便只需要发送在表里的索引位置即可，用索引来代替实际的Header</p>
+<p>例如 :method&#x3D;GET 使用索引值 2 表示，:path&#x3D;&#x2F;index.html 使用索引值 5 表示</p>
+<p><img src="https://fastly.jsdelivr.net/gh/kudryavka1013/note-pic@master/note/20210413003646.webp" alt="img"></p>
+<p>索引表包括两个部分</p>
+<ul>
+<li>Static Table：一些常用的HTTP Header字段</li>
+<li>Dynamic Table：动态添加的HTTP Header</li>
+</ul>
+<h5 id="请求优先级"><a href="#请求优先级" class="headerlink" title="请求优先级"></a>请求优先级</h5><p>把http消息分为很多独立帧之后，就可以通过优化这些帧的交错和传输顺序进一步优化性能。每个流都可以带有一个31比特的<strong>优先值</strong>：0 表示最高优先级；2的31次方-1 表示最低优先级</p>
+<p>服务器可以根据流的优先级，控制资源分配（CPU、内存、带宽），而在响应数据准备好之后，优先将最高优先级的帧发送给客户端。<strong>高优先级的流都应该优先发送，但又不是绝对的。绝对地遵守，这样可能又会引入首队阻塞的问题：高优先级的请求慢导致阻塞其他资源交付</strong>。分配处理资源和客户端与服务器间的带宽，不同优先级的混合也是必须的。</p>
+<p>优先级从高到低：主要的HTML -&gt; CSS文件 -&gt; JS文件 -&gt; 图片等其它资源</p>
+<h5 id="服务端推送"><a href="#服务端推送" class="headerlink" title="服务端推送"></a>服务端推送</h5><p>在客户端请求之前发送数据，即<strong>还没有收到浏览器的请求，服务器就把各种资源推送给浏览器</strong></p>
+<p>浏览器没有请求的东西，我服务端可以先送给你放在你的本地缓存中。比如，客户端请求X，服务端知道X依赖于Y，虽然没有请求Y，但我把Y跟着X的请求一起返回客户端。这样在一次请求中，就得到了多个资源，省去了客户端重复请求的步骤。</p>
+<p><img src="https://fastly.jsdelivr.net/gh/kudryavka1013/note-pic@master/note/20210413115901.webp" alt="img"></p>
+<p>当服务端需要主动推送某个资源时，便会发送一个 Frame Type 为 <code>PUSH_PROMISE</code> 的 Frame，里面带了 PUSH 需要新建的 Stream ID。意思是告诉客户端：接下来我要用这个 ID 向你发送东西，客户端准备好接着。客户端解析 Frame 时，发现它是一个 <code>PUSH_PROMISE</code> 类型，便会准备接收服务端要推送的流。</p>
+<p>服务端可以主动推送，客户端也有权利选择是否接收。如果服务端推送的资源已经被浏览器缓存过，浏览器可以通过发送 <code>RST_STREAM</code> 帧来拒收。主动推送也遵守同源策略，服务器不会随便推送第三方资源给客户端。</p>
+<p>虽然看起来很美好，实际上还是有一些问题的。对于所要推送的资源文件，如果<u>浏览器已经有缓存</u>，推送就是浪费带宽。即使推送的文件版本更新，浏览器也会优先使用本地缓存。有一种解决办法是：只对第一次访问的用户使用服务器推送，根据 Cookie 判断是否为第一次访问</p>
+<h5 id="HTTP-2-0和SPDY的区别"><a href="#HTTP-2-0和SPDY的区别" class="headerlink" title="HTTP 2.0和SPDY的区别"></a>HTTP 2.0和SPDY的区别</h5><ul>
+<li>HTTP 2.0 <strong>不强制</strong>使用HTTPS，可以选择不使用SSL&#x2F;TLS</li>
+<li>对于头部压缩算法，SPDY 采用 <strong>DEFLATE</strong>，HTTP 2.0使用 <strong>HPACK</strong></li>
+</ul>
+<h5 id="性能瓶颈"><a href="#性能瓶颈" class="headerlink" title="性能瓶颈"></a>性能瓶颈</h5><p>现在所有的压力集中在底层一个TCP连接之上，比如TCP分组的<strong>队首阻塞</strong>问题，若干个HTTP的请求在复用一个TCP的连接，底层的TCP协议是不知道上层有多少个HTTP的请求的，所以，一旦单个TCP packet丢失，整个连接都会阻塞，此时所有的HTTP请求都必需等待这个丢了的包被重传回来。</p>
+<h6 id="队首阻塞（Head-of-Line-Blocking，HOL）"><a href="#队首阻塞（Head-of-Line-Blocking，HOL）" class="headerlink" title="队首阻塞（Head-of-Line Blocking，HOL）"></a>队首阻塞（Head-of-Line Blocking，HOL）</h6><p><img src="https://fastly.jsdelivr.net/gh/kudryavka1013/note-pic@master/note/HOL_blocking.png" alt="img"></p>
+<p>左边的是四个输入队列，四个队列中的数据包要去的右边的output的对应数字的端口。此时，第一个队列和第三个队列都要写右边的第四个端口，然后，一个时刻只能处理一个包，所以，一个队列只能在那等另一个队列写完后。然后，其此时的3号或1号端口是空闲的，而队列中的要去1号和3号端口的数据，被第4号端口给block住了。这就是所谓的HOL blocking问题。</p>
+<p>在HTTP&#x2F;1.1中，pipeline中如果有一个请求block了，那么队列后请求也统统被block住了；HTTP 2.0 中，多个请求复用一个TCP连接，一旦发生丢包，同样会block住所有的HTTP请求</p>
+<p>到这里为止，TCP已经到它的极限了，这不是通过优化就能解决的问题，这是TCP本身的局限性。那么，我们还有什么解法吗？答案是 HTTP 3.0 改用UDP，那是更复杂的东西了。</p>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/GICbiyJpINrHZ41u_4zT-A">HTTP1.0、HTTP1.1 和 HTTP2.0 的区别</a></p>
+<p><a target="_blank" rel="noopener" href="https://coolshell.cn/articles/19840.html#HTTP_09_10">HTTP的前世今生</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_35642036/article/details/82788314">HTTP0.9、HTTP1.0、HTTP1.1、HTTP2、HTTP3的区别</a></p>
+<p><a target="_blank" rel="noopener" href="http://www.linuxidc.com/Linux/2015-08/122287.htm">HTTP2.0性能增强的核心：二进制分帧</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+  <div class="license cc">
+  
+    <div class="license-title">HTTP从0.9到2.0</div>
+    <div class="license-link">
+      <a href="https://blog.kudryavka.site/posts/fb5fec7f0210/">https://blog.kudryavka.site/posts/fb5fec7f0210/</a>
+    </div>
+    <div class="license-meta">
+      <div class="license-meta-item">
+        <div class="license-meta-title">本文作者</div>
+        <div class="license-meta-text">
+          Kudryavka
+        </div>
+      </div>
+        <div class="license-meta-item">
+          <div class="license-meta-title">发布于</div>
+          <div class="license-meta-text">
+            2021-05-09
+          </div>
+        </div>
+        <div class="license-meta-item">
+          <div class="license-meta-title">更新于</div>
+          <div class="license-meta-text">
+            2024-02-21
+          </div>
+        </div>
+      <div class="license-meta-item">
+        <div class="license-meta-title">许可协议</div>
+        <div class="license-meta-text">
+          
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank">
+              <i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA 4.0</a>
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-statement">
+        转载或引用本文时，请遵守上述许可协议，注明出处，不得用于商业用途！
+      
+    </div>
+  </div>
+          <div class="post-tags">
+              <a href="/tags/HTTP-HTTPS/" rel="tag"># HTTP/HTTPS</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/12ca26326d3c/" rel="prev" title="Ajax和跨域请求">
+                  <i class="fa fa-chevron-left"></i> Ajax和跨域请求
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/posts/be5b37ddc96d/" rel="next" title="看看Docker">
+                  看看Docker <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Kudryavka</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">31k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">2:36</span>
+  </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

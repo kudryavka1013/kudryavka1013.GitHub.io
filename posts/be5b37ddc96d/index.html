@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/resources/favicon/logo.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon/logo.svg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon/logo.svg">
+  <link rel="mask-icon" href="/resources/favicon/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.kudryavka.site","root":"/","images":"/resources/images/","scheme":"Gemini","darkmode":true,"version":"8.14.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"flat"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="写在前面本文是我学习Docker的一些记录，介绍了一些相关的概念和使用方法，以及自己的一些理解。内容比较简单，也没有实际的例子。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="看看Docker">
+<meta property="og:url" content="https://blog.kudryavka.site/posts/be5b37ddc96d/index.html">
+<meta property="og:site_name" content="渐渐">
+<meta property="og:description" content="写在前面本文是我学习Docker的一些记录，介绍了一些相关的概念和使用方法，以及自己的一些理解。内容比较简单，也没有实际的例子。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-05-12T15:04:06.000Z">
+<meta property="article:modified_time" content="2024-02-21T08:40:55.000Z">
+<meta property="article:author" content="Kudryavka">
+<meta property="article:tag" content="Docker">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://blog.kudryavka.site/posts/be5b37ddc96d/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://blog.kudryavka.site/posts/be5b37ddc96d/","path":"/posts/be5b37ddc96d/","title":"看看Docker"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>看看Docker | 渐渐</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">渐渐</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">如重温往日邮寄</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-life"><a href="/life/" rel="section"><i class="fa fa-mug-saucer fa-fw"></i>随笔</a></li><li class="menu-item menu-item-notes"><a href="/notes/" rel="section"><i class="fa fa-feather-pointed fa-fw"></i>学习</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-paper-plane fa-fw"></i>归档</a></li><li class="menu-item menu-item-collection"><a href="/collection/" rel="section"><i class="fa fa-guitar fa-fw"></i>收藏</a></li>
+  </ul>
+</nav>
+
+
+
+
+<link href="https://cdn.bootcdn.net/ajax/libs/aplayer/1.10.1/APlayer.min.css" rel="stylesheet" />
+
+<link rel="stylesheet" href="https://registry.npmmirror.com/lxgw-wenkai-screen-web/latest/files/style.css"/>
+  <script>
+    var meting_api = 'https://api.injahow.cn/meting/?server=:server&type=:type&id=:id&auth=:auth&r=:r';
+  </script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/aplayer/1.10.1/APlayer.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/meting/1.2.0/Meting.min.js"></script>
+  <div
+    class="aplayer"
+    data-id="8201666696"
+    data-server="netease"
+    data-type="playlist"
+    data-fixed="true"
+    data-autoplay="false"
+    data-order="random"
+    data-volume="0.2"
+    data-theme="#4C5E87"
+    data-preload="auto"
+    data-lrc-type="0"></div>
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%86%99%E5%9C%A8%E5%89%8D%E9%9D%A2"><span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Docker%E6%98%AF%E4%B8%AA%E5%95%A5%EF%BC%9F"><span class="nav-text">Docker是个啥？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Docker%E5%AE%89%E8%A3%85"><span class="nav-text">Docker安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%95%9C%E5%83%8F-Image"><span class="nav-text">镜像 Image</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%B9%E5%99%A8-Container"><span class="nav-text">容器 Container</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%A8-Dockerfile-%E5%AE%9A%E5%88%B6%E9%95%9C%E5%83%8F"><span class="nav-text">用 Dockerfile 定制镜像</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%95%9C%E5%83%8F%E7%9A%84%E5%88%86%E5%B1%82%E5%AD%98%E5%82%A8"><span class="nav-text">镜像的分层存储</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AE%9A%E5%88%B6%E9%95%9C%E5%83%8F"><span class="nav-text">定制镜像</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#FROM%E6%8C%87%E4%BB%A4"><span class="nav-text">FROM指令</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#RUN%E6%8C%87%E4%BB%A4"><span class="nav-text">RUN指令</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9E%84%E5%BB%BA%E9%95%9C%E5%83%8F"><span class="nav-text">构建镜像</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-text">总结</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-text">参考</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Kudryavka"
+      src="https://avatars.githubusercontent.com/u/50348668?v=4">
+  <p class="site-author-name" itemprop="name">Kudryavka</p>
+  <div class="site-description" itemprop="description">Gamer / Harmonica / Front-End</div>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kudryavka1013" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kudryavka1013" rel="noopener me" target="_blank"><i class="fa-brands fa-github fa-lg fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/22735925" title="bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;22735925" rel="noopener me" target="_blank"><i class="fa-brands fa-bilibili fa-lg fa-fw"></i></a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.kudryavka.site/posts/be5b37ddc96d/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/50348668?v=4">
+      <meta itemprop="name" content="Kudryavka">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="渐渐">
+      <meta itemprop="description" content="Gamer / Harmonica / Front-End">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="看看Docker | 渐渐">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          看看Docker
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-05-12 23:04:06" itemprop="dateCreated datePublished" datetime="2021-05-12T23:04:06+08:00">2021-05-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/notes/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h4 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h4><p>本文是我学习Docker的一些记录，介绍了一些相关的概念和使用方法，以及自己的一些理解。内容比较简单，也没有实际的例子。</p>
+<h4 id="Docker是个啥？"><a href="#Docker是个啥？" class="headerlink" title="Docker是个啥？"></a>Docker是个啥？</h4><p>简单的说，Docker就是一种虚拟化技术，对应用进程进行了封装隔离，成为一个个容器。每个容器都有配置好的虚拟环境，容器里的进程都是和虚拟的环境进行交互。</p>
+<p>我们可以想象对于一组应用进程，把它们放在一个盒子里，盒子里看不到外面，也不知道外面有什么，但是可以通过盒子预先开好的孔洞和外部交流，这就是容器的虚拟环境，孔洞则是Docker给我们提供的接口。而一台机器上，可以有很多个这样的盒子，每个盒子的孔洞可能不同，这就是每个容器的虚拟环境都可以定制。</p>
+<p>其实这就对应了Docker的图标：小鲸鱼就是我们的机器，上面的方块就是我们的一个个容器。</p>
+<h4 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h4><p>Image：镜像，提供容器运行时所需的各种东西</p>
+<p>Container：容器，运行中的镜像实体；容器的实质是进程，但与直接在宿主执行的进程不同，容器进程运行于属于自己的独立的命名空间，有自己的一套环境</p>
+<p>Repository：仓库，存放&#x2F;分发镜像，包括私人仓库和公共仓库</p>
+<p>Dockerfile：构建镜像的文件</p>
+<p>Volume：数据卷，存放数据</p>
+<p>有一个可能不太恰当的比喻：</p>
+<ul>
+<li>Docker &#x3D; 灶台</li>
+<li>Image &#x3D; 菜谱和原材料</li>
+<li>Container &#x3D; 饭菜</li>
+<li>Dockerfile &#x3D; 纸笔</li>
+</ul>
+<p>在灶台（Docker）上，我们使用菜谱和原材料（image）来做饭菜（container），同时我们可以用纸笔（dockerfile）来写我们自己的菜谱</p>
+<h4 id="Docker安装"><a href="#Docker安装" class="headerlink" title="Docker安装"></a>Docker安装</h4><p>看这个不好吗？</p>
+<p><a target="_blank" rel="noopener" href="https://yeasy.gitbook.io/docker_practice/install">安装 Docker - Docker —— 从入门到实践 (gitbook.io)</a></p>
+<h4 id="镜像-Image"><a href="#镜像-Image" class="headerlink" title="镜像 Image"></a>镜像 Image</h4><p>要真正用上Docker，我们无非是运行一些容器；要运行容器，我们首先要有镜像。镜像就相当于容器的模版，根据镜像生成容器，它们就像类和实例之间的关系。</p>
+<p>查看本地镜像：<code>docker image ls</code></p>
+<p>获取仓库里的镜像：<code>docker pull imageName</code></p>
+<p>基于一个镜像生成一个容器：<code>docker run imageName</code></p>
+<p>删除本地镜像：<code>docker image rm imageName</code></p>
+<p>使用这些命令，一般都要附带一些选项参数，上面的只是最基本、最简单的用法</p>
+<h4 id="容器-Container"><a href="#容器-Container" class="headerlink" title="容器 Container"></a>容器 Container</h4><p>有了镜像之后，我们就可以生成一个容器；而且，容器是可以停止的，我们也可以将终止的容器重新启动</p>
+<p>新建容器并启动：<code>docker run imageName</code><br>Docker会检查本地有没有该镜像，如果不存在对应镜像，就会从公共仓库（Docker Hub）下载</p>
+<p>从终止的容器启动：<code>docker container start containerName</code></p>
+<p>停止一个容器的运行：<code>docker container stop containerName</code></p>
+<p>重启一个容器：<code>docker container restart containerName</code></p>
+<p>删除一个容器：<code>docker container rm containerName</code></p>
+<p>同样的，我们一般都需要一些额外的选项参数，比如给容器命名，映射端口等</p>
+<h4 id="用-Dockerfile-定制镜像"><a href="#用-Dockerfile-定制镜像" class="headerlink" title="用 Dockerfile 定制镜像"></a>用 Dockerfile 定制镜像</h4><p>我们当然不满足于使用别人的菜谱！我们需要构建自己的应用时，也得自己定制镜像，虽然这么话是这么说，其实我们自己定制，也基本是根据已有的镜像进行操作。就好比改进别人写好的食谱，来符合自己的口味。</p>
+<h5 id="镜像的分层存储"><a href="#镜像的分层存储" class="headerlink" title="镜像的分层存储"></a>镜像的分层存储</h5><p>在定制自己的镜像前，得先了解一些镜像结构方面的知识。</p>
+<p><strong>Docker 镜像</strong> 是一个特殊的文件系统，除了提供容器运行时所需的程序、库、资源、配置等文件外，还包含了一些为运行时准备的一些配置参数（如匿名卷、环境变量、用户等）。镜像 <strong>不包含</strong> 任何动态数据，其内容在构建之后也不会被改变。</p>
+<p>严格来说，镜像并非是像一个 ISO 那样的打包文件，镜像只是一个虚拟的概念，其实际体现并非由一个文件组成，而是由一组文件系统组成，或者说，由<strong>多层文件系统</strong>联合组成。</p>
+<p>镜像构建时，会一层层构建，前一层是后一层的基础。每一层构建完就不会再发生改变，后一层上的任何改变只发生在自己这一层。比如，删除前一层文件的操作，实际不是真的删除前一层的文件，而是仅在当前层标记为该文件已删除。在最终容器运行的时候，虽然不会看到这个文件，但是实际上该文件会一直跟随镜像。</p>
+<h5 id="定制镜像"><a href="#定制镜像" class="headerlink" title="定制镜像"></a>定制镜像</h5><p>镜像的定制实际上就是定制每一层所添加的配置、文件。如果我们可以把每一层修改、安装、构建、操作的命令都写入一个脚本，用这个脚本来构建、定制镜像，这个脚本就是Dockerfile</p>
+<p>Dockerfile 是一个文本文件，其内包含了一条条的 **指令(Instruction)**，每一条指令构建一层，因此每一条指令的内容，就是描述该层应当如何构建，下面我们看最常见的两个指令，除了FROM和RUN，还有COPY，ADD，CMD等等</p>
+<h6 id="FROM指令"><a href="#FROM指令" class="headerlink" title="FROM指令"></a>FROM指令</h6><p>要定制一个新的镜像，必须以一个镜像为基础，那我们就使用 <code>FROM imageName</code> 来指定基础镜像，<strong>这是必须的，而且是第一条指令</strong>。</p>
+<p>那有人就要问了，我有镜像，我就不用，我就要从头构建，诶，就是玩儿。从格式上来说，那不行，你得用 <code>FROM scratch</code> 表示，这个 scratch 表示是一个虚拟的空镜像，就相当于不以任何镜像为基础，从零开始构建。</p>
+<h6 id="RUN指令"><a href="#RUN指令" class="headerlink" title="RUN指令"></a>RUN指令</h6><p><code>RUN</code> 指令是就是用来执行命令行命令的，它有两种格式：</p>
+<ul>
+<li>shell格式：<code>RUN &lt;命令&gt;</code>，就像直接在命令行中输入的命令一样</li>
+<li>exec格式：<code>RUN [&quot;可执行文件&quot;, &quot;参数1&quot;, &quot;参数2&quot;]</code>，这更像是函数调用中的格式</li>
+</ul>
+<p>前面说过了，每一条指令就构建一层，如果我们有很多条命令，一条命令就用一个RUN，就很多余。我们要从逻辑角度来思考，一个RUN对应就做一件事情。比如编译、安装就视为一层的事情。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">FROM debian:stretch
+
+RUN <span class="token builtin class-name">set</span> -x<span class="token punctuation">;</span> <span class="token assign-left variable">buildDeps</span><span class="token operator">=</span><span class="token string">'gcc libc6-dev make wget'</span> <span class="token punctuation">\</span>
+    <span class="token operator">&amp;&amp;</span> <span class="token function">apt-get</span> update <span class="token punctuation">\</span>
+    <span class="token operator">&amp;&amp;</span> <span class="token function">apt-get</span> <span class="token function">install</span> <span class="token parameter variable">-y</span> <span class="token variable">$buildDeps</span> <span class="token punctuation">\</span>
+    <span class="token operator">&amp;&amp;</span> <span class="token function">wget</span> <span class="token parameter variable">-O</span> redis.tar.gz <span class="token string">"http://download.redis.io/releases/redis-5.0.3.tar.gz"</span> <span class="token punctuation">\</span>
+    <span class="token operator">&amp;&amp;</span> <span class="token function">mkdir</span> <span class="token parameter variable">-p</span> /usr/src/redis <span class="token punctuation">\</span>
+    <span class="token operator">&amp;&amp;</span> <span class="token function">tar</span> <span class="token parameter variable">-xzf</span> redis.tar.gz <span class="token parameter variable">-C</span> /usr/src/redis --strip-components<span class="token operator">=</span><span class="token number">1</span> <span class="token punctuation">\</span>
+    <span class="token operator">&amp;&amp;</span> <span class="token function">make</span> <span class="token parameter variable">-C</span> /usr/src/redis <span class="token punctuation">\</span>
+    <span class="token operator">&amp;&amp;</span> <span class="token function">make</span> <span class="token parameter variable">-C</span> /usr/src/redis <span class="token function">install</span> <span class="token punctuation">\</span>
+    <span class="token operator">&amp;&amp;</span> <span class="token function">rm</span> <span class="token parameter variable">-rf</span> /var/lib/apt/lists/* <span class="token punctuation">\</span>
+    <span class="token operator">&amp;&amp;</span> <span class="token function">rm</span> redis.tar.gz <span class="token punctuation">\</span>
+    <span class="token operator">&amp;&amp;</span> <span class="token function">rm</span> <span class="token parameter variable">-r</span> /usr/src/redis <span class="token punctuation">\</span>
+    <span class="token operator">&amp;&amp;</span> <span class="token function">apt-get</span> purge <span class="token parameter variable">-y</span> --auto-remove <span class="token variable">$buildDeps</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>我们不看中间的内容，注意到RUN命令的每行末尾使用了 <code>\</code> 来换行，一个RUN里使用 <code>&amp;&amp;</code> 将多条shell命令串联起来，它们共同组成了一层。这才是编写Dockerfile的正确打开方式，避免一条命令行语句一个RUN</p>
+<p>此外，之前也说过，镜像是多层存储，每一层的东西并不会在下一层被删除，会一直跟随着镜像。那么我们在构建每一层的时候，都要顺带的把这层的无关垃圾清理掉，不要带到下一层去，免得搞到最后整个镜像非常的臃肿。具体怎么清理，看你构建的时候用到了什么东西。</p>
+<h5 id="构建镜像"><a href="#构建镜像" class="headerlink" title="构建镜像"></a>构建镜像</h5><p>Dockerfile写好了，接下来就要利用它，构建出一个我们自己的镜像</p>
+<p><code>docker build -t 镜像名称 &lt;上下文路径&gt;</code></p>
+<p>-t 选项后面，我们就可以指定输出的镜像名称</p>
+<p>这里我们要讨论一下这个路径的问题，这里指明是 <strong>上下文路径</strong>。首先我们得知道 build 的原理，这命令并不是说在本地进行构建，而是把需要构建的文件发到远程服务端（Docker引擎），远端构建好了再给我们发回来。我们输入的这个路径下的所有内容会被打包上传，远端拿到这么一个包，再根据里面的Dockerfile来构建出我们的镜像文件。</p>
+<p>所以，我们一般命令都会这么用，在上下文目录下开终端：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> build <span class="token parameter variable">-t</span> 镜像名称 <span class="token builtin class-name">.</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>注意有个点，这个 <code>.</code> 就是指把当前目录作为上下文</p>
+<p>和这相关的 <code>COPY</code> 类指令，里面的路径也只能用相对路径，因为是相对上下文目录而言的，这些文件不能超出上下文目录，如果需要，就该把这些文件放进上下文目录里。</p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>到此为止，我们已经知道了Docker的使用流程，使用镜像，运行容器什么的基本没什么可说的，就是一些命令。关键在于Dockerfile的使用以及一些需要注意的问题。希望看了这个文章能帮助你简单了解和使用Docker。建议看看阮一峰的两篇文章，里面有详细的解说和教程。</p>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a target="_blank" rel="noopener" href="https://yeasy.gitbook.io/docker_practice/introduction/what">什么是 Docker - Docker —— 从入门到实践</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2018/02/docker-tutorial.html">Docker 入门教程 - 阮一峰的网络日志 (ruanyifeng.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://ruanyifeng.com/blog/2018/02/docker-wordpress-tutorial.html">Docker 微服务教程 - 阮一峰的网络日志 (ruanyifeng.com)</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+  <div class="license cc">
+  
+    <div class="license-title">看看Docker</div>
+    <div class="license-link">
+      <a href="https://blog.kudryavka.site/posts/be5b37ddc96d/">https://blog.kudryavka.site/posts/be5b37ddc96d/</a>
+    </div>
+    <div class="license-meta">
+      <div class="license-meta-item">
+        <div class="license-meta-title">本文作者</div>
+        <div class="license-meta-text">
+          Kudryavka
+        </div>
+      </div>
+        <div class="license-meta-item">
+          <div class="license-meta-title">发布于</div>
+          <div class="license-meta-text">
+            2021-05-12
+          </div>
+        </div>
+        <div class="license-meta-item">
+          <div class="license-meta-title">更新于</div>
+          <div class="license-meta-text">
+            2024-02-21
+          </div>
+        </div>
+      <div class="license-meta-item">
+        <div class="license-meta-title">许可协议</div>
+        <div class="license-meta-text">
+          
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank">
+              <i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA 4.0</a>
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-statement">
+        转载或引用本文时，请遵守上述许可协议，注明出处，不得用于商业用途！
+      
+    </div>
+  </div>
+          <div class="post-tags">
+              <a href="/tags/Docker/" rel="tag"># Docker</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/fb5fec7f0210/" rel="prev" title="HTTP从0.9到2.0">
+                  <i class="fa fa-chevron-left"></i> HTTP从0.9到2.0
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/posts/4c1a78ef6c8a/" rel="next" title="常见的WEB攻击总结">
+                  常见的WEB攻击总结 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Kudryavka</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">31k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">2:36</span>
+  </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

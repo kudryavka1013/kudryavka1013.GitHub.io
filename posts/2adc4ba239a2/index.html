@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/resources/favicon/logo.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon/logo.svg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon/logo.svg">
+  <link rel="mask-icon" href="/resources/favicon/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.kudryavka.site","root":"/","images":"/resources/images/","scheme":"Gemini","darkmode":true,"version":"8.14.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"flat"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="本文主要记录了这个博客是如何部署的，以及一些主题和插件的配置情况。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="博客配置记录">
+<meta property="og:url" content="https://blog.kudryavka.site/posts/2adc4ba239a2/index.html">
+<meta property="og:site_name" content="渐渐">
+<meta property="og:description" content="本文主要记录了这个博客是如何部署的，以及一些主题和插件的配置情况。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-06-11T16:16:55.000Z">
+<meta property="article:modified_time" content="2024-02-21T08:35:41.000Z">
+<meta property="article:author" content="Kudryavka">
+<meta property="article:tag" content="Hexo">
+<meta property="article:tag" content="博客搭建">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://blog.kudryavka.site/posts/2adc4ba239a2/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://blog.kudryavka.site/posts/2adc4ba239a2/","path":"/posts/2adc4ba239a2/","title":"博客配置记录"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>博客配置记录 | 渐渐</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">渐渐</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">如重温往日邮寄</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-life"><a href="/life/" rel="section"><i class="fa fa-mug-saucer fa-fw"></i>随笔</a></li><li class="menu-item menu-item-notes"><a href="/notes/" rel="section"><i class="fa fa-feather-pointed fa-fw"></i>学习</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-paper-plane fa-fw"></i>归档</a></li><li class="menu-item menu-item-collection"><a href="/collection/" rel="section"><i class="fa fa-guitar fa-fw"></i>收藏</a></li>
+  </ul>
+</nav>
+
+
+
+
+<link href="https://cdn.bootcdn.net/ajax/libs/aplayer/1.10.1/APlayer.min.css" rel="stylesheet" />
+
+<link rel="stylesheet" href="https://registry.npmmirror.com/lxgw-wenkai-screen-web/latest/files/style.css"/>
+  <script>
+    var meting_api = 'https://api.injahow.cn/meting/?server=:server&type=:type&id=:id&auth=:auth&r=:r';
+  </script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/aplayer/1.10.1/APlayer.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/meting/1.2.0/Meting.min.js"></script>
+  <div
+    class="aplayer"
+    data-id="8201666696"
+    data-server="netease"
+    data-type="playlist"
+    data-fixed="true"
+    data-autoplay="false"
+    data-order="random"
+    data-volume="0.2"
+    data-theme="#4C5E87"
+    data-preload="auto"
+    data-lrc-type="0"></div>
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%89%88%E6%9C%AC%E8%AF%B4%E6%98%8E"><span class="nav-text">版本说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%83%A8%E5%88%86%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%97"><span class="nav-text">部分配置指南</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E5%A4%9A%E4%B8%AAlayout%E4%B8%BAindex%E7%9A%84%E9%A1%B5%E9%9D%A2"><span class="nav-text">配置多个layout为index的页面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B0%83%E6%95%B4%E7%AB%99%E7%82%B9%E5%AD%97%E4%BD%93"><span class="nav-text">调整站点字体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%95%E5%85%A5%E9%9F%B3%E4%B9%90%E6%92%AD%E6%94%BE%E5%99%A8"><span class="nav-text">引入音乐播放器</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Kudryavka"
+      src="https://avatars.githubusercontent.com/u/50348668?v=4">
+  <p class="site-author-name" itemprop="name">Kudryavka</p>
+  <div class="site-description" itemprop="description">Gamer / Harmonica / Front-End</div>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kudryavka1013" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kudryavka1013" rel="noopener me" target="_blank"><i class="fa-brands fa-github fa-lg fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/22735925" title="bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;22735925" rel="noopener me" target="_blank"><i class="fa-brands fa-bilibili fa-lg fa-fw"></i></a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.kudryavka.site/posts/2adc4ba239a2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/50348668?v=4">
+      <meta itemprop="name" content="Kudryavka">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="渐渐">
+      <meta itemprop="description" content="Gamer / Harmonica / Front-End">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="博客配置记录 | 渐渐">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          博客配置记录
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-06-12 00:16:55" itemprop="dateCreated datePublished" datetime="2023-06-12T00:16:55+08:00">2023-06-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/notes/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/notes/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" itemprop="url" rel="index"><span itemprop="name">博客搭建</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>本文主要记录了这个博客是如何部署的，以及一些主题和插件的配置情况。</p>
+<span id="more"></span>
+
+<p>虽说只是博客重启，倒也并非随便改改这么简单。从工作量上比较，和新开一个貌似没什么区别（受不了一点）。光是升级版本，就会发现Hexo、NexT主题与Node版本各种不对付，各个版本都有自己的想法。本来想着维持原状，在多次尝试后终于还是找到了能正常运作的组合，过程好不费劲。</p>
+<h2 id="版本说明"><a href="#版本说明" class="headerlink" title="版本说明"></a>版本说明</h2><ul>
+<li>Hexo：6.3.0</li>
+<li>NexT主题：8.14.2</li>
+<li>Node版本：15.14.0</li>
+</ul>
+<p>框架使用Hexo，这个就不用多说了，快速生成前端静态网站的博客框架，支持本地调试、一键部署等功能；据说这个框架在文章多起来后编译效率有问题，但是对我来说目前还没有影响（毕竟懒人），用它也是图用的人多、社区生态好罢了。</p>
+<p>主题使用NexT，也是一个烂大街的主题了，各种教你配置的文章满地都是，但是说实话没有几篇是有用的，绝大多数情况下直接去找官方文档可能更省事。所以本文仅供参考，不保证有多少价值。</p>
+<h2 id="部分配置指南"><a href="#部分配置指南" class="headerlink" title="部分配置指南"></a>部分配置指南</h2><h3 id="配置多个layout为index的页面"><a href="#配置多个layout为index的页面" class="headerlink" title="配置多个layout为index的页面"></a>配置多个layout为index的页面</h3><p>标题有点不好理解，说白了就是让菜单的其它页面的布局和首页一样。</p>
+<p>举个栗子：</p>
+<ul>
+<li>首页，我要展示所有的文章，布局就是NexT的默认布局；</li>
+<li>生活和笔记两个菜单，我也想按首页的布局去展现，同时分别展示对应分类下的文章。</li>
+</ul>
+<p>Hexo默认是使用 <code>hexo-generator-index</code> 这个插件，我们需要替换为第三方的 <code>hexo-generator-index2</code>，同时删除原来插件。这个插件支持展示（过滤）特定 分类&#x2F;标签&#x2F;路径 下的文章</p>
+<p>除此之外，还可以不在菜单中展示的情况下，配置 tags，archives 等页面</p>
+<p>配置部分可以直接看<a target="_blank" rel="noopener" href="https://github.com/Jamling/hexo-generator-index2/blob/master/README_zh.md">文档</a>，写的很详细了</p>
+<h3 id="调整站点字体"><a href="#调整站点字体" class="headerlink" title="调整站点字体"></a>调整站点字体</h3><p>调整字体，有时候需要引入Google没有的字体</p>
+<p>可以本地引入，使用ttf2woff得到字体文件后，放在本地目录下，然后写一个CSS文件声明字体（@font-face）</p>
+<p>这里主要介绍CDN引入方式<br>首先需要一个 custom file，比如 header.njk，在其中引入相应字体资源。这具体资源怎么找就要自己想办法了，或者可以参考别人的自己做一份。</p>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>stylesheet<span class="token punctuation">"</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://cdn.jsdelivr.net/npm/lxgw-wenkai-lite-webfont@1.0.0/style.css<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span><span class="token punctuation">></span></span><span class="token style"><span class="token language-css">
+  <span class="token atrule"><span class="token rule">@import</span> <span class="token string">'lxgw-wenkai-lite-webfont/style.css'</span><span class="token punctuation">;</span></span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>然后在 <code>_config.next.yml</code> 文件中添加配置项</p>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">font</span><span class="token punctuation">:</span>
+  <span class="token key atrule">enable</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>
+
+  <span class="token comment"># 外链字体库地址，例如 //fonts.googleapis.com (默认值)</span>
+  <span class="token key atrule">host</span><span class="token punctuation">:</span>
+
+<span class="token comment"># 全局字体，应用在 body 元素上</span>
+  <span class="token key atrule">global</span><span class="token punctuation">:</span>
+    <span class="token comment"># false 表示不使用外链</span>
+    <span class="token key atrule">external</span><span class="token punctuation">:</span> <span class="token boolean important">false</span>  
+    <span class="token key atrule">family</span><span class="token punctuation">:</span> LXGW WenKai Lite
+
+  <span class="token comment"># 标题字体 (h1, h2, h3, h4, h5, h6)</span>
+  <span class="token key atrule">headings</span><span class="token punctuation">:</span>
+    <span class="token key atrule">external</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>
+    <span class="token key atrule">family</span><span class="token punctuation">:</span> 
+
+  <span class="token comment"># 文章字体</span>
+  <span class="token key atrule">posts</span><span class="token punctuation">:</span>
+    <span class="token key atrule">external</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>
+    <span class="token key atrule">family</span><span class="token punctuation">:</span>
+
+  <span class="token comment"># Logo 字体</span>
+  <span class="token key atrule">logo</span><span class="token punctuation">:</span>
+    <span class="token key atrule">external</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>
+    <span class="token key atrule">family</span><span class="token punctuation">:</span>
+
+  <span class="token comment"># 代码字体，应用于 code 以及代码块</span>
+  <span class="token key atrule">codes</span><span class="token punctuation">:</span>
+    <span class="token key atrule">external</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>
+    family<span class="token punctuation">:</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>除了 global 之外，也可以单独配置某部分的字体，如 posts、headings、codes</p>
+<h3 id="引入音乐播放器"><a href="#引入音乐播放器" class="headerlink" title="引入音乐播放器"></a>引入音乐播放器</h3><p>播放器使用APlayer（此处膜拜大佬 DIYGOD），通过CDN方式引入，配合 MetingJS 使用，可支持网易云、QQ音乐等。支持按歌单，专辑、歌手等类型获得播放列表</p>
+<p>同理，需要一个 custom file，引入</p>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css<span class="token punctuation">"</span></span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>stylesheet<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://cdn.jsdelivr.net/npm/meting@1.2.0/dist/Meting.min.js<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span>
+    <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>aplayer<span class="token punctuation">"</span></span>
+    <span class="token attr-name">data-id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>歌单id<span class="token punctuation">"</span></span>
+    <span class="token attr-name">data-server</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>netease<span class="token punctuation">"</span></span>
+    <span class="token attr-name">data-type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>playlist<span class="token punctuation">"</span></span>
+    <span class="token attr-name">data-fixed</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>true<span class="token punctuation">"</span></span>
+    <span class="token attr-name">data-autoplay</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>false<span class="token punctuation">"</span></span>
+    <span class="token attr-name">data-order</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>random<span class="token punctuation">"</span></span>
+    <span class="token attr-name">data-volume</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>0.2<span class="token punctuation">"</span></span>
+    <span class="token attr-name">data-theme</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>#4C5E87<span class="token punctuation">"</span></span>
+    <span class="token attr-name">data-preload</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>auto<span class="token punctuation">"</span></span>
+    <span class="token attr-name">data-lrc-type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>0<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>注意事项：</p>
+<ul>
+<li><p>版本，MetingJS 使用1.2.x版本，高版本不支持APlayer1.10.0</p>
+</li>
+<li><p>API加载失败，MetingJS内置的API目前不太稳定，可用其它的代替，添加如下配置</p>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
+  <span class="token keyword">var</span> meting_api <span class="token operator">=</span> <span class="token string">'https://meting.yany.ml/api?server=:server&amp;type=:type&amp;id=:id&amp;auth=:auth&amp;r=:r'</span><span class="token punctuation">;</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>实现全局播放，切换页面不刷新，在 <code>_config.next.yml</code> 中打开配置 pjax 即可</p>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+  <div class="license cc">
+  
+    <div class="license-title">博客配置记录</div>
+    <div class="license-link">
+      <a href="https://blog.kudryavka.site/posts/2adc4ba239a2/">https://blog.kudryavka.site/posts/2adc4ba239a2/</a>
+    </div>
+    <div class="license-meta">
+      <div class="license-meta-item">
+        <div class="license-meta-title">本文作者</div>
+        <div class="license-meta-text">
+          Kudryavka
+        </div>
+      </div>
+        <div class="license-meta-item">
+          <div class="license-meta-title">发布于</div>
+          <div class="license-meta-text">
+            2023-06-12
+          </div>
+        </div>
+        <div class="license-meta-item">
+          <div class="license-meta-title">更新于</div>
+          <div class="license-meta-text">
+            2024-02-21
+          </div>
+        </div>
+      <div class="license-meta-item">
+        <div class="license-meta-title">许可协议</div>
+        <div class="license-meta-text">
+          
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank">
+              <i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA 4.0</a>
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-statement">
+        转载或引用本文时，请遵守上述许可协议，注明出处，不得用于商业用途！
+      
+    </div>
+  </div>
+          <div class="post-tags">
+              <a href="/tags/Hexo/" rel="tag"># Hexo</a>
+              <a href="/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" rel="tag"># 博客搭建</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/871da6ea2de6/" rel="prev" title="博客重启">
+                  <i class="fa fa-chevron-left"></i> 博客重启
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/posts/4bf09c40db2b/" rel="next" title="Web Worker">
+                  Web Worker <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Kudryavka</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">31k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">2:36</span>
+  </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

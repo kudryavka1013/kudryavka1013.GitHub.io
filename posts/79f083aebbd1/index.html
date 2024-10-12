@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/resources/favicon/logo.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon/logo.svg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon/logo.svg">
+  <link rel="mask-icon" href="/resources/favicon/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.kudryavka.site","root":"/","images":"/resources/images/","scheme":"Gemini","darkmode":true,"version":"8.14.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"flat"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="前言表单其实就是收集不同类型的用户输入，即采集数据。我们用HTML来构建一份表单，然后通过JS来处理表单中的数据，然后把表单提交给服务器。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="表单和表单脚本">
+<meta property="og:url" content="https://blog.kudryavka.site/posts/79f083aebbd1/index.html">
+<meta property="og:site_name" content="渐渐">
+<meta property="og:description" content="前言表单其实就是收集不同类型的用户输入，即采集数据。我们用HTML来构建一份表单，然后通过JS来处理表单中的数据，然后把表单提交给服务器。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/kudryavka1013/note-pic@master/note/image-20210425202240324.png">
+<meta property="article:published_time" content="2021-04-27T03:31:25.000Z">
+<meta property="article:modified_time" content="2024-02-21T08:40:55.000Z">
+<meta property="article:author" content="Kudryavka">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="HTML">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://fastly.jsdelivr.net/gh/kudryavka1013/note-pic@master/note/image-20210425202240324.png">
+
+
+<link rel="canonical" href="https://blog.kudryavka.site/posts/79f083aebbd1/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://blog.kudryavka.site/posts/79f083aebbd1/","path":"/posts/79f083aebbd1/","title":"表单和表单脚本"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>表单和表单脚本 | 渐渐</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">渐渐</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">如重温往日邮寄</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-life"><a href="/life/" rel="section"><i class="fa fa-mug-saucer fa-fw"></i>随笔</a></li><li class="menu-item menu-item-notes"><a href="/notes/" rel="section"><i class="fa fa-feather-pointed fa-fw"></i>学习</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-paper-plane fa-fw"></i>归档</a></li><li class="menu-item menu-item-collection"><a href="/collection/" rel="section"><i class="fa fa-guitar fa-fw"></i>收藏</a></li>
+  </ul>
+</nav>
+
+
+
+
+<link href="https://cdn.bootcdn.net/ajax/libs/aplayer/1.10.1/APlayer.min.css" rel="stylesheet" />
+
+<link rel="stylesheet" href="https://registry.npmmirror.com/lxgw-wenkai-screen-web/latest/files/style.css"/>
+  <script>
+    var meting_api = 'https://api.injahow.cn/meting/?server=:server&type=:type&id=:id&auth=:auth&r=:r';
+  </script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/aplayer/1.10.1/APlayer.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/meting/1.2.0/Meting.min.js"></script>
+  <div
+    class="aplayer"
+    data-id="8201666696"
+    data-server="netease"
+    data-type="playlist"
+    data-fixed="true"
+    data-autoplay="false"
+    data-order="random"
+    data-volume="0.2"
+    data-theme="#4C5E87"
+    data-preload="auto"
+    data-lrc-type="0"></div>
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTML%E8%A1%A8%E5%8D%95"><span class="nav-text">HTML表单</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#form-%E5%85%83%E7%B4%A0%E7%9A%84%E5%B8%B8%E7%94%A8%E5%B1%9E%E6%80%A7"><span class="nav-text">form 元素的常用属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E7%9A%84%E8%A1%A8%E5%8D%95%E5%85%83%E7%B4%A0"><span class="nav-text">常用的表单元素</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#input-%E5%85%83%E7%B4%A0"><span class="nav-text">input 元素</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#select-%E5%85%83%E7%B4%A0"><span class="nav-text">select 元素</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#textarea-%E5%85%83%E7%B4%A0"><span class="nav-text">textarea 元素</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#button-%E5%85%83%E7%B4%A0"><span class="nav-text">button 元素</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#fieldset-%E5%85%83%E7%B4%A0"><span class="nav-text">fieldset 元素</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#H5%E6%96%B0%E5%A2%9E%E7%9A%84%E8%A1%A8%E5%8D%95%E5%85%83%E7%B4%A0"><span class="nav-text">H5新增的表单元素</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#datalist-%E5%85%83%E7%B4%A0"><span class="nav-text">datalist 元素</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#keygen-%E5%85%83%E7%B4%A0"><span class="nav-text">keygen 元素</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#output-%E5%85%83%E7%B4%A0"><span class="nav-text">output 元素</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#input-%E5%85%83%E7%B4%A0%E7%9A%84%E5%B1%9E%E6%80%A7"><span class="nav-text">input 元素的属性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JS%E8%A1%A8%E5%8D%95%E8%84%9A%E6%9C%AC"><span class="nav-text">JS表单脚本</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A1%A8%E5%8D%95%E5%AF%B9%E5%BA%94DOM%E7%9A%84%E5%AF%B9%E8%B1%A1"><span class="nav-text">表单对应DOM的对象</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E8%A1%A8%E5%8D%95"><span class="nav-text">获取表单</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8F%90%E4%BA%A4%E8%A1%A8%E5%8D%95"><span class="nav-text">提交表单</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%87%8D%E7%BD%AE%E8%A1%A8%E5%8D%95"><span class="nav-text">重置表单</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%A1%A8%E5%8D%95%E5%AD%97%E6%AE%B5%E7%9A%84%E5%B1%9E%E6%80%A7%E5%92%8C%E6%96%B9%E6%B3%95"><span class="nav-text">表单字段的属性和方法</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%85%B1%E6%9C%89%E7%9A%84%E8%A1%A8%E5%8D%95%E5%AD%97%E6%AE%B5%E5%B1%9E%E6%80%A7"><span class="nav-text">共有的表单字段属性</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%85%B1%E6%9C%89%E7%9A%84%E8%A1%A8%E5%8D%95%E5%AD%97%E6%AE%B5%E6%96%B9%E6%B3%95"><span class="nav-text">共有的表单字段方法</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%85%B1%E6%9C%89%E7%9A%84%E8%A1%A8%E5%8D%95%E5%AD%97%E6%AE%B5%E4%BA%8B%E4%BB%B6"><span class="nav-text">共有的表单字段事件</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E6%9C%AC%E6%A1%86%E8%84%9A%E6%9C%AC"><span class="nav-text">文本框脚本</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%80%89%E6%8B%A9%EF%BC%88%E9%80%89%E4%B8%AD%EF%BC%89%E6%96%87%E6%9C%AC"><span class="nav-text">选择（选中）文本</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E9%80%89%E6%8B%A9%E7%9A%84%E6%96%87%E6%9C%AC"><span class="nav-text">获取选择的文本</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E9%80%89%E6%8B%A9%E5%85%A8%E9%83%A8-x2F-%E9%83%A8%E5%88%86%E6%96%87%E6%9C%AC"><span class="nav-text">选择全部&#x2F;部分文本</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%BF%87%E6%BB%A4%E8%BE%93%E5%85%A5"><span class="nav-text">过滤输入</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%B1%8F%E8%94%BD%E5%AD%97%E7%AC%A6"><span class="nav-text">屏蔽字符</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E5%89%AA%E8%B4%B4%E6%9D%BF"><span class="nav-text">操作剪贴板</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#H5%E7%BA%A6%E6%9D%9F%E9%AA%8C%E8%AF%81API"><span class="nav-text">H5约束验证API</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%89%E6%8B%A9%E6%A1%86%E8%84%9A%E6%9C%AC"><span class="nav-text">选择框脚本</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%80%89%E6%8B%A9%E9%80%89%E9%A1%B9"><span class="nav-text">选择选项</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E9%80%89%E4%B8%AD%E9%A1%B9"><span class="nav-text">获取选中项</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E9%80%89%E4%B8%AD%E9%A1%B9"><span class="nav-text">设置选中项</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E9%80%89%E9%A1%B9"><span class="nav-text">添加选项</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%A7%BB%E9%99%A4%E9%80%89%E9%A1%B9"><span class="nav-text">移除选项</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%A7%BB%E5%8A%A8%E5%92%8C%E9%87%8D%E6%8E%92%E9%80%89%E9%A1%B9"><span class="nav-text">移动和重排选项</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%A8%E5%8D%95%E5%BA%8F%E5%88%97%E5%8C%96"><span class="nav-text">表单序列化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-text">总结</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Kudryavka"
+      src="https://avatars.githubusercontent.com/u/50348668?v=4">
+  <p class="site-author-name" itemprop="name">Kudryavka</p>
+  <div class="site-description" itemprop="description">Gamer / Harmonica / Front-End</div>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kudryavka1013" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kudryavka1013" rel="noopener me" target="_blank"><i class="fa-brands fa-github fa-lg fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/22735925" title="bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;22735925" rel="noopener me" target="_blank"><i class="fa-brands fa-bilibili fa-lg fa-fw"></i></a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.kudryavka.site/posts/79f083aebbd1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/50348668?v=4">
+      <meta itemprop="name" content="Kudryavka">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="渐渐">
+      <meta itemprop="description" content="Gamer / Harmonica / Front-End">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="表单和表单脚本 | 渐渐">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          表单和表单脚本
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-04-27 11:31:25" itemprop="dateCreated datePublished" datetime="2021-04-27T11:31:25+08:00">2021-04-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/notes/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/notes/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>表单其实就是收集不同类型的用户输入，即<u>采集数据</u>。我们用HTML来构建一份表单，然后通过JS来处理表单中的数据，然后把表单提交给服务器。</p>
+<h3 id="HTML表单"><a href="#HTML表单" class="headerlink" title="HTML表单"></a>HTML表单</h3><pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>form</span><span class="token punctuation">></span></span>
+.
+  form elements 表单元素
+.
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>form</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>用 <code>&lt;form&gt;</code> 做一个表单，表单里放表单元素，就是一些输入框，单选按钮，复选框，提交按钮之类的东西</p>
+<h4 id="form-元素的常用属性"><a href="#form-元素的常用属性" class="headerlink" title="form 元素的常用属性"></a>form 元素的常用属性</h4><ul>
+<li><p>action：表单提交时执行的操作，发送到什么地方</p>
+</li>
+<li><p>target：表单提交后响应的方式， _blank &#x2F;_self 等</p>
+</li>
+<li><p>method：指定提交表单的HTTP方法</p>
+<p>GET：键值对形式把表单放到URL里，这是<strong>不安全</strong>的，同时长度受限<br>POST：表单放在HTTP请求的正文里，长度不受限</p>
+</li>
+<li><p>autocomplete：自动填充内容</p>
+</li>
+<li><p>novalidate：不验证表单数据，这个不会影响JS，只影响浏览器自己的验证</p>
+</li>
+<li><p>enctype：编码类型</p>
+</li>
+</ul>
+<h4 id="常用的表单元素"><a href="#常用的表单元素" class="headerlink" title="常用的表单元素"></a>常用的表单元素</h4><h5 id="input-元素"><a href="#input-元素" class="headerlink" title="input 元素"></a>input 元素</h5><p>input 有点怪，它一个元素就有多种形态，根据 type 属性的不同，它可以变成不同的东西。</p>
+<p>type属性取值如下：</p>
+<ul>
+<li><p>text</p>
+</li>
+<li><p>password</p>
+<p>这两个就是<u>单行输入框</u>，其中password会有掩码处理</p>
+</li>
+<li><p>submit</p>
+<p>一个按钮，它能<u>提交表单数据到表单处理程序</u>，其中表单处理程序通过action在 <code>&lt;form action=&quot;action_page.php&quot;&gt;</code> 里定义，不过现在一般都不这么用</p>
+</li>
+<li><p>radio</p>
+<p><u>单选</u>按钮，就只是一个小圆点而已，提示文本要自己另外写。至少两个单选按钮放到一起用才有实际意义。通过 name 属性来指定哪些单选按钮是一组的，value属性指定该按钮的值（这和你的提示文本没有关联的）</p>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>sex<span class="token punctuation">"</span></span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>male<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>male<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>label</span> <span class="token attr-name">for</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>male<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>男的<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>label</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span><span class="token punctuation">/></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>sex<span class="token punctuation">"</span></span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>female<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>female<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>label</span> <span class="token attr-name">for</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>female<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>女的<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>label</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>这里的 label 就是为 input 服务的，for 属性（<u>根据id</u>）指定这个 label 是属于哪个 input 的。点击这个 label，相当于点击 input</p>
+</li>
+<li><p>checkbox</p>
+<p>复选框（复选按钮），就是一个小方框，可以<u>多选</u>。其它和radio一样，提交时是一个<u>数组</u>，里面放着选中的值</p>
+</li>
+<li><p>button</p>
+<p>就一个按钮，和一般的按钮没什么不同</p>
+</li>
+</ul>
+<p>H5多了很多新的type取值：</p>
+<ul>
+<li>file：上传文件</li>
+<li>number：数字值，会限制输入数字</li>
+<li>range：范围选择器，配合min和max属性使用</li>
+<li>image：图片形式的<u>提交按钮</u>，配合src和alt属性使用</li>
+<li>color：颜色选择器</li>
+<li>date：日期选择器</li>
+<li>email：邮箱格式，如果浏览器支持，会自动验证，最好还是用JS自己验证比较好</li>
+<li>month：年和月的日期选择器</li>
+<li>week：年和周的日期选择器</li>
+<li>time：一天的时间选择器</li>
+<li>tel：电话号码</li>
+<li>url：就URL地址，浏览器支持的话会自动验证</li>
+</ul>
+<h5 id="select-元素"><a href="#select-元素" class="headerlink" title="select 元素"></a>select 元素</h5><p>创建一个<u>下拉列表</u>。列表的选项通过 <code>&lt;option&gt;</code> 来定义，通常把某个选项设置成预定义</p>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>select</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>cars<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+ <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>option</span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>volvo<span class="token punctuation">"</span></span> <span class="token attr-name">selected</span><span class="token punctuation">></span></span>Volvo<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>option</span><span class="token punctuation">></span></span>
+ <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>option</span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>saab<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Saab<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>option</span><span class="token punctuation">></span></span>
+ <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>option</span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>fiat<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Fiat<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>option</span><span class="token punctuation">></span></span>
+ <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>option</span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>audi<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Audi<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>option</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>select</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>默认是单选，但是可以设置 multiple 来变成多选（可以但没必要，为啥不用checkbox）</p>
+<h5 id="textarea-元素"><a href="#textarea-元素" class="headerlink" title="textarea 元素"></a>textarea 元素</h5><p>创建一个<u>多行文本输入框</u>（或者叫<u>文本域</u>），最基本的可以指定这个框的行数（rows）和列数（一行几个字符，cols）</p>
+<h5 id="button-元素"><a href="#button-元素" class="headerlink" title="button 元素"></a>button 元素</h5><p>就是一个按钮，它和 <code>&lt;input type=&quot;button&quot;&gt;</code> 的按钮好像没有什么不同</p>
+<h5 id="fieldset-元素"><a href="#fieldset-元素" class="headerlink" title="fieldset 元素"></a>fieldset 元素</h5><p>本身没有什么实际意义，只是用来组合表单中的一些元素，把它们分组打包。<br>当一组表单元素放到 <code>&lt;fieldset&gt;</code>  标签内时，浏览器会以特殊方式来显示它们，甚至可创建一个子表单来处理这些元素。</p>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>form</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>fieldset</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>legend</span><span class="token punctuation">></span></span>健康信息<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>legend</span><span class="token punctuation">></span></span>
+    身高：<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>text<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+    体重：<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>text<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>fieldset</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>form</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><img src="https://fastly.jsdelivr.net/gh/kudryavka1013/note-pic@master/note/image-20210425202240324.png" alt="image-20210425202240324"></p>
+<h5 id="H5新增的表单元素"><a href="#H5新增的表单元素" class="headerlink" title="H5新增的表单元素"></a>H5新增的表单元素</h5><h6 id="datalist-元素"><a href="#datalist-元素" class="headerlink" title="datalist 元素"></a>datalist 元素</h6><p>为 input 元素规定<u>预定义选项列表</u>，用户会在他们输入数据时看到预定义选项的下拉列表，<u>input 元素的 list 属性必须引用 datalist 元素的 id 属性</u></p>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>text<span class="token punctuation">"</span></span> <span class="token attr-name">list</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>browsers<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>datalist</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>browsers<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>option</span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Internet Explorer<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>option</span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Firefox<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>option</span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Chrome<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>option</span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Opera<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>option</span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Safari<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>datalist</span><span class="token punctuation">></span></span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h6 id="keygen-元素"><a href="#keygen-元素" class="headerlink" title="keygen 元素"></a>keygen 元素</h6><p>标签规定用于表单的密钥对生成器字段，当提交表单时，私钥存储在本地，公钥发送到服务器</p>
+<h6 id="output-元素"><a href="#output-元素" class="headerlink" title="output 元素"></a>output 元素</h6><p>作为计算结果输出显示，好像挺鸡肋的</p>
+<h4 id="input-元素的属性"><a href="#input-元素的属性" class="headerlink" title="input 元素的属性"></a>input 元素的属性</h4><p>input标签里，除了最重要的type属性，还有一些属性也是非常重要且常用的</p>
+<ul>
+<li>value：规定该input里输入字段的值，比如文本框的内容，单选、多选选中的内容等，如果是按钮则是里面的提示文本</li>
+<li>readonly：只读。不能修改</li>
+<li>disabled：禁用。包括不可用，不可点击，不会被提交</li>
+<li>size：规定输入的长度，按字符计算</li>
+<li>maxlength：最大长度</li>
+</ul>
+<p>H5新增加的属性：</p>
+<ul>
+<li>autocomplete：自动填写表单，取值为 on&#x2F;off</li>
+<li>autofocus：自动获取焦点，取值为 true&#x2F;false</li>
+<li>height 和 width：规定宽高，仅适用于 <code>type=&quot;image&quot;</code></li>
+<li>list：配合datalist标签使用的属性，指定要引用的预定义选项列表</li>
+<li>min 和 max：最小值最大值，适用于number、range、date等输入相关、可以量化的</li>
+<li>multiple：布尔属性，允许用户在 input 元素中输入一个以上的值。适用于 email、file和select（没必要）</li>
+<li>pattern (regexp)：正则表达式检测，传入正则</li>
+<li>placeholder：提示占位符</li>
+<li>required：必填，布尔属性</li>
+<li>step：合法数字间隔，如果 <code>step=&quot;3&quot;</code>，则合法数字应该是 -3、0、3、6等等</li>
+</ul>
+<p>特别的，讨论一下form*属性，其实无非就是表单里某些input特别设置一下，很多属性都会覆盖form元素整体设置的属性：</p>
+<ul>
+<li><p>form</p>
+<p>规定这个 input 属于哪个或哪些表单。如果某个 input 不在某个 form 标签里，可以用这个属性来指定。同时，如果一个 input 要属于多个表单，就要通过这个属性来指定，表单直接用空格隔开</p>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>form</span> <span class="token attr-name">action</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>action_page.php<span class="token punctuation">"</span></span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>form1<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>text<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>inform<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span><span class="token punctuation">></span></span>
+   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>submit<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Submit<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>form</span><span class="token punctuation">></span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>text<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>notinform<span class="token punctuation">"</span></span> <span class="token attr-name">form</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>form1<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+<span class="token comment">&lt;!-- 这个input虽然在外面，但也属于form1 --></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>formaction</p>
+<p>规定当提交表单时处理该输入控件的文件的 URL，适用于<code>type=&quot;submit&quot;</code> 以及 <code>type=&quot;image&quot;</code>，覆盖 form 元素的 action 属性。</p>
+<p>简单的说就是改变某个提交按钮的提交路径，可以在一个表单里做两种不同的提交操作</p>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>form</span> <span class="token attr-name">action</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>action_page.php<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+   First name: <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>text<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>fname<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span><span class="token punctuation">></span></span>
+   Last name: <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>text<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>lname<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span><span class="token punctuation">></span></span>
+   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>submit<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Submit<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span><span class="token punctuation">></span></span>
+   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>submit<span class="token punctuation">"</span></span> <span class="token attr-name">formaction</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>demo_admin.asp<span class="token punctuation">"</span></span>
+   <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Submit as admin<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>form</span><span class="token punctuation">></span></span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>formenctype</p>
+<p>规定当把表单数据（form-data）提交至服务器时如何对其进行编码（仅针对 method&#x3D;”post” 的表单），适用于 type&#x3D;”submit” 以及 type&#x3D;”image”，会覆盖 form 元素的 enctype 属性</p>
+</li>
+<li><p>formmethod</p>
+<p>定义用以向 action URL 发送表单数据（form-data）的 HTTP 方法，适用于 <code>type=&quot;submit&quot;</code> 以及 <code>type=&quot;image&quot;</code>，会覆盖 form 元素的 method 属性</p>
+</li>
+<li><p>formnovalidate</p>
+<p>规定在提交表单时不对 input 元素进行验证，用于 <code>type=&quot;submit&quot;</code>，会覆盖 form 元素的 novalidate 属性</p>
+</li>
+<li><p>formtarget</p>
+<p>取值 _blank &#x2F;_self 等，指定提交表单后的响应是当前页面还是开一个新页面</p>
+</li>
+</ul>
+<h3 id="JS表单脚本"><a href="#JS表单脚本" class="headerlink" title="JS表单脚本"></a>JS表单脚本</h3><p>虽然只用HTML，就可以完成一个表单的生成和提交，甚至还可以做一些简单的检测。但是我们依旧需要JavaScript来帮我们完成更复杂的表单验证工作和表单增强。</p>
+<h4 id="表单对应DOM的对象"><a href="#表单对应DOM的对象" class="headerlink" title="表单对应DOM的对象"></a>表单对应DOM的对象</h4><p>在HTML里，表单是 <code>&lt;form&gt;</code>，在JavaScript里，对应的是HTMLFormElement类型（继承HTMLElement），有对应表单内容的属性和操作表单的方法。</p>
+<ul>
+<li>acceptCharset（对应accept-charset）、action、enctype、method、name、target 和HTML里的表单属性都是一一对应的</li>
+<li>elements：表单中所有控件的集合</li>
+<li>length：表单中控件的数量</li>
+<li>reset()：重置表单</li>
+<li>submit()：提交表单</li>
+</ul>
+<h5 id="获取表单"><a href="#获取表单" class="headerlink" title="获取表单"></a>获取表单</h5><ol>
+<li>给 <code>&lt;form&gt;</code> 加上id，通过 <code>document.getElementById()</code> 来获取对应表单</li>
+<li>使用 <code>document.forms</code> 可以获取页面里所有表单，通过index或者name值来获取特定表单<br><code>document.forms[0]</code>，<code>document.forms[&quot;表单name值&quot;]</code></li>
+</ol>
+<h5 id="提交表单"><a href="#提交表单" class="headerlink" title="提交表单"></a>提交表单</h5><ol>
+<li><p>表单的按钮可以提交表单</p>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token comment">&lt;!-- 通用的表单按钮 --></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>submit<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Submit Form<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+<span class="token comment">&lt;!-- 图片按钮 --></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>image<span class="token punctuation">"</span></span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>...<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+<span class="token comment">&lt;!-- 自定义按钮 --></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>submit<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Submit Form<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>通过这些按钮提交，<strong>会在提交之前触发submit事件</strong>，如果我们要验证表单数据，就可以通过<u>阻止这个事件的默认行为</u>（监听submit事件，并取得事件对象，使用<code>event.preventDefault()</code>）来取消表单的提交，验证完之后再决定要不要提交表单</p>
+</li>
+<li><p>submit() 方法</p>
+<p><code>form.submit()</code>，表单对象直接调用方法就可以提交，<strong>这不会触发submit事件</strong>，所以调用前要验证表单</p>
+</li>
+</ol>
+<h5 id="重置表单"><a href="#重置表单" class="headerlink" title="重置表单"></a>重置表单</h5><ol>
+<li><p>表单的重置按钮可以重置表单</p>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token comment">&lt;!-- 通用的重置按钮 --></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>reset<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Reset Form<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+<span class="token comment">&lt;!-- 自定义按钮 --></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>reset<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Reset Form<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>点击这些按钮时，<strong>会在重置前触发reset事件</strong>，我们可以在必要时取消重置操作，原理同上，<u>取消默认行为</u></p>
+</li>
+<li><p>reset()方法</p>
+<p><code>form.reset()</code>，和 <code>submit()</code> 不同，调用该方法<strong>会触发reset事件</strong>，就像点击按钮一样</p>
+</li>
+</ol>
+<p>事实上，重置表单的需求是很少见的，一般情况下都是提供一个取消按钮，让用户回到前一个界面</p>
+<h5 id="表单字段的属性和方法"><a href="#表单字段的属性和方法" class="headerlink" title="表单字段的属性和方法"></a>表单字段的属性和方法</h5><p>使用表单的 elements 属性来获取表单里的所有元素（字段），可以通过 index 和 name 来获取某个字段，elements 是一个有序列表，还能使用length</p>
+<p><code>aForm.elements[0]</code>，<code>aForm.elements[&quot;textbox1&quot;]</code>，<code>aFrom.elements.length</code></p>
+<p>特别地，如果使用 name，那么会去找<u>所有</u>符合的元素，返回一个NodeList；如果使用 index，则只会返回<u>第一个元素</u></p>
+<h6 id="共有的表单字段属性"><a href="#共有的表单字段属性" class="headerlink" title="共有的表单字段属性"></a>共有的表单字段属性</h6><p>除了<code>&lt;fieldset&gt;</code>，所有字段都有一些共同的属性，由于<code>&lt;input&gt;</code>有多种类型，就会有一些独有的属性</p>
+<ul>
+<li>disabled：是否被禁用</li>
+<li>readOnly：是否只读</li>
+<li>name：字段名称</li>
+<li>type：字段类型。其中<code>&lt;select&gt;</code>的值有 select-one &#x2F; select-multiple，是<u>只读</u>的，而<code>&lt;input&gt;</code>和<code>&lt;button&gt;</code>的type可以动态修改。<code>&lt;fieldset&gt;</code>没有type</li>
+<li>value：字段的值</li>
+<li>tableIndex：表示当前字段的切换序号，主要影响元素的聚焦</li>
+<li>form：当前字段所属的表单，<strong>只读</strong>，除了这个属性，其他属性都可以被JS动态修改</li>
+</ul>
+<h6 id="共有的表单字段方法"><a href="#共有的表单字段方法" class="headerlink" title="共有的表单字段方法"></a>共有的表单字段方法</h6><ul>
+<li>focus()：获得焦点，注意如果用在<u>隐藏</u>了的字段上（设置了诸如<code>type=&quot;hidden&quot;/display/visibility</code>隐藏的东西），会出问题</li>
+<li>blur()：失去焦点，只是移走焦点，不会移到别的元素上</li>
+</ul>
+<p>它们都会触发相应事件</p>
+<h6 id="共有的表单字段事件"><a href="#共有的表单字段事件" class="headerlink" title="共有的表单字段事件"></a>共有的表单字段事件</h6><p>除了一般的键盘、鼠标、更改和HTML事件，所有表单字段都支持和焦点相关的事件</p>
+<ul>
+<li>blur：失去焦点时触发</li>
+<li>focus：获得焦点时触发</li>
+<li>change：对于<code>&lt;input&gt;/&lt;textarea&gt;</code>，<u>失去焦点且value改变</u>时触发；对于<code>&lt;select&gt;</code>，选项改变时（不失焦也会）触发</li>
+</ul>
+<p>此外，blur和change事件的触发先后，不同浏览器有不同的实现</p>
+<h4 id="文本框脚本"><a href="#文本框脚本" class="headerlink" title="文本框脚本"></a>文本框脚本</h4><p>我们知道，文本框就两种：<code>&lt;input type=&quot;text&quot;&gt;</code>和<code>&lt;textarea&gt;</code>。多数时候它们的行为都差不多，但还是有一些区别</p>
+<p>对于<code>&lt;input type=&quot;text&quot;&gt;</code>，我们用size控制<u>显示</u>的长度，maxlength控制<u>最大输入</u>长度，用value设置<u>初始值</u></p>
+<p>而对于<code>&lt;textarea&gt;</code>，它总是展示成一个多行文本框，我们要用rows和cols来分别控制<u>显示</u>的行数和列数，而且它<u>不能在HTML里控制最大输入长度</u>（你当然可以用JS来控制），同时它的初始值要放在两个标签之间<code>&lt;textarea&gt;初始值&lt;/textarea&gt;</code></p>
+<p><strong>注意：它们的内容都是保存在 value 值里</strong></p>
+<p>我们最好不要用标准DOM方法来处理它的value值，因为对value的修改，不一定会反映在DOM里，最好用如下方法：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> textbox <span class="token operator">=</span> document<span class="token punctuation">.</span>form<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>elements<span class="token punctuation">[</span><span class="token string">"textbox1"</span><span class="token punctuation">]</span>
+textbox<span class="token punctuation">.</span>value <span class="token operator">=</span> <span class="token string">"new value"</span>
+<span class="token comment">//最好不要用setAttribute之类的方法</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h5 id="选择（选中）文本"><a href="#选择（选中）文本" class="headerlink" title="选择（选中）文本"></a>选择（选中）文本</h5><h6 id="获取选择的文本"><a href="#获取选择的文本" class="headerlink" title="获取选择的文本"></a>获取选择的文本</h6><p>文本框有一个select事件，在选择了文本框中的文本时就会被触发。但是我们只知道用户选择了文本，不知道选择了哪些文本。对于这个问题，H5给文本框加入了两个属性：<strong>selectionStart</strong>和<strong>selectionEnd</strong>，记录了选择开始和结尾的偏移量（从0开始）。我们可以利用它们配合substring来获得用户的选择内容</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">getSelectedText</span><span class="token punctuation">(</span><span class="token parameter">textbox</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+ <span class="token keyword">return</span> textbox<span class="token punctuation">.</span>value<span class="token punctuation">.</span><span class="token function">substring</span><span class="token punctuation">(</span>textbox<span class="token punctuation">.</span>selectionStart<span class="token punctuation">,</span>textbox<span class="token punctuation">.</span>selectionEnd<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h6 id="选择全部-x2F-部分文本"><a href="#选择全部-x2F-部分文本" class="headerlink" title="选择全部&#x2F;部分文本"></a>选择全部&#x2F;部分文本</h6><p>在JS里，我们用 <strong>select()</strong> 方法来选择文本框中的所有文本，这个方法有一个很常用的功能：每次聚焦到文本框时，就用这个方法选中所有文本，方便用户操作（特别是有默认值的多行文本框）</p>
+<p>如果要选中部分文本，那不就用substring就行了？别傻了，你在想啥呢？选中文本是会在页面上呈现出来被选中的。我们要用 <strong>setSelectionRange()</strong> 方法，它类似substring，接受第一个字符的索引和最后一个字符<u>之后的字符</u>的索引。</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">textbox<span class="token punctuation">.</span><span class="token function">setSelectionRange</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> textbox<span class="token punctuation">.</span>value<span class="token punctuation">.</span>length<span class="token punctuation">)</span> <span class="token comment">// 这里可不是length-1 啊，注意</span>
+textbox<span class="token punctuation">.</span><span class="token function">setSelectionRange</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">7</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>值得注意的是，我们得在<u>调用这个方法之前或之后</u><strong>立即将焦点设置到该文本框</strong></p>
+<h5 id="过滤输入"><a href="#过滤输入" class="headerlink" title="过滤输入"></a>过滤输入</h5><p>我们经常要控制文本框<u>能输入什么</u>，而文本框默认是没那么多验证输入的手段。我们得用JS配合事件和DOM来增强我们的输入框</p>
+<h6 id="屏蔽字符"><a href="#屏蔽字符" class="headerlink" title="屏蔽字符"></a>屏蔽字符</h6><p>当我们要某个文本框的输入不包含某些字符<br>我们要做的事情有：监听 keypress 事件 -&gt; 检查事件里的字符编码 -&gt; 决定如何响应<br>说人话就是：拿到事件里输入的东西 -&gt; 匹配我们的规则 -&gt; 决定要不要这个输入</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">textbox<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">"keypress"</span><span class="token punctuation">,</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">event</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+ <span class="token keyword">var</span> target <span class="token operator">=</span> event<span class="token punctuation">.</span>target
+ <span class="token keyword">var</span> charCode <span class="token operator">=</span> event<span class="token punctuation">.</span>charCode
+ 
+ <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>正则表达式<span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span>String<span class="token punctuation">.</span><span class="token function">fromCharCode</span><span class="token punctuation">(</span>charCode<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> charCode <span class="token operator">></span> <span class="token number">9</span> <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span>event<span class="token punctuation">.</span>ctrlKey<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+  event<span class="token punctuation">.</span><span class="token function">preventDefault</span><span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment">// 阻止默认行为</span>
+ <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>这里的匹配规则后面还有 charCode &gt; 9，表示不会忽略哪些功能键比如方向键和一些其它的案件，而 !event.ctrlKey 则是避免屏蔽了复制粘贴等功能</p>
+<h6 id="操作剪贴板"><a href="#操作剪贴板" class="headerlink" title="操作剪贴板"></a>操作剪贴板</h6><p>剪贴板事件：</p>
+<ul>
+<li>beforecopy</li>
+<li>copy</li>
+<li>beforecut</li>
+<li>cut</li>
+<li>beforepaste</li>
+<li>paste</li>
+</ul>
+<p>before型事件只会在显示针对文本框的上下文菜单（预期将发生剪贴板事件）的情况下触发，说人话就是<strong>在文本框按鼠标右键（或者快捷键）出菜单时触发</strong></p>
+<p>要访问剪贴板里的内容，我们使用 <strong>clipboardData</strong>对象，该对象是event的一个属性，只有在处理剪贴板事件期间 clipboardData 才有效</p>
+<p>这个对象有三个方法：getData()、setData()、clearData()</p>
+<ul>
+<li>getData()：接受一个参数，即要取得的数据的格式，<u>text&#x2F;plain 或者 url</u></li>
+<li>setData()：第一个参数同样也是数据的类型，第二个参数是要放在剪贴板里的文本</li>
+</ul>
+<p>当我们要确保粘贴到文本框的内容符合某种格式，就在paste事件里检查剪贴板的value</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">textbox.addEventListener(&quot;paste&quot;,function(event)&#123;
+ var text &#x3D; event.getData(&quot;text&#x2F;plain&quot;)
+ 
+ if(!正则表达式.test(text))&#123;
+  event.preventDefault()  &#x2F;&#x2F; 阻止默认行为
+ &#125;
+&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h5 id="H5约束验证API"><a href="#H5约束验证API" class="headerlink" title="H5约束验证API"></a>H5约束验证API</h5><p>还记得之前说的HTML5新增了不少input元素的属性，比如required、min、max等属性；还有input的各种type类型，比如email，number等。对于这些各种约束，我们可以用 <strong>checkValidity()</strong> 方法和 <strong>validity</strong> 属性把这些约束利用起来。</p>
+<ul>
+<li><p>checkValidity()</p>
+<p>检测表单中的<u>某个字段</u>是否有效，返回布尔值，例如<code>document.forms[0].elements[0].checkValidity()</code>；要<u>检测整个表单</u>，可以在表单自身调用这个方法，只要有一个字段无效，就会返回false，例如<code>document.forms[0].checkValidity()</code></p>
+</li>
+<li><p>validity</p>
+<p>相比上面的方法，这个属性对象包含一系列属性，每个属性都是一个布尔值，告诉你字段出现什么问题</p>
+<ul>
+<li>customError：如果设置了setCustomValidity()，则为true</li>
+<li>patternMismatch：值和pattern属性不匹配</li>
+<li>rangeOverflow：值比max大</li>
+<li>rangeUnderflow：值比min小</li>
+<li>stepMisMatch：min和max之间的步长（step）不合理</li>
+<li>tooLong：值超过了maxlength，一般都是false</li>
+<li>typeMismatch：值不符合type要求的格式（比如mail，url）</li>
+<li>valid：如果这里的其它属性都是false，则返回true</li>
+<li>valueMissing：标注required的字段里没有值</li>
+</ul>
+</li>
+</ul>
+<h4 id="选择框脚本"><a href="#选择框脚本" class="headerlink" title="选择框脚本"></a>选择框脚本</h4><p>选择框使用<code>&lt;select&gt;</code>和<code>&lt;option&gt;</code>来创建，除了共有的属性和方法，HTMLSelectElement还有独特的属性和方法</p>
+<ul>
+<li>add(newOption, relOption)：插入新的option元素，<u>放在relOption元素前面</u></li>
+<li>remove(index)：移除某个option</li>
+<li>options：该选择框的所有option列表（HTMLCollection）</li>
+<li>selectedIndex：选中项的索引（从0开始），如果没有选中项则是-1，多个选中项只保存<u>第一个索引</u></li>
+<li>multiple：对应HTML的属性，是否多选</li>
+<li>size：对应HTML的属性，选择框可见行数</li>
+<li>type：select-one &#x2F; select-multiple</li>
+</ul>
+<p>选择框的value属性，有几种情况：</p>
+<ol>
+<li>没有选中项：value值是个空字符串</li>
+<li>有一个选中项，而且在HTML里指定了value特性，那么value值就是value特性（包括空字符串）</li>
+<li>有一个选中项，但是在HTML里没有指定value特性，那么value值取选项的文本，也就是<code>&lt;option&gt;这里的内容&lt;/option&gt;</code></li>
+<li>有多个选中项，按照前面的规则，只取第一个选中项的值</li>
+</ol>
+<hr>
+<p><code>&lt;option&gt;</code>在DOM里对应HTMLOptionElement，有如下独特的属性：</p>
+<ul>
+<li>index：当前选项在整个options的索引</li>
+<li>label：就对应HTML的label标签</li>
+<li>selected：是否被选中</li>
+<li>text：选项的文本</li>
+<li>value：对应HTML的value特性</li>
+</ul>
+<p>在获取这些属性的时候，推荐使用表单的属性，而不用标准DOM方法</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> text <span class="token operator">=</span> selectbox<span class="token punctuation">.</span>options<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>text
+<span class="token keyword">var</span> value <span class="token operator">=</span> selectbox<span class="token punctuation">.</span>options<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>value<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h5 id="选择选项"><a href="#选择选项" class="headerlink" title="选择选项"></a>选择选项</h5><h6 id="获取选中项"><a href="#获取选中项" class="headerlink" title="获取选中项"></a>获取选中项</h6><p>对于单选，就很简单了，使用 selectedIndex 就行：<code>selectbox.options[selectbox.selectedIndex]</code></p>
+<p>对于多选，使用 selectedIndex 只会返回第一项，我们需要遍历options里每个选项的selected属性：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">getSelectedOptions</span><span class="token punctuation">(</span><span class="token parameter">selectbox</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+ <span class="token keyword">var</span> result <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">var</span> option <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+    
+    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">let</span> i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span>len<span class="token operator">=</span>selectbox<span class="token punctuation">.</span>options<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">&lt;</span>len<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+      option <span class="token operator">=</span> selectbox<span class="token punctuation">.</span>options<span class="token punctuation">[</span>i<span class="token punctuation">]</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>option<span class="token punctuation">.</span>selected<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+            result<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>option<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">return</span> result
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h6 id="设置选中项"><a href="#设置选中项" class="headerlink" title="设置选中项"></a>设置选中项</h6><p>对于单选，<u>可以设置selectedIndex</u>，也可以获取某一个选项，<u>设置它的selected属性</u>为true（这会导致其它选项的selected属性为false）。特别地，设置selected属性为false对单选没有影响</p>
+<p>对于多选，就<u>只能设置selected属性</u>，使用selectedIndex会取消其它所有选中项</p>
+<h5 id="添加选项"><a href="#添加选项" class="headerlink" title="添加选项"></a>添加选项</h5><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">//创建选项，可以用DOM方法，也可以用一个遗留下来的构造函数</span>
+<span class="token comment">//标准DOM方法</span>
+<span class="token keyword">var</span> newOption <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">"option"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+newOption<span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span>document<span class="token punctuation">.</span><span class="token function">createTextNode</span><span class="token punctuation">(</span><span class="token string">"Option text"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+newOption<span class="token punctuation">.</span><span class="token function">setAttribute</span><span class="token punctuation">(</span><span class="token string">"value"</span><span class="token punctuation">,</span> <span class="token string">"Option value"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">//遗留下来的构造函数</span>
+<span class="token keyword">var</span> newOption <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Option</span><span class="token punctuation">(</span><span class="token string">"Option text"</span><span class="token punctuation">,</span> <span class="token string">"Option value"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+<span class="token comment">//添加选项，可以用DOM方法，也可以用选择框自己的add()方法</span>
+<span class="token comment">//标准DOM方法</span>
+selectbox<span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span>newOption<span class="token punctuation">)</span>
+selectbox<span class="token punctuation">.</span><span class="token function">insertBefore</span><span class="token punctuation">(</span>newOption<span class="token punctuation">,</span>selectbox<span class="token punctuation">.</span>options<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+<span class="token comment">//add()方法</span>
+selectbox<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>newOption<span class="token punctuation">,</span> <span class="token keyword">undefined</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>对于add()方法，接受两个参数：要加入的新选项，位于新选项<u>后面</u>的选项。如果要把新选项放到最后一个，第二个参数设置为undefined（本来应该是null，为了兼容性传入undefined）</p>
+<h5 id="移除选项"><a href="#移除选项" class="headerlink" title="移除选项"></a>移除选项</h5><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">//标准DOM方法</span>
+selectbox<span class="token punctuation">.</span><span class="token function">removeChild</span><span class="token punctuation">(</span>selectbox<span class="token punctuation">.</span>options<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+<span class="token comment">//遗留方法，把相应选项设置为null</span>
+selectbox<span class="token punctuation">.</span>options<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+
+<span class="token comment">//remove()方法</span>
+selectbox<span class="token punctuation">.</span><span class="token function">remove</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>如果要移除所有项，就循环删除<u>第一个选项</u>，因为每次删除，其它选项都会重新排位置</p>
+<h5 id="移动和重排选项"><a href="#移动和重排选项" class="headerlink" title="移动和重排选项"></a>移动和重排选项</h5><p>我们知道，<strong>如果为appendChild()方法传入一个文档中已有的元素，那么就会先从该元素的父节点中移除它，再把它添加到指定位置</strong>。我们就利用这个特性来将option从一个选择框移动到另一个选择框</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> selectbox1 <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">"selLocations1"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> selectbox2 <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">"selLocations2"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+selectbox2<span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span>selectbox1<span class="token punctuation">.</span>options<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>对于重排，我们用insertBefore()，利用同样的特性就可以了</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> optionToMove <span class="token operator">=</span> selectbox<span class="token punctuation">.</span>options<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+selectbox<span class="token punctuation">.</span><span class="token function">insertBefore</span><span class="token punctuation">(</span>optionToMove<span class="token punctuation">,</span> selectbox<span class="token punctuation">.</span>options<span class="token punctuation">[</span>optionsToMove<span class="token punctuation">.</span>index<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token comment">// 向前移动一个位置（第一个选项再往前了，不能用）</span>
+selectbox<span class="token punctuation">.</span><span class="token function">insertBefore</span><span class="token punctuation">(</span>optionToMove<span class="token punctuation">,</span> selectbox<span class="token punctuation">.</span>options<span class="token punctuation">[</span>optionsToMove<span class="token punctuation">.</span>index<span class="token operator">+</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token comment">// 向后移动一个位置（最后一个选项也能用，因为每次都会重置每个选项的index）</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="表单序列化"><a href="#表单序列化" class="headerlink" title="表单序列化"></a>表单序列化</h3><p>ajax的出现，表单序列化已经成为一种常见需求。所谓表单序列化，就是利用type、name、value属性对表单数据进行编码，同时剔除掉没用的东西的过程</p>
+<p>浏览器提交一个表单的过程：</p>
+<ul>
+<li>对表单字段的名称和值进行URL编码，用 ‘&amp;’ 连接</li>
+<li>对于<u>禁用</u>的表单字段，<u>没有勾选</u>的复选和单选框，type为<u>reset &#x2F; button</u>的按钮，都被剔除在外，不会被发送</li>
+<li>一些特殊的情况：多选选择框中每个选中的值单独一个条目；点击提交按钮提交表单则会把提交按钮也发送出去</li>
+</ul>
+<p>对于表单字段，会改写成这种形式：<code>name1=value1&amp;name2=value2</code>，其中，name和value都要使用<code>encodeURIComponent</code>进行转义</p>
+<p>当我们使用原生的表单提交（即submit）时，且enctype类型是<code>&quot;application/x-www-form-urlencoded&quot;</code>（默认的），浏览器会帮助我们进行表单序列化：对于GET，就会把序列化的内容以参数形式附在URL后面；对于POST，会把序列化的内容以键值对形式放在HTTP请求体里</p>
+<p>如果我们要用ajax来发送表单，就得我们自己手写序列化（虽然也有一些库提供了方法）</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">serialize</span><span class="token punctuation">(</span><span class="token parameter">form</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+ <span class="token keyword">var</span> parts <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+      field <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
+      i<span class="token punctuation">,</span>len<span class="token punctuation">,</span>j<span class="token punctuation">,</span>optLen<span class="token punctuation">,</span>option<span class="token punctuation">,</span>optValue<span class="token punctuation">;</span>
+  
+  <span class="token comment">//遍历表单的每个字段</span>
+  <span class="token keyword">for</span><span class="token punctuation">(</span>i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span>len<span class="token operator">=</span>form<span class="token punctuation">.</span>elements<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">&lt;</span>len<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+   field <span class="token operator">=</span> form<span class="token punctuation">.</span>elements<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    
+    <span class="token keyword">switch</span><span class="token punctuation">(</span>field<span class="token punctuation">.</span>type<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+      <span class="token keyword">case</span> <span class="token string">"select-one"</span><span class="token operator">:</span>
+      <span class="token keyword">case</span> <span class="token string">"select-multiple"</span><span class="token operator">:</span>
+        <span class="token comment">// 选择框内容处理</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>field<span class="token punctuation">.</span>name<span class="token punctuation">.</span>length<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+         <span class="token keyword">for</span><span class="token punctuation">(</span>j<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span>optLen<span class="token operator">=</span>field<span class="token punctuation">.</span>options<span class="token punctuation">.</span>length<span class="token punctuation">;</span> j<span class="token operator">&lt;</span>optLen<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+            option <span class="token operator">=</span> field<span class="token punctuation">.</span>options<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span><span class="token punctuation">(</span>option<span class="token punctuation">.</span>selected<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+             optValue <span class="token operator">=</span> <span class="token punctuation">(</span>option<span class="token punctuation">.</span><span class="token function">hasAttribute</span><span class="token punctuation">(</span><span class="token string">"value"</span><span class="token punctuation">)</span> <span class="token operator">?</span> option<span class="token punctuation">.</span>value <span class="token operator">:</span> option<span class="token punctuation">.</span>text<span class="token punctuation">)</span><span class="token punctuation">;</span>
+              parts<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token function">encodeURIComponent</span><span class="token punctuation">(</span>field<span class="token punctuation">.</span>name<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"="</span> <span class="token operator">+</span> <span class="token function">encodeURIComponent</span><span class="token punctuation">(</span>optValue<span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token punctuation">&#125;</span>
+          <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">break</span><span class="token punctuation">;</span>
+      <span class="token keyword">case</span> <span class="token keyword">undefined</span><span class="token operator">:</span>    <span class="token comment">// 这个主要是fieldset，没有type类型</span>
+      <span class="token keyword">case</span> <span class="token string">"file"</span><span class="token operator">:</span>
+      <span class="token keyword">case</span> <span class="token string">"submit"</span><span class="token operator">:</span>
+      <span class="token keyword">case</span> <span class="token string">"reset"</span><span class="token operator">:</span>
+      <span class="token keyword">case</span> <span class="token string">"button"</span><span class="token operator">:</span>
+        <span class="token keyword">break</span><span class="token punctuation">;</span>           <span class="token comment">// 这些都不需要作为提交内容</span>
+        
+      <span class="token keyword">case</span> <span class="token string">"radio"</span><span class="token operator">:</span>
+      <span class="token keyword">case</span> <span class="token string">"checkbox"</span><span class="token operator">:</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>field<span class="token punctuation">.</span>checked<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+          <span class="token keyword">break</span><span class="token punctuation">;</span>         <span class="token comment">// 没有选中项</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token comment">/* 这里没有break语句，执行default内容 */</span>
+        
+      <span class="token keyword">default</span><span class="token operator">:</span>
+        <span class="token comment">// 不包含没有名字的表单字段</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>field<span class="token punctuation">.</span>name<span class="token punctuation">.</span>length<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+          parts<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token function">encodeURIComponent</span><span class="token punctuation">(</span>field<span class="token punctuation">.</span>name<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"="</span> <span class="token operator">+</span> <span class="token function">encodeURIComponent</span><span class="token punctuation">(</span>field<span class="token punctuation">.</span>value<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span>
+  <span class="token keyword">return</span> parts<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token string">"&amp;"</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>HTML实现了最基础的表单，就算没有JS也能独立使用</p>
+<p>表单和表单字段引入各种属性和方法，方便了JS对它们操作，以实现功能更复杂的表单</p>
+<p>表单序列化的操作，是方便Ajax的使用</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+  <div class="license cc">
+  
+    <div class="license-title">表单和表单脚本</div>
+    <div class="license-link">
+      <a href="https://blog.kudryavka.site/posts/79f083aebbd1/">https://blog.kudryavka.site/posts/79f083aebbd1/</a>
+    </div>
+    <div class="license-meta">
+      <div class="license-meta-item">
+        <div class="license-meta-title">本文作者</div>
+        <div class="license-meta-text">
+          Kudryavka
+        </div>
+      </div>
+        <div class="license-meta-item">
+          <div class="license-meta-title">发布于</div>
+          <div class="license-meta-text">
+            2021-04-27
+          </div>
+        </div>
+        <div class="license-meta-item">
+          <div class="license-meta-title">更新于</div>
+          <div class="license-meta-text">
+            2024-02-21
+          </div>
+        </div>
+      <div class="license-meta-item">
+        <div class="license-meta-title">许可协议</div>
+        <div class="license-meta-text">
+          
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank">
+              <i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA 4.0</a>
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-statement">
+        转载或引用本文时，请遵守上述许可协议，注明出处，不得用于商业用途！
+      
+    </div>
+  </div>
+          <div class="post-tags">
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+              <a href="/tags/HTML/" rel="tag"># HTML</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/a1335b9e2d7d/" rel="prev" title="NexT设置文章字数和阅读时长">
+                  <i class="fa fa-chevron-left"></i> NexT设置文章字数和阅读时长
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/posts/1e502ca9050e/" rel="next" title="表单和文件上传">
+                  表单和文件上传 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Kudryavka</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">31k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">2:36</span>
+  </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
