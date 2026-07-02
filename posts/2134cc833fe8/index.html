@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/resources/favicon/logo.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon/logo.svg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon/logo.svg">
+  <link rel="mask-icon" href="/resources/favicon/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/silver/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.kudryavka.site","root":"/","images":"/resources/images/","scheme":"Gemini","darkmode":true,"version":"8.18.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"flat"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":true,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.18.0/config.min.js"></script>
+
+    <meta name="description" content="一般人们说的视频格式，通常指的是同时包含音频和视频的文件封装格式，注意与视频编码格式区分。 关于这些专业名称的混用已经无力吐槽了。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数字视频编码简介">
+<meta property="og:url" content="https://blog.kudryavka.site/posts/2134cc833fe8/index.html">
+<meta property="og:site_name" content="渐渐">
+<meta property="og:description" content="一般人们说的视频格式，通常指的是同时包含音频和视频的文件封装格式，注意与视频编码格式区分。 关于这些专业名称的混用已经无力吐槽了。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.kudryavka.site/blog/note-24-05-banner.png">
+<meta property="article:published_time" content="2024-11-24T09:17:00.000Z">
+<meta property="article:modified_time" content="2026-01-20T15:58:42.000Z">
+<meta property="article:author" content="_-iX">
+<meta property="article:tag" content="音视频编码">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.kudryavka.site/blog/note-24-05-banner.png">
+
+
+<link rel="canonical" href="https://blog.kudryavka.site/posts/2134cc833fe8/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://blog.kudryavka.site/posts/2134cc833fe8/","path":"/posts/2134cc833fe8/","title":"数字视频编码简介"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>数字视频编码简介 | 渐渐</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">渐渐</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">如重温往日邮寄</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-life"><a href="/life/" rel="section"><i class="fa fa-mug-saucer fa-fw"></i>生活</a></li><li class="menu-item menu-item-notes"><a href="/notes/" rel="section"><i class="fa fa-feather-pointed fa-fw"></i>笔记</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-paper-plane fa-fw"></i>归档</a></li><li class="menu-item menu-item-music"><a href="/collection/music/" rel="section"><i class="fa fa-guitar fa-fw"></i>音乐</a></li>
+  </ul>
+</nav>
+
+
+
+
+<div class="kitty-wrapper">
+  <div class="kitty-main">
+    <span class="stand"></span>
+    <div class="cat">
+      <div class="body"></div>
+      <div class="head">
+        <div class="ear"></div>
+        <div class="ear"></div>
+      </div>
+      <div class="face">
+        <div class="nose"></div>
+        <div class="whisker-container">
+          <div class="whisker"></div>
+          <div class="whisker"></div>
+        </div>
+        <div class="whisker-container">
+          <div class="whisker"></div>
+          <div class="whisker"></div>
+        </div>
+      </div>
+      <div class="tail-container">
+        <div class="tail">
+          <div class="tail">
+            <div class="tail">
+              <div class="tail">
+                <div class="tail">
+                  <div class="tail">
+                    <div class="tail"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%95%E4%B8%BA%E7%BC%96%E7%A0%81%EF%BC%9F%E4%B8%BA%E4%BD%95%E7%BC%96%E7%A0%81%EF%BC%9F"><span class="nav-text">何为编码？为何编码？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DCT"><span class="nav-text">DCT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%A7%E9%A2%84%E6%B5%8B"><span class="nav-text">帧预测</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E8%A7%86%E9%A2%91%E7%BC%96%E7%A0%81%E6%A0%BC%E5%BC%8F"><span class="nav-text">常见视频编码格式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#H-261"><span class="nav-text">H.261</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MPEG-1-Part-2"><span class="nav-text">MPEG-1 Part 2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MPEG-2-Part-2-x2F-H-262"><span class="nav-text">MPEG-2 Part 2&#x2F;H.262</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MPEG-4-Part-10-x2F-H-264-x2F-AVC"><span class="nav-text">MPEG-4 Part 10&#x2F;H.264&#x2F;AVC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MPEG-H-Part-2-x2F-H-265-x2F-HEVC"><span class="nav-text">MPEG-H Part 2&#x2F;H.265&#x2F;HEVC</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A2%8E%E7%A2%8E%E5%BF%B5"><span class="nav-text">碎碎念</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="_-iX"
+      src="/resources/images/avatar.webp">
+  <p class="site-author-name" itemprop="name">_-iX</p>
+  <div class="site-description" itemprop="description">Game / Harmonica / Front-End</div>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kudryavka1013" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kudryavka1013" rel="noopener me" target="_blank"><i class="fa-brands fa-github fa-lg fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/22735925" title="bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;22735925" rel="noopener me" target="_blank"><i class="fa-brands fa-bilibili fa-lg fa-fw"></i></a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.kudryavka.site/posts/2134cc833fe8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/resources/images/avatar.webp">
+      <meta itemprop="name" content="_-iX">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="渐渐">
+      <meta itemprop="description" content="Game / Harmonica / Front-End">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="数字视频编码简介 | 渐渐">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          数字视频编码简介
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-11-24 17:17:00" itemprop="dateCreated datePublished" datetime="2024-11-24T17:17:00+08:00">2024-11-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/notes/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/notes/%E9%9F%B3%E8%A7%86%E9%A2%91%E7%BC%96%E7%A0%81/" itemprop="url" rel="index"><span itemprop="name">音视频编码</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p><img data-src="https://i.kudryavka.site/blog/note-24-05-banner.png" alt="banner"></p>
+<p>一般人们说的视频格式，通常指的是同时包含音频和视频的文件封装格式，注意与视频编码格式区分。</p>
+<p>关于这些专业名称的混用已经无力吐槽了。</p>
+<span id="more"></span>
+
+<h2 id="何为编码？为何编码？"><a href="#何为编码？为何编码？" class="headerlink" title="何为编码？为何编码？"></a>何为编码？为何编码？</h2><p>编码即压缩编码，通过各种手段对原始的视频数据进行处理，删除冗余信息，从而减少数据量。</p>
+<p>数字视频本质上即连续播放的图像。虽说一张图像大小有限，但架不住它多呀！一般情况下视频帧率至少得有 24 帧（按照电影标准），即 1 秒 24 张图像，如果不做任何处理就进行存储，绝大部分机器都没有这么大的空间。</p>
+<p>所以需要对视频编码的原因显而易见，为了减少视频大小，便于存储以及传播。当然，压缩编码必然会对视频画面的质量造成损失，如何在保证质量的前提下，不断减少视频所需的存储空间，成了业界研究的方向。</p>
+<h3 id="DCT"><a href="#DCT" class="headerlink" title="DCT"></a>DCT</h3><p>既然数字视频实质上就是一帧帧连续的图像，我们可以从图像的压缩入手，将图像进行压缩，即可降低视频的大小。这就引出了 DCT（离散余弦变换）算法。</p>
+<p>DCT 经常被用于信号处理（比如数字音频也用到了 DCT 进行压缩）和图像处理，对信号和图像（包括静止图像和运动图像）进行<strong>有损</strong>数据压缩。</p>
+<p>这种算法可以将图像从空间域转换到频率域，然后做量化。大多数自然信号（包括声音和图像）的能量（或者叫信息）都集中在余弦变换后的低频部分。</p>
+<p>由于人眼对于细节信息不是很敏感，所以可以通过 DCT 处理后，去除人眼敏感程度较低的高频信息，保留绝大部分低频信息，从而减少图像的体积。</p>
+<h3 id="帧预测"><a href="#帧预测" class="headerlink" title="帧预测"></a>帧预测</h3><p>所谓帧预测，就是基于<strong>帧与帧之间的画面大部分都是不动的</strong>这一说法，根据前一帧（又叫参考帧）去计算后一帧的画面，将不动的部分沿用之前的压缩结果，将动的部分用运动方向加距离的矢量记录，就可以省下大量的空间。</p>
+<p>最基础的做法就是将一个大的画面划分成一个个小块（宏块），对每一帧的每个块，运用运动补偿的方法计算前后帧之间的差异并进行压缩。更进阶一点的做法就不局限于前后两帧，可以是更多的参考帧；对于划分宏块的方式也不在局限于固定的大小，可以是更小更细分。</p>
+<h2 id="常见视频编码格式"><a href="#常见视频编码格式" class="headerlink" title="常见视频编码格式"></a>常见视频编码格式</h2><p>在 PR 或者 AE 中导出素材时，常常会看见各种视频参数选项。处于好奇就去了解了一下相关知识。</p>
+<ol>
+<li>H.261</li>
+<li>MPEG-1 Part 2</li>
+<li>MPEG-2 Part 2&#x2F;H.262</li>
+<li>MPEG-4 Part 10&#x2F;H.264&#x2F;AVC</li>
+<li>MPEG-H Part 2&#x2F;H.265&#x2F;HEVC</li>
+</ol>
+<h3 id="H-261"><a href="#H-261" class="headerlink" title="H.261"></a>H.261</h3><p>这个格式已经退出历史舞台啦。</p>
+<p>作为奠基者的编码格式，H.261 引入了诸如 DCT（离散余弦变换）算法、分块（宏块）、基于宏块与运动补偿的帧间预测等技术，为后来者打下了框架基础。可以说，它的框架影响了日后产生的几乎所有的视频编码。</p>
+<h3 id="MPEG-1-Part-2"><a href="#MPEG-1-Part-2" class="headerlink" title="MPEG-1 Part 2"></a>MPEG-1 Part 2</h3><p>MPEG1 受到 H.261 的深刻影响，继承和发展了分块、运动补偿、DCT 算法等思想，并做出了自己的改进，比如引入新的双向预测帧、亚像素精度的运动补偿等新技术。</p>
+<h3 id="MPEG-2-Part-2-x2F-H-262"><a href="#MPEG-2-Part-2-x2F-H-262" class="headerlink" title="MPEG-2 Part 2&#x2F;H.262"></a>MPEG-2 Part 2&#x2F;H.262</h3><p>这是 DVD 和最早的数字电视时代的编码格式。</p>
+<p>在前人基础上，H.262 支持了隔行扫描，并提高了支持的码率的范围。</p>
+<p>所谓隔行扫描，是相对于逐行扫描的一种渲染方式。将一个画面按照奇数行与偶数行分为两个“场”，按先后顺序分别扫描渲染。如此一次扫描所需的带宽就减少一半，而由于人眼的视觉暂留效应，并不会收到太大的影响，只会看到完整的一帧。</p>
+<h3 id="MPEG-4-Part-10-x2F-H-264-x2F-AVC"><a href="#MPEG-4-Part-10-x2F-H-264-x2F-AVC" class="headerlink" title="MPEG-4 Part 10&#x2F;H.264&#x2F;AVC"></a>MPEG-4 Part 10&#x2F;H.264&#x2F;AVC</h3><p>目前最广泛使用的视频编码标准，由 ITU-T 和 ISO 两个国际标准化组织的专家组成的联合工作组（JVT）负责制定。</p>
+<p>由于两个组织分别有自己的标准，因此后来联合工作组制定的标准被 ITU-T 定义为 H.264，被 ISO 定义为14496-10（MPEG-4 第10部分）高级视频编码（AVC，Advanced Video Coding）标准</p>
+<p>由此可知 <strong>H.264</strong> 和 <strong>MPEG-4 Part 10</strong>、<strong>AVC</strong> 都是指代相同的标准，只是名称不同</p>
+<h3 id="MPEG-H-Part-2-x2F-H-265-x2F-HEVC"><a href="#MPEG-H-Part-2-x2F-H-265-x2F-HEVC" class="headerlink" title="MPEG-H Part 2&#x2F;H.265&#x2F;HEVC"></a>MPEG-H Part 2&#x2F;H.265&#x2F;HEVC</h3><p>又叫 HEVC（High Efficiency Video Coding），多个名称的原因同 H.264，也是由原班人马 ITU-T 和 ISO 联合制定，所以会有两个名称。</p>
+<p>相比 H.264 而言，H.265 能达到两倍的压缩率（同样画面质量下比特率减少50%），可以支持高达 8K 的清晰度，但是于此同时，编解码难度也因此变高。同时高昂的专利费用问题（没错它并不是免费的编码格式），也给它的推广带来了许多困难。</p>
+<h2 id="碎碎念"><a href="#碎碎念" class="headerlink" title="碎碎念"></a>碎碎念</h2><p>网络带宽能力、显示设备等随时代发展越来越强，视频编码也在一直进步，流媒体逐渐占据网络流量传输的大头，人们对于视频质量、色彩的要求也在不断提高，但是网络带宽总是有物理上限的，毕竟内容提供方的小钱钱也是大风刮来的。</p>
+<p>查看如今（2024）大部分国内视频或流媒体网站，虽然都在推什么超清、高帧率等所谓的“新功能”，但大多数都还在使用 H.264，甚至还有压码率开倒车的现象（说的就是你，阿B！）。</p>
+<p>至于 Chrome 浏览器，多年都在使用软件解码 H.265，在 107 版本才正式推送开启硬件解码的功能。据说就是因为复杂的专利、版权、技术派系问题，才迟迟端上来，折腾坏了一众 Web HEVC 程序员。</p>
+<p>HEVC 这新一代的编码格式对压缩率的提高，以及对于杜比视界，4K，8K，HDR 这些高级特性的支持，在降本方面天然就有优势，想必没有哪个大流量的视频流媒体平台会拒绝。</p>
+<p>但是话又说回来，现在的人对于手机的依赖程度，以及在手机上观看视频的频率，真的不好说上 4K 甚至 8K 的意义何在。手机设备毕竟屏幕大小摆在那里，多数人真的能够分辨出个中差异吗？就我个人观点，当前常规的流媒体视频网站对于质量和成本之间的平衡基本已经走到尽头了，画面应该不会再有更大的提升，未来的超高清视频还是需要依赖于 VR 之类的设备才能发挥最大作用。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+  <div class="license cc">
+  
+    <div class="license-title">数字视频编码简介</div>
+    <div class="license-link">
+      <a href="https://blog.kudryavka.site/posts/2134cc833fe8/">https://blog.kudryavka.site/posts/2134cc833fe8/</a>
+    </div>
+    <div class="license-meta">
+      <div class="license-meta-item">
+        <div class="license-meta-title">本文作者</div>
+        <div class="license-meta-text">
+          _-iX
+        </div>
+      </div>
+        <div class="license-meta-item">
+          <div class="license-meta-title">发布于</div>
+          <div class="license-meta-text">
+            2024-11-24
+          </div>
+        </div>
+        <div class="license-meta-item">
+          <div class="license-meta-title">更新于</div>
+          <div class="license-meta-text">
+            2026-01-20
+          </div>
+        </div>
+      <div class="license-meta-item">
+        <div class="license-meta-title">许可协议</div>
+        <div class="license-meta-text">
+          
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank">
+              <i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA 4.0</a>
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-statement">
+        转载或引用本文时，请遵守上述许可协议，注明出处，不得用于商业用途！
+      
+    </div>
+  </div>
+          <div class="post-tags">
+              <a href="/tags/%E9%9F%B3%E8%A7%86%E9%A2%91%E7%BC%96%E7%A0%81/" rel="tag"># 音视频编码</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/51e63ad22e4f/" rel="prev" title="记一次复制图片到剪贴板的实现">
+                  <i class="fa fa-angle-left"></i> 记一次复制图片到剪贴板的实现
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/posts/e860c3970356/" rel="next" title="GitHub Pages 国内访问加速">
+                  GitHub Pages 国内访问加速 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2021 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fas fa-pray"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">_-iX</span>
+  </div><script>
+  const meting_api = 'https://api.injahow.cn/meting/?server=:server&type=:type&id=:id&auth=:auth&r=:r';
+  const isMobile = () => {
+    var userAgent = navigator.userAgent
+    return /Android|iPhone|iPad|iPod|BlackBerry|webOS|Windows Phone|SymbianOS|IEMobile|Opera Mini/i.test(userAgent);
+  }
+  const fontResource = document.createElement("link");
+  fontResource.setAttribute("rel", "stylesheet");
+  isMobile()
+    ? fontResource.setAttribute("href", "https://registry.npmmirror.com/lxgw-wenkai-screen-web/latest/files/lxgwwenkaiscreen/result.css")
+    : fontResource.setAttribute("href", "https://registry.npmmirror.com/@callmebill/lxgw-wenkai-web/latest/files/lxgwwenkai-regular/result.css");
+  document.body.appendChild(fontResource);
+</script>
+<div>
+  <a href="/tags/" class="footer-link">
+    <i class="fa fa-tags"></i>
+    文章标签
+  </a>
+</div>
+<script defer="defer" src="https://registry.npmmirror.com/aplayer/1.10.1/files/dist/APlayer.min.js"></script>
+<link href="https://registry.npmmirror.com/aplayer/1.10.1/files/dist/APlayer.min.css" rel="stylesheet"/>
+<link href="/resources/css/aplayer.custom.css" rel="stylesheet"/>
+<script defer="defer" src="https://registry.npmmirror.com/meting/1.2.0/files/dist/Meting.min.js"></script>
+<div
+  class="aplayer"
+  data-id="8201666696"
+  data-server="netease"
+  data-type="playlist"
+  data-fixed="true"
+  data-autoplay="false"
+  data-order="random"
+  data-volume="0.2"
+  data-theme="#1661ab"
+  data-preload="auto"
+  data-lrc-type="0"></div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js" integrity="sha256-4mJNT2bMXxcc1GCJaxBmMPdmah5ji0Ldnd79DKd1hoM=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha256-AjM0J5XIbiB590BrznLEgZGLnOQWrt62s3BEq65Q/I0=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha256-9cmf7tcLdXpKsPi/2AWE93PbZpTp4M4tqzFk+lWomjU=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.0.8/medium-zoom.min.js" integrity="sha256-7PhEpEWEW0XXQ0k6kQrPKwuoIomz8R8IYyuU1Qew4P8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.18.0/comments.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.18.0/utils.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.18.0/motion.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.18.0/next-boot.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.18.0/pjax.min.js"></script>
+
+  
+
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.18.0/third-party/pace.min.js"></script>
+
+
+  
+
+
+
+
+
+</body>
+</html>

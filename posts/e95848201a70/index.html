@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/resources/favicon/logo.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon/logo.svg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon/logo.svg">
+  <link rel="mask-icon" href="/resources/favicon/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/silver/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.kudryavka.site","root":"/","images":"/resources/images/","scheme":"Gemini","darkmode":true,"version":"8.18.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"flat"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":true,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.18.0/config.min.js"></script>
+
+    <meta name="description" content="起因只是想为博客的超链接美化一下样式，却不慎跌入了下划线的大坑。在折腾了好几种方法但效果都不尽如人意后，我发现还是基本的 CSS 属性效果最好（真香）。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="下划线的几种 CSS 实现方案">
+<meta property="og:url" content="https://blog.kudryavka.site/posts/e95848201a70/index.html">
+<meta property="og:site_name" content="渐渐">
+<meta property="og:description" content="起因只是想为博客的超链接美化一下样式，却不慎跌入了下划线的大坑。在折腾了好几种方法但效果都不尽如人意后，我发现还是基本的 CSS 属性效果最好（真香）。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.kudryavka.site/blog/note-25-01-banner.png">
+<meta property="og:image" content="https://i.kudryavka.site/blog/note-25-01-1.png">
+<meta property="og:image" content="https://i.kudryavka.site/blog/note-25-01-2.png">
+<meta property="og:image" content="https://i.kudryavka.site/blog/note-25-01-3.gif">
+<meta property="og:image" content="https://i.kudryavka.site/blog/note-25-01-4.png">
+<meta property="og:image" content="https://i.kudryavka.site/blog/note-25-01-5.gif">
+<meta property="article:published_time" content="2025-02-19T12:52:09.000Z">
+<meta property="article:modified_time" content="2026-01-20T15:58:42.000Z">
+<meta property="article:author" content="_-iX">
+<meta property="article:tag" content="CSS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.kudryavka.site/blog/note-25-01-banner.png">
+
+
+<link rel="canonical" href="https://blog.kudryavka.site/posts/e95848201a70/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://blog.kudryavka.site/posts/e95848201a70/","path":"/posts/e95848201a70/","title":"下划线的几种 CSS 实现方案"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>下划线的几种 CSS 实现方案 | 渐渐</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">渐渐</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">如重温往日邮寄</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-life"><a href="/life/" rel="section"><i class="fa fa-mug-saucer fa-fw"></i>生活</a></li><li class="menu-item menu-item-notes"><a href="/notes/" rel="section"><i class="fa fa-feather-pointed fa-fw"></i>笔记</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-paper-plane fa-fw"></i>归档</a></li><li class="menu-item menu-item-music"><a href="/collection/music/" rel="section"><i class="fa fa-guitar fa-fw"></i>音乐</a></li>
+  </ul>
+</nav>
+
+
+
+
+<div class="kitty-wrapper">
+  <div class="kitty-main">
+    <span class="stand"></span>
+    <div class="cat">
+      <div class="body"></div>
+      <div class="head">
+        <div class="ear"></div>
+        <div class="ear"></div>
+      </div>
+      <div class="face">
+        <div class="nose"></div>
+        <div class="whisker-container">
+          <div class="whisker"></div>
+          <div class="whisker"></div>
+        </div>
+        <div class="whisker-container">
+          <div class="whisker"></div>
+          <div class="whisker"></div>
+        </div>
+      </div>
+      <div class="tail-container">
+        <div class="tail">
+          <div class="tail">
+            <div class="tail">
+              <div class="tail">
+                <div class="tail">
+                  <div class="tail">
+                    <div class="tail"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#text-decoration"><span class="nav-text">text-decoration</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E4%B8%AA%E8%A3%85%E9%A5%B0%E7%BA%BF"><span class="nav-text">多个装饰线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%87%E6%B8%A1%E6%95%88%E6%9E%9C"><span class="nav-text">过渡效果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#border"><span class="nav-text">border</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#box-shadow"><span class="nav-text">box-shadow</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#background"><span class="nav-text">background</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#scaleX-%E5%AE%9E%E7%8E%B0%E8%BF%87%E6%B8%A1%E6%95%88%E6%9E%9C"><span class="nav-text">scaleX 实现过渡效果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8B%93%E5%B1%95%E5%AD%A6%E4%B9%A0"><span class="nav-text">拓展学习</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="_-iX"
+      src="/resources/images/avatar.webp">
+  <p class="site-author-name" itemprop="name">_-iX</p>
+  <div class="site-description" itemprop="description">Game / Harmonica / Front-End</div>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kudryavka1013" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kudryavka1013" rel="noopener me" target="_blank"><i class="fa-brands fa-github fa-lg fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/22735925" title="bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;22735925" rel="noopener me" target="_blank"><i class="fa-brands fa-bilibili fa-lg fa-fw"></i></a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.kudryavka.site/posts/e95848201a70/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/resources/images/avatar.webp">
+      <meta itemprop="name" content="_-iX">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="渐渐">
+      <meta itemprop="description" content="Game / Harmonica / Front-End">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="下划线的几种 CSS 实现方案 | 渐渐">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          下划线的几种 CSS 实现方案
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-02-19 20:52:09" itemprop="dateCreated datePublished" datetime="2025-02-19T20:52:09+08:00">2025-02-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/notes/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/notes/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p><img data-src="https://i.kudryavka.site/blog/note-25-01-banner.png" alt="banner"></p>
+<p>起因只是想为博客的超链接美化一下样式，却不慎跌入了下划线的大坑。在折腾了好几种方法但效果都不尽如人意后，我发现还是基本的 CSS 属性效果最好（真香）。</p>
+<h2 id="text-decoration"><a href="#text-decoration" class="headerlink" title="text-decoration"></a>text-decoration</h2><blockquote>
+<p>2025 年的今天，似乎不需要考虑兼容性问题了，吗？</p>
+</blockquote>
+<p>CSS 官方的装饰线属性，先来看看兼容性如何~</p>
+<p><img data-src="https://i.kudryavka.site/blog/note-25-01-1.png" alt="example"></p>
+<p>看起来除了 Safari，在多端上表现都良好。等等，“included in shorthand”？有些不对，再看看。</p>
+<p>原来这里的 <code>text-decoration-thickness</code> 属性在 Safari 上只是对<strong>简写</strong>不太支持，单独一条的写法是完全没问题的！因此实际使用时，为了保证兼容性，我建议还是分开写这些属性。</p>
+<p><code>text-decoration</code> 和 <code>border</code> 类似，实际是由三条（排除 thickness）属性构成的简写，分别是：</p>
+<ul>
+<li><code>text-decoration-color</code></li>
+<li><code>text-decoration-style</code></li>
+<li><code>text-decoration-line</code></li>
+</ul>
+<p>color 属性，略。</p>
+<p>style 属性，决定了装饰线的外观。支持 <code>solid</code>、<code>dotted</code>、<code>dashed</code>、<code>double</code> 和 <code>wavy</code> （波浪线），可基本满足我们的需求。</p>
+<p>而 line 属性，则决定了装饰线的类型（或位置），除了常规的 <code>underline</code>、<code>none</code>，还支持设置为 <code>overline</code> 上划线和  <code>line-through</code> 中划线，当然也没什么机会用就是了。</p>
+<p>thickness 属性，用于配置装饰线的厚度，默认为 <code>auto</code>，可以设置为特定长度值，也可设为百分比值；设为百分比时，会根据当前字号大小来计算厚度，最小 1px。</p>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css">&#x2F;* length *&#x2F;
+text-decoration-thickness: 0.1em;
+
+&#x2F;* percentage *&#x2F;
+text-decoration-thickness: 10%;</code></pre>
+
+<p>这里直接借用 <a target="_blank" rel="noopener" href="https://github.com/chokcoco">chokcoco</a> 老师的图展示一下各个属性的效果：</p>
+<p><img data-src="https://i.kudryavka.site/blog/note-25-01-2.png" alt="text-decoration"></p>
+<p>除了以上这些属性，还有一个 <code>text-underline-offset</code> 也值得一提。该属性用于设置下划线相对其原始位置的偏移量，取值和 thickness 一样为特定值或百分比；而且它<strong>只影响</strong>值为 underline 的装饰线，并不会影响其它装饰线的偏移量。</p>
+<h3 id="多个装饰线"><a href="#多个装饰线" class="headerlink" title="多个装饰线"></a>多个装饰线</h3><p>text-decoration-line 是支持同时配置多个的，具体写法如下：</p>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css">text-decoration-line: overline underline line-through;</code></pre>
+
+<p>但可惜的是，除此之外的其它属性并不能同时指定多种线的样式。只能通过嵌套多个元素的方式给分别插入装饰线并添加相应样式（所以光它一个厉害其实没什么用）。</p>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup">&lt;p&gt;
+  Lorem Ipsum is 
+  &lt;span classname&#x3D;&#39;u&#39;&gt;&lt;span classname&#x3D;&#39;lt&#39;&gt; simply dummy text &lt;&#x2F;span&gt;&lt;&#x2F;span&gt; 
+  of the printing and typesetting industry.
+&lt;&#x2F;p&gt;</code></pre>
+
+<pre class="line-numbers language-css" data-language="css"><code class="language-css">u &#123;
+  text-decoration-line: underline;
+  text-decoration-color: red;
+&#125;
+
+lt &#123;
+  text-decoration-line: line-through;
+  text-decoration-color: lime;
+&#125;
+</code></pre>
+
+<h3 id="过渡效果"><a href="#过渡效果" class="headerlink" title="过渡效果"></a>过渡效果</h3><p>text-decoration 每个值都可以触发过渡效果，我们可以以此实现一个超链接 hover 样式。</p>
+<p>由于 thickness 并不支持设置为 0px，所以考虑设置通常状态下 color 为 <code>transparent</code>，并在 hover 状态下调整颜色；最后调整一下 offset 偏移和 thickness，一个简单的下划线过渡动画就完成了。</p>
+<pre class="line-numbers language-less" data-language="less"><code class="language-less">a &#123;
+  text-decoration: underline solid transparent;
+  text-underline-offset: 6px;
+  text-decoration-thickness: 1px;
+  transition: all 0.2s linear;
+  cursor: pointer;
+
+  &amp;:hover &#123;
+    text-decoration: underline solid $post-link-color;
+    text-underline-offset: 4px;
+    color: purple;
+  &#125;
+&#125;</code></pre>
+
+<p><img data-src="https://i.kudryavka.site/blog/note-25-01-3.gif" alt="text-decoration"></p>
+<h2 id="border"><a href="#border" class="headerlink" title="border"></a>border</h2><p>效果一般的实现方式，本来就是因为 text-decoration 兼容性问题才使用的替代方案，可以的话尽量不用。代码本身没什么好说的，至多就是和伪元素结合使用。</p>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css">a::after &#123;
+  content: &quot;&quot;;
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 0;
+  bottom: 0;
+  border-bottom: 1px solid black;
+&#125;</code></pre>
+
+<p>只用 border 方式实现的下划线要通过 padding 来控制文字间距，并且由于 border 本身参与盒子模型计算，会对整体样式产生一定影响；同时它对于 block 类型的多行文本效果也不好（无论用不用伪元素），这种情况下只展示最后一行的下划线，看起来非常奇怪。</p>
+<p><img data-src="https://i.kudryavka.site/blog/note-25-01-4.png" alt="border"></p>
+<h2 id="box-shadow"><a href="#box-shadow" class="headerlink" title="box-shadow"></a>box-shadow</h2><p>和 border 类似，相比 border 好处是不会影响布局，但是坏处是只能实线样式，没有其它花活，且不方便调整间距，得用多个 box-shadow 重叠处理。</p>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css">a &#123;
+  box-shadow: 0 1px 0 0 #ccc;
+&#125;</code></pre>
+
+<h2 id="background"><a href="#background" class="headerlink" title="background"></a>background</h2><p>background 的花活就很多了，这里只介绍最简单的下划线，其实就是利用 linear-gradient 模拟实线或虚线；过渡效果等更多技巧可看 <a target="_blank" rel="noopener" href="https://github.com/chokcoco/iCSS/issues/138">chokcoco 老师的文章</a>，也是使用 background-size 和 background-position 来实现的。</p>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css">a &#123;
+  background: linear-gradient(90deg, #ccc, #ccc);
+  background-size: 100% 1px;
+  background-repeat: no-repeat;
+  background-position: 100% 100%;
+&#125;</code></pre>
+
+<h3 id="scaleX-实现过渡效果"><a href="#scaleX-实现过渡效果" class="headerlink" title="scaleX 实现过渡效果"></a>scaleX 实现过渡效果</h3><blockquote>
+<p>缺少泛用性，需要实现某些特殊效果时，可以考虑</p>
+</blockquote>
+<p>配合伪元素和 transition 实现一个 hover 从中间向两边展开下划线的效果：</p>
+<pre class="line-numbers language-less" data-language="less"><code class="language-less">a &#123;
+  position: relative;
+  cursor: pointer;
+      
+  &amp;::before &#123;
+    background: purple;
+    bottom: 0;
+    content: &#39;&#39;;
+    height: 2px;
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    transition: transform .2s;
+  &#125;
+  
+  &amp;:hover &#123;
+    color: purple;
+
+    &amp;::before&#123;
+      transform: scaleX(1);
+    &#125;
+  &#125;
+&#125;</code></pre>
+
+<p><img data-src="https://i.kudryavka.site/blog/note-25-01-5.gif" alt="scalex"></p>
+<h2 id="拓展学习"><a href="#拓展学习" class="headerlink" title="拓展学习"></a>拓展学习</h2><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/lwlblog/p/17757416.html">https://www.cnblogs.com/lwlblog/p/17757416.html</a><br><a target="_blank" rel="noopener" href="https://github.com/chokcoco/iCSS/issues/138">https://github.com/chokcoco/iCSS/issues/138</a><br><a target="_blank" rel="noopener" href="https://css-tricks.com/styling-underlines-web/">https://css-tricks.com/styling-underlines-web/</a><br><a target="_blank" rel="noopener" href="https://medium.design/crafting-link-underlines-on-medium-7c03a9274f9">https://medium.design/crafting-link-underlines-on-medium-7c03a9274f9</a><br><a target="_blank" rel="noopener" href="https://github.com/chokcoco/iCSS/issues/103">https://github.com/chokcoco/iCSS/issues/103</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+  <div class="license cc">
+  
+    <div class="license-title">下划线的几种 CSS 实现方案</div>
+    <div class="license-link">
+      <a href="https://blog.kudryavka.site/posts/e95848201a70/">https://blog.kudryavka.site/posts/e95848201a70/</a>
+    </div>
+    <div class="license-meta">
+      <div class="license-meta-item">
+        <div class="license-meta-title">本文作者</div>
+        <div class="license-meta-text">
+          _-iX
+        </div>
+      </div>
+        <div class="license-meta-item">
+          <div class="license-meta-title">发布于</div>
+          <div class="license-meta-text">
+            2025-02-19
+          </div>
+        </div>
+        <div class="license-meta-item">
+          <div class="license-meta-title">更新于</div>
+          <div class="license-meta-text">
+            2026-01-20
+          </div>
+        </div>
+      <div class="license-meta-item">
+        <div class="license-meta-title">许可协议</div>
+        <div class="license-meta-text">
+          
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank">
+              <i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA 4.0</a>
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-statement">
+        转载或引用本文时，请遵守上述许可协议，注明出处，不得用于商业用途！
+      
+    </div>
+  </div>
+          <div class="post-tags">
+              <a href="/tags/CSS/" rel="tag"># CSS</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/e860c3970356/" rel="prev" title="GitHub Pages 国内访问加速">
+                  <i class="fa fa-angle-left"></i> GitHub Pages 国内访问加速
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/posts/e33c4a5a6d9b/" rel="next" title="WebAssembly 基础">
+                  WebAssembly 基础 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2021 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fas fa-pray"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">_-iX</span>
+  </div><script>
+  const meting_api = 'https://api.injahow.cn/meting/?server=:server&type=:type&id=:id&auth=:auth&r=:r';
+  const isMobile = () => {
+    var userAgent = navigator.userAgent
+    return /Android|iPhone|iPad|iPod|BlackBerry|webOS|Windows Phone|SymbianOS|IEMobile|Opera Mini/i.test(userAgent);
+  }
+  const fontResource = document.createElement("link");
+  fontResource.setAttribute("rel", "stylesheet");
+  isMobile()
+    ? fontResource.setAttribute("href", "https://registry.npmmirror.com/lxgw-wenkai-screen-web/latest/files/lxgwwenkaiscreen/result.css")
+    : fontResource.setAttribute("href", "https://registry.npmmirror.com/@callmebill/lxgw-wenkai-web/latest/files/lxgwwenkai-regular/result.css");
+  document.body.appendChild(fontResource);
+</script>
+<div>
+  <a href="/tags/" class="footer-link">
+    <i class="fa fa-tags"></i>
+    文章标签
+  </a>
+</div>
+<script defer="defer" src="https://registry.npmmirror.com/aplayer/1.10.1/files/dist/APlayer.min.js"></script>
+<link href="https://registry.npmmirror.com/aplayer/1.10.1/files/dist/APlayer.min.css" rel="stylesheet"/>
+<link href="/resources/css/aplayer.custom.css" rel="stylesheet"/>
+<script defer="defer" src="https://registry.npmmirror.com/meting/1.2.0/files/dist/Meting.min.js"></script>
+<div
+  class="aplayer"
+  data-id="8201666696"
+  data-server="netease"
+  data-type="playlist"
+  data-fixed="true"
+  data-autoplay="false"
+  data-order="random"
+  data-volume="0.2"
+  data-theme="#1661ab"
+  data-preload="auto"
+  data-lrc-type="0"></div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js" integrity="sha256-4mJNT2bMXxcc1GCJaxBmMPdmah5ji0Ldnd79DKd1hoM=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha256-AjM0J5XIbiB590BrznLEgZGLnOQWrt62s3BEq65Q/I0=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha256-9cmf7tcLdXpKsPi/2AWE93PbZpTp4M4tqzFk+lWomjU=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.0.8/medium-zoom.min.js" integrity="sha256-7PhEpEWEW0XXQ0k6kQrPKwuoIomz8R8IYyuU1Qew4P8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.18.0/comments.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.18.0/utils.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.18.0/motion.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.18.0/next-boot.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.18.0/pjax.min.js"></script>
+
+  
+
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.18.0/third-party/pace.min.js"></script>
+
+
+  
+
+
+
+
+
+</body>
+</html>

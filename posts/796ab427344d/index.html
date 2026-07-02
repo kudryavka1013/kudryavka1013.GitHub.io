@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/resources/favicon/logo.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon/logo.svg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon/logo.svg">
+  <link rel="mask-icon" href="/resources/favicon/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/silver/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.kudryavka.site","root":"/","images":"/resources/images/","scheme":"Gemini","darkmode":true,"version":"8.18.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"flat"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":true,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.18.0/config.min.js"></script>
+
+    <meta name="description" content="Promise.all() 和 Promise.race() 是使用频率非常高的两个方法，手动实现一下，帮助理解 Promise。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="手动实现 Promise.all 和 Promise.race">
+<meta property="og:url" content="https://blog.kudryavka.site/posts/796ab427344d/index.html">
+<meta property="og:site_name" content="渐渐">
+<meta property="og:description" content="Promise.all() 和 Promise.race() 是使用频率非常高的两个方法，手动实现一下，帮助理解 Promise。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-09-19T14:58:49.000Z">
+<meta property="article:modified_time" content="2026-01-20T15:58:42.000Z">
+<meta property="article:author" content="_-iX">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://blog.kudryavka.site/posts/796ab427344d/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://blog.kudryavka.site/posts/796ab427344d/","path":"/posts/796ab427344d/","title":"手动实现 Promise.all 和 Promise.race"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>手动实现 Promise.all 和 Promise.race | 渐渐</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">渐渐</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">如重温往日邮寄</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-life"><a href="/life/" rel="section"><i class="fa fa-mug-saucer fa-fw"></i>生活</a></li><li class="menu-item menu-item-notes"><a href="/notes/" rel="section"><i class="fa fa-feather-pointed fa-fw"></i>笔记</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-paper-plane fa-fw"></i>归档</a></li><li class="menu-item menu-item-music"><a href="/collection/music/" rel="section"><i class="fa fa-guitar fa-fw"></i>音乐</a></li>
+  </ul>
+</nav>
+
+
+
+
+<div class="kitty-wrapper">
+  <div class="kitty-main">
+    <span class="stand"></span>
+    <div class="cat">
+      <div class="body"></div>
+      <div class="head">
+        <div class="ear"></div>
+        <div class="ear"></div>
+      </div>
+      <div class="face">
+        <div class="nose"></div>
+        <div class="whisker-container">
+          <div class="whisker"></div>
+          <div class="whisker"></div>
+        </div>
+        <div class="whisker-container">
+          <div class="whisker"></div>
+          <div class="whisker"></div>
+        </div>
+      </div>
+      <div class="tail-container">
+        <div class="tail">
+          <div class="tail">
+            <div class="tail">
+              <div class="tail">
+                <div class="tail">
+                  <div class="tail">
+                    <div class="tail"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Promise-all"><span class="nav-text">Promise.all()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Promise-race"><span class="nav-text">Promise.race</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="_-iX"
+      src="/resources/images/avatar.webp">
+  <p class="site-author-name" itemprop="name">_-iX</p>
+  <div class="site-description" itemprop="description">Game / Harmonica / Front-End</div>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kudryavka1013" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kudryavka1013" rel="noopener me" target="_blank"><i class="fa-brands fa-github fa-lg fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/22735925" title="bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;22735925" rel="noopener me" target="_blank"><i class="fa-brands fa-bilibili fa-lg fa-fw"></i></a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.kudryavka.site/posts/796ab427344d/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/resources/images/avatar.webp">
+      <meta itemprop="name" content="_-iX">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="渐渐">
+      <meta itemprop="description" content="Game / Harmonica / Front-End">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="手动实现 Promise.all 和 Promise.race | 渐渐">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          手动实现 Promise.all 和 Promise.race
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-09-19 22:58:49" itemprop="dateCreated datePublished" datetime="2021-09-19T22:58:49+08:00">2021-09-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/notes/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/notes/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>Promise.all() 和 Promise.race() 是使用频率非常高的两个方法，手动实现一下，帮助理解 Promise。</p>
+<span id="more"></span>
+
+<h2 id="Promise-all"><a href="#Promise-all" class="headerlink" title="Promise.all()"></a>Promise.all()</h2><p>把 all() 的功能拆解成几个步骤：</p>
+<ol>
+<li>首先接收一个数组，数组里可能是Promise，也<u>可能是普通的数据</u></li>
+<li>构造一个新的Promise实例 <strong>P</strong></li>
+<li>执行数组里的Promise，接收结果并等待数组里每一个Promise完成，这里分两种情况：<br><u>所有</u>Promise的状态都变成Fulfilled（成功），或者有<u>任意一个</u>Promise的状态变成Reject（失败）</li>
+<li>改变 <strong>P</strong> 的状态，这取决于第三步的情况：<br>成功则返回值是一个数组，里面<u>按顺序</u>放着每一个Promise的返回值；失败则返回值是<u>第一个</u>失败的Promise的返回值</li>
+</ol>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">function pAll(promises) &#123;
+    &#x2F;&#x2F;创建一个新的 Promise
+    return new Promise((resolve, reject) &#x3D;&gt; &#123;
+        &#x2F;&#x2F;新建一个数组来保存结果
+        const length &#x3D; promises.length;
+        if (length &#x3D;&#x3D;&#x3D; 0) &#123;
+            resolve([])
+        &#125;
+        const results &#x3D; new Array(length);
+        let count &#x3D; 0;
+        for (let i &#x3D; 0; i &lt; length; i++) &#123;
+            &#x2F;&#x2F; 每个 Promise 执行，把结果放进数组里
+            Promise.resolve(promises[i]).then(function(res) &#123;
+                results[i] &#x3D; res
+                &#x2F;&#x2F; 每一个 Promise 成功，就计数
+                &#x2F;&#x2F; 当所有 Promise 都成功，就 resolve 输出结果
+                count++
+                if (count &#x3D;&#x3D;&#x3D; length) &#123;
+                    resolve(results)
+                &#125;
+            &#125;, function(err) &#123;
+                &#x2F;&#x2F; 有任何一个 Promise 失败，就 reject 输出错误
+                reject(err)
+            &#125;)
+        &#125;
+    &#125;)
+&#125;</code></pre>
+
+<p>我们先来测试一下，看看效果如何：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">&#x2F;&#x2F; 模拟有延迟的 Promise
+var p1 &#x3D; new Promise((resolve, reject) &#x3D;&gt; &#123;
+    setTimeout(() &#x3D;&gt; &#123;
+        resolve(1)
+    &#125;, 800)
+&#125;)
+&#x2F;&#x2F; 普通值
+var p2 &#x3D; 2
+&#x2F;&#x2F; 直接完成的 Promise
+var p3 &#x3D; Promise.resolve(3)
+&#x2F;&#x2F; 失败的 Promise
+var p4 &#x3D; Promise.reject(4)
+
+&#x2F;&#x2F; 分别测试成功和失败
+pAll([p1, p2, p3]).then((res) &#x3D;&gt; &#123;
+    console.log(res)
+    &#x2F;&#x2F; [1,2,3]
+&#125;).catch((err) &#x3D;&gt; &#123;
+    console.log(err)
+&#125;)
+
+pAll([p1, p2, p3, p4]).then((res) &#x3D;&gt; &#123;
+    console.log(res)
+&#125;).catch((err) &#x3D;&gt; &#123;
+    console.log(err)
+    &#x2F;&#x2F; 4
+&#125;)</code></pre>
+
+<p>如你所见，其实这里有不少需要注意的地方，需要我们考虑周全：</p>
+<ol>
+<li>首先是接收的参数，既可以是 Promise，也可以是普通的数据。Promise 我们不必多说，直接使用就行了，而对于普通数据，则要使用 <code>Promise.resolve()</code> 处理<br><code>Promise.resolve()</code> 对于 Promise会直接返回这个 Promise，对于普通值，则会将它包装成一个 Promise。此外对于 thenable 值，还会将它展开。<br>所以会有这么 <code>Promise.resolve(promises[i]).then(...)</code> 保证无论数组里放的是什么，都能正常运行</li>
+<li>然后是执行的过程，这个 for 循环里循环变量是 let，不能是 var，当然非要用 var 就得换个写法了。原因不用多说，用 var 会导致每一个 <code>results[i] = res</code> 里的 i 是同一个</li>
+<li>最后是保存的结果，必须是按照接收参数的顺序来存放结果。因为并不能确定 Promise 完成的先后顺序，所以我们不使用 push 或是其它的方法，而是使用下标来存放。这个比较好理解</li>
+<li>还有这么一行代码 <code>if(length === 0)&#123;resolve([])&#125;</code>，如果给 Promise.all() 传一个空数组[]，那么返回的 Promise 会直接完成，这里和原生的 all 函数保持返回内容一致</li>
+</ol>
+<hr>
+<h2 id="Promise-race"><a href="#Promise-race" class="headerlink" title="Promise.race"></a>Promise.race</h2><p>同样地，我们把race()的功能拆解一下：</p>
+<ol>
+<li>接收一个数组，可能是Promise，也可<u>能是普通数据</u></li>
+<li>构造一个新的Promise实例 <strong>P</strong></li>
+<li>执行数组里的Promise，等待数组里<u>最先完成</u>的Promise</li>
+<li>改变 <strong>P</strong> 的状态，根据第三步中最先完成的Promise，返回这个Promise的成功值或失败值</li>
+</ol>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">function pRace(promises) &#123;
+    return new Promise(((resolve, reject) &#x3D;&gt; &#123;
+        for (let i &#x3D; 0; i &lt; promises.length; i++) &#123;
+            Promise.resolve(promises[i]).then((res) &#x3D;&gt; &#123;
+                resolve(res)
+            &#125;, (err) &#x3D;&gt; &#123;
+                reject(err)
+            &#125;)
+        &#125;
+    &#125;))
+&#125;</code></pre>
+
+<p>这个相比 all() 简单多了，不需要考虑多个 Promise 的结果，只取第一个完成的 Promise</p>
+<p>看看效果如何：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">var p1 &#x3D; new Promise((resolve, reject) &#x3D;&gt; &#123;
+    setTimeout(() &#x3D;&gt; &#123;
+        resolve(1)
+    &#125;, 800)
+&#125;)
+var p2 &#x3D; Promise.resolve(2)
+var p3 &#x3D; Promise.reject(3)
+
+&#x2F;&#x2F; 分别测试成功和失败
+pRace([p1, p2]).then(res &#x3D;&gt; &#123;
+    console.log(res)
+    &#x2F;&#x2F; 2
+&#125;).catch(err &#x3D;&gt; &#123;
+    console.log(err)
+&#125;)
+
+pRace([p1, p3]).then(res &#x3D;&gt; &#123;
+    console.log(res)
+&#125;).catch(err &#x3D;&gt; &#123;
+    console.log(err)
+    &#x2F;&#x2F; 3
+&#125;)</code></pre>
+
+<p>同理要注意的地方，一个是对于普通数据的转换，使用 <code>Promise.resolve()</code> ，执行Promise时的循环变量用 let</p>
+<p>事实上，如果给原生的 race() 传入一个空数组[]，那这个 Promise 永远都不会完成。这里也保持一致不多处理了。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+  <div class="license cc">
+  
+    <div class="license-title">手动实现 Promise.all 和 Promise.race</div>
+    <div class="license-link">
+      <a href="https://blog.kudryavka.site/posts/796ab427344d/">https://blog.kudryavka.site/posts/796ab427344d/</a>
+    </div>
+    <div class="license-meta">
+      <div class="license-meta-item">
+        <div class="license-meta-title">本文作者</div>
+        <div class="license-meta-text">
+          _-iX
+        </div>
+      </div>
+        <div class="license-meta-item">
+          <div class="license-meta-title">发布于</div>
+          <div class="license-meta-text">
+            2021-09-19
+          </div>
+        </div>
+        <div class="license-meta-item">
+          <div class="license-meta-title">更新于</div>
+          <div class="license-meta-text">
+            2026-01-20
+          </div>
+        </div>
+      <div class="license-meta-item">
+        <div class="license-meta-title">许可协议</div>
+        <div class="license-meta-text">
+          
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank">
+              <i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA 4.0</a>
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-statement">
+        转载或引用本文时，请遵守上述许可协议，注明出处，不得用于商业用途！
+      
+    </div>
+  </div>
+          <div class="post-tags">
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/4c1a78ef6c8a/" rel="prev" title="常见的WEB攻击总结">
+                  <i class="fa fa-angle-left"></i> 常见的WEB攻击总结
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/posts/871da6ea2de6/" rel="next" title="博客重启">
+                  博客重启 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2021 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fas fa-pray"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">_-iX</span>
+  </div><script>
+  const meting_api = 'https://api.injahow.cn/meting/?server=:server&type=:type&id=:id&auth=:auth&r=:r';
+  const isMobile = () => {
+    var userAgent = navigator.userAgent
+    return /Android|iPhone|iPad|iPod|BlackBerry|webOS|Windows Phone|SymbianOS|IEMobile|Opera Mini/i.test(userAgent);
+  }
+  const fontResource = document.createElement("link");
+  fontResource.setAttribute("rel", "stylesheet");
+  isMobile()
+    ? fontResource.setAttribute("href", "https://registry.npmmirror.com/lxgw-wenkai-screen-web/latest/files/lxgwwenkaiscreen/result.css")
+    : fontResource.setAttribute("href", "https://registry.npmmirror.com/@callmebill/lxgw-wenkai-web/latest/files/lxgwwenkai-regular/result.css");
+  document.body.appendChild(fontResource);
+</script>
+<div>
+  <a href="/tags/" class="footer-link">
+    <i class="fa fa-tags"></i>
+    文章标签
+  </a>
+</div>
+<script defer="defer" src="https://registry.npmmirror.com/aplayer/1.10.1/files/dist/APlayer.min.js"></script>
+<link href="https://registry.npmmirror.com/aplayer/1.10.1/files/dist/APlayer.min.css" rel="stylesheet"/>
+<link href="/resources/css/aplayer.custom.css" rel="stylesheet"/>
+<script defer="defer" src="https://registry.npmmirror.com/meting/1.2.0/files/dist/Meting.min.js"></script>
+<div
+  class="aplayer"
+  data-id="8201666696"
+  data-server="netease"
+  data-type="playlist"
+  data-fixed="true"
+  data-autoplay="false"
+  data-order="random"
+  data-volume="0.2"
+  data-theme="#1661ab"
+  data-preload="auto"
+  data-lrc-type="0"></div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js" integrity="sha256-4mJNT2bMXxcc1GCJaxBmMPdmah5ji0Ldnd79DKd1hoM=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha256-AjM0J5XIbiB590BrznLEgZGLnOQWrt62s3BEq65Q/I0=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha256-9cmf7tcLdXpKsPi/2AWE93PbZpTp4M4tqzFk+lWomjU=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.0.8/medium-zoom.min.js" integrity="sha256-7PhEpEWEW0XXQ0k6kQrPKwuoIomz8R8IYyuU1Qew4P8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.18.0/comments.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.18.0/utils.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.18.0/motion.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.18.0/next-boot.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.18.0/pjax.min.js"></script>
+
+  
+
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.18.0/third-party/pace.min.js"></script>
+
+
+  
+
+
+
+
+
+</body>
+</html>

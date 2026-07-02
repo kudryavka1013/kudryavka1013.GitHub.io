@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/resources/favicon/logo.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon/logo.svg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon/logo.svg">
+  <link rel="mask-icon" href="/resources/favicon/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/silver/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.kudryavka.site","root":"/","images":"/resources/images/","scheme":"Gemini","darkmode":true,"version":"8.18.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"flat"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":true,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.18.0/config.min.js"></script>
+
+    <meta name="description" content="捕获这一块，冒泡这一块">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS 原生事件和 React 合成事件">
+<meta property="og:url" content="https://blog.kudryavka.site/posts/2623c4723632/index.html">
+<meta property="og:site_name" content="渐渐">
+<meta property="og:description" content="捕获这一块，冒泡这一块">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.kudryavka.site/blog/note/2602/2602-banner.png">
+<meta property="og:image" content="https://i.kudryavka.site/blog/note/2602/2602-1782957988.png">
+<meta property="og:image" content="https://i.kudryavka.site/blog/note/2602/2602-1782958411.png">
+<meta property="og:image" content="https://i.kudryavka.site/blog/note/2602/2602-1782958555.png">
+<meta property="og:image" content="https://i.kudryavka.site/blog/note/2602/2602-1782958844.png">
+<meta property="og:image" content="https://i.kudryavka.site/blog/note/2602/2602-1782958889.png">
+<meta property="og:image" content="https://i.kudryavka.site/blog/note/2602/2602-1782959297.png">
+<meta property="og:image" content="https://i.kudryavka.site/blog/note/2602/2602-1782959318.png">
+<meta property="og:image" content="https://i.kudryavka.site/blog/note/2602/2602-1782959739.png">
+<meta property="og:image" content="https://i.kudryavka.site/blog/note/2602/2602-1782958979.png">
+<meta property="og:image" content="https://i.kudryavka.site/blog/note/2602/2602-1782959747.png">
+<meta property="og:image" content="https://i.kudryavka.site/blog/note/2602/2602-1782959753.png">
+<meta property="article:published_time" content="2026-07-02T02:20:12.000Z">
+<meta property="article:modified_time" content="2026-07-02T02:44:43.000Z">
+<meta property="article:author" content="_-iX">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="React">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.kudryavka.site/blog/note/2602/2602-banner.png">
+
+
+<link rel="canonical" href="https://blog.kudryavka.site/posts/2623c4723632/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://blog.kudryavka.site/posts/2623c4723632/","path":"/posts/2623c4723632/","title":"JS 原生事件和 React 合成事件"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>JS 原生事件和 React 合成事件 | 渐渐</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">渐渐</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">如重温往日邮寄</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-life"><a href="/life/" rel="section"><i class="fa fa-mug-saucer fa-fw"></i>生活</a></li><li class="menu-item menu-item-notes"><a href="/notes/" rel="section"><i class="fa fa-feather-pointed fa-fw"></i>笔记</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-paper-plane fa-fw"></i>归档</a></li><li class="menu-item menu-item-music"><a href="/collection/music/" rel="section"><i class="fa fa-guitar fa-fw"></i>音乐</a></li>
+  </ul>
+</nav>
+
+
+
+
+<div class="kitty-wrapper">
+  <div class="kitty-main">
+    <span class="stand"></span>
+    <div class="cat">
+      <div class="body"></div>
+      <div class="head">
+        <div class="ear"></div>
+        <div class="ear"></div>
+      </div>
+      <div class="face">
+        <div class="nose"></div>
+        <div class="whisker-container">
+          <div class="whisker"></div>
+          <div class="whisker"></div>
+        </div>
+        <div class="whisker-container">
+          <div class="whisker"></div>
+          <div class="whisker"></div>
+        </div>
+      </div>
+      <div class="tail-container">
+        <div class="tail">
+          <div class="tail">
+            <div class="tail">
+              <div class="tail">
+                <div class="tail">
+                  <div class="tail">
+                    <div class="tail"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JS-%E5%8E%9F%E7%94%9F%E4%BA%8B%E4%BB%B6"><span class="nav-text">JS 原生事件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E6%96%B9%E6%B3%95"><span class="nav-text">相关方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#React-%E5%90%88%E6%88%90%E4%BA%8B%E4%BB%B6"><span class="nav-text">React 合成事件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98"><span class="nav-text">事件委托</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#React-%E4%BA%8B%E4%BB%B6%E6%9C%BA%E5%88%B6%E7%AE%80%E4%BB%8B"><span class="nav-text">React 事件机制简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#React-%E6%B7%B7%E5%90%88%E4%BD%BF%E7%94%A8%E5%90%88%E6%88%90%E4%BA%8B%E4%BB%B6%E5%92%8C%E5%8E%9F%E7%94%9F%E4%BA%8B%E4%BB%B6"><span class="nav-text">React 混合使用合成事件和原生事件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%90%88%E6%88%90%E4%BA%8B%E4%BB%B6%E5%92%8C%E5%8E%9F%E7%94%9F%E4%BA%8B%E4%BB%B6%E7%9A%84%E5%9B%9E%E8%B0%83%E6%89%A7%E8%A1%8C%E5%85%88%E5%90%8E%E9%A1%BA%E5%BA%8F%EF%BC%9F"><span class="nav-text">1. 合成事件和原生事件的回调执行先后顺序？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%B7%B7%E7%94%A8%E4%BA%8B%E4%BB%B6%E7%9A%84%E6%83%85%E5%86%B5%E4%B8%8B%E5%A6%82%E4%BD%95%E9%98%BB%E6%AD%A2%E4%BA%8B%E4%BB%B6%E4%BC%A0%E6%92%AD%EF%BC%9F"><span class="nav-text">2. 混用事件的情况下如何阻止事件传播？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#React-16-x2F-React-17-%E4%BA%8B%E4%BB%B6%E6%9C%BA%E5%88%B6%E7%9A%84%E5%B7%AE%E5%BC%82"><span class="nav-text">React 16 &#x2F; React 17+ 事件机制的差异</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-text">总结</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="_-iX"
+      src="/resources/images/avatar.webp">
+  <p class="site-author-name" itemprop="name">_-iX</p>
+  <div class="site-description" itemprop="description">Game / Harmonica / Front-End</div>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kudryavka1013" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kudryavka1013" rel="noopener me" target="_blank"><i class="fa-brands fa-github fa-lg fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/22735925" title="bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;22735925" rel="noopener me" target="_blank"><i class="fa-brands fa-bilibili fa-lg fa-fw"></i></a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.kudryavka.site/posts/2623c4723632/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/resources/images/avatar.webp">
+      <meta itemprop="name" content="_-iX">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="渐渐">
+      <meta itemprop="description" content="Game / Harmonica / Front-End">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="JS 原生事件和 React 合成事件 | 渐渐">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          JS 原生事件和 React 合成事件
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-07-02 10:20:12" itemprop="dateCreated datePublished" datetime="2026-07-02T10:20:12+08:00">2026-07-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/notes/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/notes/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p><img data-src="https://i.kudryavka.site/blog/note/2602/2602-banner.png" alt="banner|693"></p>
+<p>捕获这一块，冒泡这一块</p>
+<span id="more"></span>
+
+<h1 id="JS-原生事件"><a href="#JS-原生事件" class="headerlink" title="JS 原生事件"></a>JS 原生事件</h1><p><img data-src="https://i.kudryavka.site/blog/note/2602/2602-1782957988.png" alt="js event|694"></p>
+<h2 id="相关方法"><a href="#相关方法" class="headerlink" title="相关方法"></a>相关方法</h2><ol>
+<li><code>event.preventDefault</code>: 阻止事件默认行为</li>
+<li><code>event.stopPropagation</code>: 仅阻止事件继续传播</li>
+<li><code>event.stopImmediatePropagation</code>: 阻止事件继续传播，并且阻止目标元素上绑定的其他 同类型 事件的事件监听函数的执行。</li>
+</ol>
+<h1 id="React-合成事件"><a href="#React-合成事件" class="headerlink" title="React 合成事件"></a>React 合成事件</h1><h2 id="事件委托"><a href="#事件委托" class="headerlink" title="事件委托"></a>事件委托</h2><p>我们在 React 的 JSX 上绑定事件时，其实并非直接在相应元素上进行操作。<br>React → <code>&lt;button onClick=&#123;onClick&#125;</code> ≠ <code>&lt;button onclick=&#39;onclick()&#39;</code> ← 原生 JS</p>
+<p>尝试给按钮绑定一个事件，并通过控制台看看实际情况：</p>
+<p><img data-src="https://i.kudryavka.site/blog/note/2602/2602-1782958411.png" alt="175"></p>
+<p>可以发现在 button 上其实只放了一个占位的空函数，里面什么也没有做。</p>
+<p>实际上，绝大部分监听事件是在根节点进行绑定的并处理的。</p>
+<p><img data-src="https://i.kudryavka.site/blog/note/2602/2602-1782958555.png"></p>
+<p>这种做法就是<strong>事件委托，是一种利用事件冒泡机制，将子级的事件向上传递，最终交给父级统一处理的设计模式</strong>。</p>
+<h2 id="React-事件机制简介"><a href="#React-事件机制简介" class="headerlink" title="React 事件机制简介"></a>React 事件机制简介</h2><p>React 自己实现了实现了包括 代理、注册监听、构造合成事件、分发事件 等一整套事件流管理系统。而我们代码中能直接接触到的实际上是 React 给我们包装好的合成事件</p>
+<ul>
+<li>事件监听绑定</li>
+</ul>
+<p><img data-src="https://i.kudryavka.site/blog/note/2602/2602-1782958844.png" alt="react event bind|697"></p>
+<ul>
+<li>处理合成事件</li>
+<li>收集事件响应链路</li>
+<li>触发事件回调函数</li>
+</ul>
+<p><img data-src="https://i.kudryavka.site/blog/note/2602/2602-1782958889.png" alt="react event callback|697"></p>
+<p>合成事件的优点如下：</p>
+<ol>
+<li><p>一致性：React 统一对事件进行代理、注册、分发，抹平了不同浏览器之间的底层差异</p>
+</li>
+<li><p>可拓展性：React 在原有基础上进行改造，实现了自己的一些事件，更好地与 useState 等状态进行联动</p>
+<ul>
+<li>比如 <code>&lt;input type=&quot;checkbox&quot; /&gt;</code> 和 <code>&lt;input type=&quot;radio&quot; /&gt;</code>，change 事件触发时机是<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/HTMLElement/change_event">比较怪异</a>的，React 做了新的 onChange 来统一</li>
+</ul>
+</li>
+<li><p>提高效率（性能）：事件委托的设计就是用于解决事件处理程序过多的问题</p>
+<ul>
+<li>由于每绑定一个事件都会增加内存使用，使用事件委托，只需在 DOM 树中尽量最高的层次上添加一个事件处理程序；这减少了增删 DOM 元素时事件的添加移除动作，以此减少资源消耗；</li>
+<li>统一进行回调函数的处理，React 可以批量执行事件的具体回调函数，达到节约性能的目的。</li>
+</ul>
+</li>
+</ol>
+<h2 id="React-混合使用合成事件和原生事件"><a href="#React-混合使用合成事件和原生事件" class="headerlink" title="React 混合使用合成事件和原生事件"></a>React 混合使用合成事件和原生事件</h2><blockquote>
+<p>以下的测试均基于 React 17。React 17 后，几乎将所有的事件委托到根节点进行处理分发，根据实际触发的 DOM 节点链路按顺序组装一系列的回调函数，然后放到队列里去执行。</p>
+</blockquote>
+<p>开发过程中，有时候不可避免需要混合使用两种事件，我们需要注意它们执行的时机和可能存在的互相影响。以下是两个常见问题：</p>
+<h3 id="1-合成事件和原生事件的回调执行先后顺序？"><a href="#1-合成事件和原生事件的回调执行先后顺序？" class="headerlink" title="1. 合成事件和原生事件的回调执行先后顺序？"></a>1. 合成事件和原生事件的回调执行先后顺序？</h3><p>分别给 document， wrapper-div，button 绑定 click 合成事件和原生事件，点击后控制台输出如下：</p>
+<p><img data-src="https://i.kudryavka.site/blog/note/2602/2602-1782959297.png"></p>
+<p><img data-src="https://i.kudryavka.site/blog/note/2602/2602-1782959318.png" alt="175"></p>
+<ol>
+<li>从 document 开始执行捕获回调；</li>
+<li>在 root 处，根据触发顺序，依次执行 div 和 button 的合成事件的捕获回调，然后继续向下传播；</li>
+<li>依次触发 div，button 原生事件的捕获回调；</li>
+<li>依次触发 button，div 原生事件的冒泡回调；</li>
+<li>回到 root，依次触发合成事件的冒泡回调；</li>
+<li>最后执行 document 的冒泡回调并结束。</li>
+</ol>
+<h3 id="2-混用事件的情况下如何阻止事件传播？"><a href="#2-混用事件的情况下如何阻止事件传播？" class="headerlink" title="2. 混用事件的情况下如何阻止事件传播？"></a>2. 混用事件的情况下如何阻止事件传播？</h3><p>对于原生 JS 事件，我们可用 <code>event.stopPropagation</code>、<code>event.stopImmediatePropagation</code> 来阻止当前事件继续传播或同时阻止该元素上其它同类回调的执行</p>
+<p>但在 React 里，由于不同种事件的回调执行先后问题，某些情况下是不适用的。</p>
+<p><strong>场景：</strong> 父组件通过原生方式做了监听，在子组件添加有同样类型的监听事件，现在想在子组件覆盖父组件的动作</p>
+<p><img data-src="https://i.kudryavka.site/blog/note/2602/2602-1782959739.png" alt="175"></p>
+<blockquote>
+<p>思考：为什么需要 event.nativeEvent？</p>
+</blockquote>
+<p>子组件的回调分别使用 <code>event.stopPropagation</code>、<code>event.nativeEvent.stopImmediatePropagation</code>，发现并不能成功阻止。</p>
+<p>原因很简单，在合成事件的回调执行前，原生事件回调已经结束了<br>上述的两个方法只能阻止事件继续传播，对于在此之前已经触发的回调是无能为力的</p>
+<p><strong>解法1：</strong> 在不改变父组件的情况下，使用 onXXXCapture；但也要考虑执行回调提前带来的其它问题，比如是否会和其它回调冲突等<br><strong>解法2：</strong> 也用原生事件去处理子组件的回调；但这会导致整个 React 组件的事件回调执行混乱，尽量避免</p>
+<h2 id="React-16-x2F-React-17-事件机制的差异"><a href="#React-16-x2F-React-17-事件机制的差异" class="headerlink" title="React 16 &#x2F; React 17+ 事件机制的差异"></a>React 16 &#x2F; React 17+ 事件机制的差异</h2><p>在 React 16，是将事件委托节点绑定在 document 上的，合成事件的执行时机和绑定在 root 上不同；</p>
+<p><img data-src="https://i.kudryavka.site/blog/note/2602/2602-1782958979.png" alt="175"></p>
+<ol>
+<li>所有的合成事件（无论捕获还是冒泡）都在 document 的冒泡阶段统一执行，这就导致在合成事件的回调中，基本不可能去阻止原生回调的执行。一旦引入某些外部组件用了原生监听，而又要自定义的话，只能在 React 组件中用原生监听拦截。</li>
+<li>不是全部事件都能绑定到 document，比如 audio、video 标签的 onplay、onpause 等，因为这些标签的事件不会冒泡；</li>
+</ol>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
+<li>React 使用事件委托机制统一处理所有事件监听，委托的节点是 root (17+) 或 document (16)</li>
+<li>React 合成事件和原生事件回调执行顺序：</li>
+</ol>
+<p>React 17 后，除了 document，合成事件的捕获回调总在原生事件前，冒泡回调总在原生事件后；</p>
+<p><img data-src="https://i.kudryavka.site/blog/note/2602/2602-1782959747.png" alt="175"></p>
+<p>React 16，除了 document，合成事件回调总在原生事件后。</p>
+<p><img data-src="https://i.kudryavka.site/blog/note/2602/2602-1782959753.png" alt="157"></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+  <div class="license cc">
+  
+    <div class="license-title">JS 原生事件和 React 合成事件</div>
+    <div class="license-link">
+      <a href="https://blog.kudryavka.site/posts/2623c4723632/">https://blog.kudryavka.site/posts/2623c4723632/</a>
+    </div>
+    <div class="license-meta">
+      <div class="license-meta-item">
+        <div class="license-meta-title">本文作者</div>
+        <div class="license-meta-text">
+          _-iX
+        </div>
+      </div>
+        <div class="license-meta-item">
+          <div class="license-meta-title">发布于</div>
+          <div class="license-meta-text">
+            2026-07-02
+          </div>
+        </div>
+        <div class="license-meta-item">
+          <div class="license-meta-title">更新于</div>
+          <div class="license-meta-text">
+            2026-07-02
+          </div>
+        </div>
+      <div class="license-meta-item">
+        <div class="license-meta-title">许可协议</div>
+        <div class="license-meta-text">
+          
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank">
+              <i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA 4.0</a>
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-statement">
+        转载或引用本文时，请遵守上述许可协议，注明出处，不得用于商业用途！
+      
+    </div>
+  </div>
+          <div class="post-tags">
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+              <a href="/tags/React/" rel="tag"># React</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/87663e155a1c/" rel="prev" title="文档笔记迁移与发布">
+                  <i class="fa fa-angle-left"></i> 文档笔记迁移与发布
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2021 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fas fa-pray"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">_-iX</span>
+  </div><script>
+  const meting_api = 'https://api.injahow.cn/meting/?server=:server&type=:type&id=:id&auth=:auth&r=:r';
+  const isMobile = () => {
+    var userAgent = navigator.userAgent
+    return /Android|iPhone|iPad|iPod|BlackBerry|webOS|Windows Phone|SymbianOS|IEMobile|Opera Mini/i.test(userAgent);
+  }
+  const fontResource = document.createElement("link");
+  fontResource.setAttribute("rel", "stylesheet");
+  isMobile()
+    ? fontResource.setAttribute("href", "https://registry.npmmirror.com/lxgw-wenkai-screen-web/latest/files/lxgwwenkaiscreen/result.css")
+    : fontResource.setAttribute("href", "https://registry.npmmirror.com/@callmebill/lxgw-wenkai-web/latest/files/lxgwwenkai-regular/result.css");
+  document.body.appendChild(fontResource);
+</script>
+<div>
+  <a href="/tags/" class="footer-link">
+    <i class="fa fa-tags"></i>
+    文章标签
+  </a>
+</div>
+<script defer="defer" src="https://registry.npmmirror.com/aplayer/1.10.1/files/dist/APlayer.min.js"></script>
+<link href="https://registry.npmmirror.com/aplayer/1.10.1/files/dist/APlayer.min.css" rel="stylesheet"/>
+<link href="/resources/css/aplayer.custom.css" rel="stylesheet"/>
+<script defer="defer" src="https://registry.npmmirror.com/meting/1.2.0/files/dist/Meting.min.js"></script>
+<div
+  class="aplayer"
+  data-id="8201666696"
+  data-server="netease"
+  data-type="playlist"
+  data-fixed="true"
+  data-autoplay="false"
+  data-order="random"
+  data-volume="0.2"
+  data-theme="#1661ab"
+  data-preload="auto"
+  data-lrc-type="0"></div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js" integrity="sha256-4mJNT2bMXxcc1GCJaxBmMPdmah5ji0Ldnd79DKd1hoM=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha256-AjM0J5XIbiB590BrznLEgZGLnOQWrt62s3BEq65Q/I0=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha256-9cmf7tcLdXpKsPi/2AWE93PbZpTp4M4tqzFk+lWomjU=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.0.8/medium-zoom.min.js" integrity="sha256-7PhEpEWEW0XXQ0k6kQrPKwuoIomz8R8IYyuU1Qew4P8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.18.0/comments.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.18.0/utils.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.18.0/motion.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.18.0/next-boot.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.18.0/pjax.min.js"></script>
+
+  
+
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.18.0/third-party/pace.min.js"></script>
+
+
+  
+
+
+
+
+
+</body>
+</html>

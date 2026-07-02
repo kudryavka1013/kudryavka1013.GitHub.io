@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/resources/favicon/logo.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon/logo.svg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon/logo.svg">
+  <link rel="mask-icon" href="/resources/favicon/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/silver/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.kudryavka.site","root":"/","images":"/resources/images/","scheme":"Gemini","darkmode":true,"version":"8.18.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"flat"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":true,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.18.0/config.min.js"></script>
+
+    <meta name="description" content="编程不能没有复制粘贴，正如西方不能失去耶路撒冷">
+<meta property="og:type" content="article">
+<meta property="og:title" content="剪贴板那些事">
+<meta property="og:url" content="https://blog.kudryavka.site/posts/71eab5a4ebbf/index.html">
+<meta property="og:site_name" content="渐渐">
+<meta property="og:description" content="编程不能没有复制粘贴，正如西方不能失去耶路撒冷">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.kudryavka.site/blog/note-25-03-banner.png">
+<meta property="article:published_time" content="2025-08-29T08:39:32.000Z">
+<meta property="article:modified_time" content="2026-01-20T15:58:42.000Z">
+<meta property="article:author" content="_-iX">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.kudryavka.site/blog/note-25-03-banner.png">
+
+
+<link rel="canonical" href="https://blog.kudryavka.site/posts/71eab5a4ebbf/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://blog.kudryavka.site/posts/71eab5a4ebbf/","path":"/posts/71eab5a4ebbf/","title":"剪贴板那些事"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>剪贴板那些事 | 渐渐</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">渐渐</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">如重温往日邮寄</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-life"><a href="/life/" rel="section"><i class="fa fa-mug-saucer fa-fw"></i>生活</a></li><li class="menu-item menu-item-notes"><a href="/notes/" rel="section"><i class="fa fa-feather-pointed fa-fw"></i>笔记</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-paper-plane fa-fw"></i>归档</a></li><li class="menu-item menu-item-music"><a href="/collection/music/" rel="section"><i class="fa fa-guitar fa-fw"></i>音乐</a></li>
+  </ul>
+</nav>
+
+
+
+
+<div class="kitty-wrapper">
+  <div class="kitty-main">
+    <span class="stand"></span>
+    <div class="cat">
+      <div class="body"></div>
+      <div class="head">
+        <div class="ear"></div>
+        <div class="ear"></div>
+      </div>
+      <div class="face">
+        <div class="nose"></div>
+        <div class="whisker-container">
+          <div class="whisker"></div>
+          <div class="whisker"></div>
+        </div>
+        <div class="whisker-container">
+          <div class="whisker"></div>
+          <div class="whisker"></div>
+        </div>
+      </div>
+      <div class="tail-container">
+        <div class="tail">
+          <div class="tail">
+            <div class="tail">
+              <div class="tail">
+                <div class="tail">
+                  <div class="tail">
+                    <div class="tail"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Clipboard-Event"><span class="nav-text">Clipboard Event</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Async-Clipboard-API"><span class="nav-text">Async Clipboard API</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#readText"><span class="nav-text">readText</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#read"><span class="nav-text">read</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#write%E3%80%81writeText"><span class="nav-text">write、writeText</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E5%AE%83%E9%97%AE%E9%A2%98"><span class="nav-text">其它问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88-navigator-clipboard-read-%E6%97%A0%E6%B3%95%E8%8E%B7%E5%8F%96%E8%87%AA%E5%AE%9A%E4%B9%89-MIME-%E7%B1%BB%E5%9E%8B%E7%9A%84%E6%95%B0%E6%8D%AE%EF%BC%9F"><span class="nav-text">为什么 navigator.clipboard.read() 无法获取自定义 MIME 类型的数据？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%8C%E6%97%B6%E4%BD%BF%E7%94%A8%E5%90%8C%E6%AD%A5%E5%92%8C%E5%BC%82%E6%AD%A5-API%EF%BC%9F"><span class="nav-text">同时使用同步和异步 API？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-text">参考</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%8E%E8%AE%B0"><span class="nav-text">后记</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="_-iX"
+      src="/resources/images/avatar.webp">
+  <p class="site-author-name" itemprop="name">_-iX</p>
+  <div class="site-description" itemprop="description">Game / Harmonica / Front-End</div>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kudryavka1013" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kudryavka1013" rel="noopener me" target="_blank"><i class="fa-brands fa-github fa-lg fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/22735925" title="bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;22735925" rel="noopener me" target="_blank"><i class="fa-brands fa-bilibili fa-lg fa-fw"></i></a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.kudryavka.site/posts/71eab5a4ebbf/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/resources/images/avatar.webp">
+      <meta itemprop="name" content="_-iX">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="渐渐">
+      <meta itemprop="description" content="Game / Harmonica / Front-End">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="剪贴板那些事 | 渐渐">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          剪贴板那些事
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-08-29 16:39:32" itemprop="dateCreated datePublished" datetime="2025-08-29T16:39:32+08:00">2025-08-29</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/notes/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/notes/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p><img data-src="https://i.kudryavka.site/blog/note-25-03-banner.png" alt="banner"></p>
+<p>编程不能没有复制粘贴，正如西方不能失去耶路撒冷</p>
+<span id="more"></span>
+
+<p>浏览器上操作剪贴板的方式一般通过如下几种方式：</p>
+<ul>
+<li>Clipboard Event：通过剪切、复制、粘贴的动作触发事件</li>
+<li>Async Clipboard API：通过异步 API 直接操作剪贴板数据</li>
+<li>execCommand：document 暴露的古早方法，不推荐再使用</li>
+</ul>
+<h2 id="Clipboard-Event"><a href="#Clipboard-Event" class="headerlink" title="Clipboard Event"></a>Clipboard Event</h2><p>通过操作剪贴板的动作触发回调函数，进而读取内容，调整后续动作</p>
+<p><code>clipboardData</code> 提供了 <code>types</code> 数组，指示剪贴板中所有数据的类型</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">const onPaste &#x3D; (event) &#x3D;&gt; &#123;
+    const &#123;
+        types
+    &#125; &#x3D; event.clipboardData
+
+    for (const mimeType of types) &#123;
+        const dataRawText &#x3D; event.clipboardData.getData(mimeType);
+    &#125;
+&#125;</code></pre>
+
+<p>对于特殊的文件类型，是单独放在 <code>files</code> 属性中的，可以作为数组读取</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">const fileList &#x3D; Array.from(e.clipboardData.files);</code></pre>
+
+<h2 id="Async-Clipboard-API"><a href="#Async-Clipboard-API" class="headerlink" title="Async Clipboard API"></a>Async Clipboard API</h2><p><code>navigator.clipboard</code> 提供 <code>read</code> 、 <code>readText</code> 和 <code>write</code> 等方法</p>
+<h3 id="readText"><a href="#readText" class="headerlink" title="readText"></a>readText</h3><p>最简单的方法，读取纯文本内容，没有什么特别的</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">const text &#x3D; await navigator.clipboard.readText();</code></pre>
+
+<h3 id="read"><a href="#read" class="headerlink" title="read"></a>read</h3><p>区别于 Event 文件类型会单独存放在 <code>files</code> 中， <code>read</code> 方法会读取包括图片、文件、富文本在内的数据，可以用 blob 形式去读取</p>
+<p>同理，可以使用 <code>types</code> 字段得到剪贴板中的数据类型，然后使用 <code>getType</code> 方法去读取内容</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">const clipboardItems &#x3D; await navigator.clipboard.read();
+&#x2F;&#x2F; 通常只有一个 clipboardItem
+const items &#x3D; [];
+for (const clipboardItem of clipboardItems) &#123;
+    const blobs &#x3D; [];
+    for (const mimeType of clipboardItem.types) &#123;
+        const blob &#x3D; await clipboardItem.getType(mimeType);
+        const dataRawText &#x3D; await blob.text();
+    &#125;
+    blobs.push(&#123;
+        mimeType,
+        dataRawText
+    &#125;);
+&#125;
+items.push(blobs);</code></pre>
+
+<h3 id="write、writeText"><a href="#write、writeText" class="headerlink" title="write、writeText"></a>write、writeText</h3><p><code>write</code> 可以向剪贴板中写入内容，我们需要构造 <code>ClipboardItem</code> ，写入 MIME 类型和数据</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">const blob &#x3D; new Blob([&#39;Hello, world!&#39;], &#123;
+    type: &#39;text&#x2F;plain&#39;
+&#125;);
+const clipboardItem &#x3D; new ClipboardItem(&#123;
+    &#39;text&#x2F;plain&#39;: blob
+&#125;);
+
+navigator.clipboard.write([clipboardItem])
+    .then(() &#x3D;&gt; &#123;
+        console.log(&#39;内容已写入剪贴板&#39;);
+    &#125;)
+    .catch(err &#x3D;&gt; &#123;
+        console.error(&#39;写入失败&#39;, err);
+    &#125;);</code></pre>
+
+<p>还有一个相对简单的 <code>writeText</code> ，就仅是写入文本</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">await navigator.clipboard.writeText(&#39;要写入剪贴板的内容&#39;);</code></pre>
+
+<h2 id="其它问题"><a href="#其它问题" class="headerlink" title="其它问题"></a>其它问题</h2><h3 id="为什么-navigator-clipboard-read-无法获取自定义-MIME-类型的数据？"><a href="#为什么-navigator-clipboard-read-无法获取自定义-MIME-类型的数据？" class="headerlink" title="为什么 navigator.clipboard.read() 无法获取自定义 MIME 类型的数据？"></a>为什么 <code>navigator.clipboard.read()</code> 无法获取自定义 MIME 类型的数据？</h3><p>事件触发，是操作系统层面的信号，可认为是由<strong>用户主动授权</strong>的操作，浏览器一般会允许读取所有能提供的类型。</p>
+<p>但异步 API 读取，由于可以被 JS 直接发起，如果被滥用会有较大安全风险，因此受到安全策略的限制。<br>实际上，异步 API 一般只会提供标准的类型（text&#x2F;plain，text&#x2F;html 等），我们手动写入的自定义数据是不会被返回的，甚至连 <code>application/xxx</code> 这种格式也不会返回。</p>
+<h3 id="同时使用同步和异步-API？"><a href="#同时使用同步和异步-API？" class="headerlink" title="同时使用同步和异步 API？"></a>同时使用同步和异步 API？</h3><p>当同时使用 <code>navigator.clipboard.read()</code> 和操作 <code>Event</code> 时，浏览器会优先处理异步剪贴板数据，部分浏览器会清空或锁定同步的 <code>e.clipboardData</code> ，导致在同一个 <code>paste</code> 事件里无法再通过 <code>e.clipboardData</code> 读取到原始数据。当然一般情况下，没有这样做的需要。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a target="_blank" rel="noopener" href="https://www.w3.org/TR/clipboard-apis">https://www.w3.org/TR/clipboard-apis</a><br><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Clipboard_API">https://developer.mozilla.org/zh-CN/docs/Web/API/Clipboard_API</a></p>
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>起初在公司项目的开发过程中，发现几个 API 读取剪贴板数据不太一致，而且常规的 <code>console.log</code> 没法直接展示完整的剪贴板内容。因此才整理出本文，并开发了一个<a target="_blank" rel="noopener" href="https://cv.kudryavka.site/">小工具</a>，可以比较方便的看到自己的剪贴板里有什么。</p>
+<p>剪贴板的图标是怎么演变来的？</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+  <div class="license cc">
+  
+    <div class="license-title">剪贴板那些事</div>
+    <div class="license-link">
+      <a href="https://blog.kudryavka.site/posts/71eab5a4ebbf/">https://blog.kudryavka.site/posts/71eab5a4ebbf/</a>
+    </div>
+    <div class="license-meta">
+      <div class="license-meta-item">
+        <div class="license-meta-title">本文作者</div>
+        <div class="license-meta-text">
+          _-iX
+        </div>
+      </div>
+        <div class="license-meta-item">
+          <div class="license-meta-title">发布于</div>
+          <div class="license-meta-text">
+            2025-08-29
+          </div>
+        </div>
+        <div class="license-meta-item">
+          <div class="license-meta-title">更新于</div>
+          <div class="license-meta-text">
+            2026-01-20
+          </div>
+        </div>
+      <div class="license-meta-item">
+        <div class="license-meta-title">许可协议</div>
+        <div class="license-meta-text">
+          
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank">
+              <i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA 4.0</a>
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-statement">
+        转载或引用本文时，请遵守上述许可协议，注明出处，不得用于商业用途！
+      
+    </div>
+  </div>
+          <div class="post-tags">
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/e33c4a5a6d9b/" rel="prev" title="WebAssembly 基础">
+                  <i class="fa fa-angle-left"></i> WebAssembly 基础
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/posts/87663e155a1c/" rel="next" title="文档笔记迁移与发布">
+                  文档笔记迁移与发布 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2021 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fas fa-pray"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">_-iX</span>
+  </div><script>
+  const meting_api = 'https://api.injahow.cn/meting/?server=:server&type=:type&id=:id&auth=:auth&r=:r';
+  const isMobile = () => {
+    var userAgent = navigator.userAgent
+    return /Android|iPhone|iPad|iPod|BlackBerry|webOS|Windows Phone|SymbianOS|IEMobile|Opera Mini/i.test(userAgent);
+  }
+  const fontResource = document.createElement("link");
+  fontResource.setAttribute("rel", "stylesheet");
+  isMobile()
+    ? fontResource.setAttribute("href", "https://registry.npmmirror.com/lxgw-wenkai-screen-web/latest/files/lxgwwenkaiscreen/result.css")
+    : fontResource.setAttribute("href", "https://registry.npmmirror.com/@callmebill/lxgw-wenkai-web/latest/files/lxgwwenkai-regular/result.css");
+  document.body.appendChild(fontResource);
+</script>
+<div>
+  <a href="/tags/" class="footer-link">
+    <i class="fa fa-tags"></i>
+    文章标签
+  </a>
+</div>
+<script defer="defer" src="https://registry.npmmirror.com/aplayer/1.10.1/files/dist/APlayer.min.js"></script>
+<link href="https://registry.npmmirror.com/aplayer/1.10.1/files/dist/APlayer.min.css" rel="stylesheet"/>
+<link href="/resources/css/aplayer.custom.css" rel="stylesheet"/>
+<script defer="defer" src="https://registry.npmmirror.com/meting/1.2.0/files/dist/Meting.min.js"></script>
+<div
+  class="aplayer"
+  data-id="8201666696"
+  data-server="netease"
+  data-type="playlist"
+  data-fixed="true"
+  data-autoplay="false"
+  data-order="random"
+  data-volume="0.2"
+  data-theme="#1661ab"
+  data-preload="auto"
+  data-lrc-type="0"></div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js" integrity="sha256-4mJNT2bMXxcc1GCJaxBmMPdmah5ji0Ldnd79DKd1hoM=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha256-AjM0J5XIbiB590BrznLEgZGLnOQWrt62s3BEq65Q/I0=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha256-9cmf7tcLdXpKsPi/2AWE93PbZpTp4M4tqzFk+lWomjU=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.0.8/medium-zoom.min.js" integrity="sha256-7PhEpEWEW0XXQ0k6kQrPKwuoIomz8R8IYyuU1Qew4P8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.18.0/comments.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.18.0/utils.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.18.0/motion.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.18.0/next-boot.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.18.0/pjax.min.js"></script>
+
+  
+
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.18.0/third-party/pace.min.js"></script>
+
+
+  
+
+
+
+
+
+</body>
+</html>

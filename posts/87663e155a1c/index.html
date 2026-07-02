@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/resources/favicon/logo.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon/logo.svg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon/logo.svg">
+  <link rel="mask-icon" href="/resources/favicon/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/silver/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.kudryavka.site","root":"/","images":"/resources/images/","scheme":"Gemini","darkmode":true,"version":"8.18.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"flat"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":true,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.18.0/config.min.js"></script>
+
+    <meta name="description" content="本文记录了将博客笔记文档与部署代码仓库分离的过程，部分借助 AI 实现，权当参考。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="文档笔记迁移与发布">
+<meta property="og:url" content="https://blog.kudryavka.site/posts/87663e155a1c/index.html">
+<meta property="og:site_name" content="渐渐">
+<meta property="og:description" content="本文记录了将博客笔记文档与部署代码仓库分离的过程，部分借助 AI 实现，权当参考。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.kudryavka.site/blog/note-26-01-banner.png">
+<meta property="article:published_time" content="2026-02-24T09:00:00.000Z">
+<meta property="article:modified_time" content="2026-02-25T01:10:57.000Z">
+<meta property="article:author" content="_-iX">
+<meta property="article:tag" content="博客搭建">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.kudryavka.site/blog/note-26-01-banner.png">
+
+
+<link rel="canonical" href="https://blog.kudryavka.site/posts/87663e155a1c/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://blog.kudryavka.site/posts/87663e155a1c/","path":"/posts/87663e155a1c/","title":"文档笔记迁移与发布"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>文档笔记迁移与发布 | 渐渐</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">渐渐</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">如重温往日邮寄</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-life"><a href="/life/" rel="section"><i class="fa fa-mug-saucer fa-fw"></i>生活</a></li><li class="menu-item menu-item-notes"><a href="/notes/" rel="section"><i class="fa fa-feather-pointed fa-fw"></i>笔记</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-paper-plane fa-fw"></i>归档</a></li><li class="menu-item menu-item-music"><a href="/collection/music/" rel="section"><i class="fa fa-guitar fa-fw"></i>音乐</a></li>
+  </ul>
+</nav>
+
+
+
+
+<div class="kitty-wrapper">
+  <div class="kitty-main">
+    <span class="stand"></span>
+    <div class="cat">
+      <div class="body"></div>
+      <div class="head">
+        <div class="ear"></div>
+        <div class="ear"></div>
+      </div>
+      <div class="face">
+        <div class="nose"></div>
+        <div class="whisker-container">
+          <div class="whisker"></div>
+          <div class="whisker"></div>
+        </div>
+        <div class="whisker-container">
+          <div class="whisker"></div>
+          <div class="whisker"></div>
+        </div>
+      </div>
+      <div class="tail-container">
+        <div class="tail">
+          <div class="tail">
+            <div class="tail">
+              <div class="tail">
+                <div class="tail">
+                  <div class="tail">
+                    <div class="tail"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%8E%B0%E7%8A%B6"><span class="nav-text">现状</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%B9%E6%A1%88"><span class="nav-text">方案</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B7%E4%BD%93%E6%AD%A5%E9%AA%A4"><span class="nav-text">具体步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90"><span class="nav-text">1. 访问权限</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E9%85%8D%E7%BD%AE%E4%BB%93%E5%BA%93-B%EF%BC%88%E5%8F%91%E9%80%81%E8%A7%A6%E5%8F%91%E4%BF%A1%E5%8F%B7%EF%BC%89"><span class="nav-text">2. 配置仓库 B（发送触发信号）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E9%85%8D%E7%BD%AE%E4%BB%93%E5%BA%93-A%EF%BC%88%E6%8E%A5%E6%94%B6%E4%BF%A1%E5%8F%B7%E5%B9%B6%E6%9E%84%E5%BB%BA%EF%BC%89"><span class="nav-text">3. 配置仓库 A（接收信号并构建）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0%E9%A1%BA%E5%BA%8F%E5%8F%98%E5%8C%96%E3%80%81%E6%9B%B4%E6%96%B0%E6%97%B6%E9%97%B4%E9%94%99%E8%AF%AF%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-text">博客文章顺序变化、更新时间错误的问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%90%8E%E8%AE%B0"><span class="nav-text">后记</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="_-iX"
+      src="/resources/images/avatar.webp">
+  <p class="site-author-name" itemprop="name">_-iX</p>
+  <div class="site-description" itemprop="description">Game / Harmonica / Front-End</div>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kudryavka1013" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kudryavka1013" rel="noopener me" target="_blank"><i class="fa-brands fa-github fa-lg fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/22735925" title="bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;22735925" rel="noopener me" target="_blank"><i class="fa-brands fa-bilibili fa-lg fa-fw"></i></a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.kudryavka.site/posts/87663e155a1c/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/resources/images/avatar.webp">
+      <meta itemprop="name" content="_-iX">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="渐渐">
+      <meta itemprop="description" content="Game / Harmonica / Front-End">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="文档笔记迁移与发布 | 渐渐">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          文档笔记迁移与发布
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-02-24 17:00:00" itemprop="dateCreated datePublished" datetime="2026-02-24T17:00:00+08:00">2026-02-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/notes/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/notes/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" itemprop="url" rel="index"><span itemprop="name">博客搭建</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p><img data-src="https://i.kudryavka.site/blog/note-26-01-banner.png" alt="banner"></p>
+<p>本文记录了将博客笔记文档与部署代码仓库分离的过程，部分借助 AI 实现，权当参考。</p>
+<span id="more"></span>
+
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>原先仅是总结一些前端的学习笔记，因此直接使用 VSC 在代码仓库里编辑和发布。后来接触了 Obsidian 后，才发现原来除了使用云笔记方案之外，也可以把文档维护在自己的 GitHub 上，真是妙哉（之前我怎么没想到），于是便开始了折腾之旅。</p>
+<p>笔记逐渐多起来之后，发现同时维护笔记仓库和博客仓库的文档，是一件挺麻烦的事。把笔记整理成文章，需要来回复制；并且文字内容放在不同的地方，让我有点不爽（强迫症犯了）。于是便想能否将博客的内容搬到笔记仓库中去。</p>
+<h1 id="现状"><a href="#现状" class="headerlink" title="现状"></a>现状</h1><p>目前使用的是 Hexo 引擎，文档是放置在 A 仓库的 <code>source</code> 目录下，当 A 仓库有 commit 时，github actions 会自动触发部署动作，检出仓库并执行部署命令。</p>
+<p>我想要的效果是笔记放在 B 仓库，笔记有更新时让 A 仓库读取 B 仓库的文件，把文档复制过去，然后执行原有的步骤。那么核心问题就是 A、B 仓库之间的监听和读取了。</p>
+<h1 id="方案"><a href="#方案" class="headerlink" title="方案"></a>方案</h1><p>执行流程大概如下：</p>
+<ol>
+<li>仓库 B (文档)：当有代码推送时，通过 Action 向仓库 A 发送一个信号（Repository Dispatch）。</li>
+<li>仓库 A (博客)：接收到信号后，启动构建任务。</li>
+<li>仓库 A 的构建脚本：<ul>
+<li>检出仓库 A 的代码（Hexo 环境）。</li>
+<li>检出仓库 B 的代码（Markdown 文档）。</li>
+<li>将 B 的文档移动到 A 的特定目录下。</li>
+<li>执行部署操作。</li>
+</ul>
+</li>
+</ol>
+<h2 id="具体步骤"><a href="#具体步骤" class="headerlink" title="具体步骤"></a>具体步骤</h2><h3 id="1-访问权限"><a href="#1-访问权限" class="headerlink" title="1. 访问权限"></a>1. 访问权限</h3><p>由于涉及到跨仓库触发和读取私有仓库，需要一个 Personal Access Token (PAT)。</p>
+<ol>
+<li>在 GitHub 设置中生成一个 PAT (Classic)，勾选 <code>repo</code> 权限。</li>
+<li>将这个 Token 保存到仓库 B 的 <code>Settings -&gt; Secrets and variables -&gt; Actions</code> 中，命名为 <code>BLOG_ACCESS_TOKEN</code>，用于仓库 B 访问仓库 A 的文件。</li>
+<li>同样将 Token 保存到仓库 A，用于仓库 A 发送部署信号给仓库 B。</li>
+</ol>
+<h3 id="2-配置仓库-B（发送触发信号）"><a href="#2-配置仓库-B（发送触发信号）" class="headerlink" title="2. 配置仓库 B（发送触发信号）"></a>2. 配置仓库 B（发送触发信号）</h3><p>在仓库 B 的 action <code>.github/workflows/deploy_trigger.yml</code> 中写入：</p>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml">name: Trigger Blog Build
+
+on:
+  push:
+    branches:
+      - main
+    # 核心配置：只有当以下路径的文件发生变动时，才运行此工作流
+    paths:
+      - &#39;Blog&#x2F;posts&#x2F;**&#39;      # 监听 blog posts 文件夹下所有文件，视情况调整
+
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Repository Dispatch to Blog Repo
+        run: |
+          curl -X POST https:&#x2F;&#x2F;api.github.com&#x2F;repos&#x2F;用户名&#x2F;仓库名&#x2F;dispatches \
+          -H &quot;Accept: application&#x2F;vnd.github.v3+json&quot; \
+          -H &quot;Authorization: Bearer $&#123;&#123; secrets.BLOG_ACCESS_TOKEN &#125;&#125;&quot; \
+          -d &#39;&#123;&quot;event_type&quot;: &quot;docs_updated&quot;&#125;&#39;</code></pre>
+
+<p>它会在某特定文件夹变动时，发送一个 <code>docs_updated</code> 的消息</p>
+<h3 id="3-配置仓库-A（接收信号并构建）"><a href="#3-配置仓库-A（接收信号并构建）" class="headerlink" title="3. 配置仓库 A（接收信号并构建）"></a>3. 配置仓库 A（接收信号并构建）</h3><p>在仓库 A 的 action <code>.github/workflows/blog_deploy.yml</code> 中配置：</p>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml">name: blog-deploy
+
+on:
+  push:
+    branches: [ &quot;main&quot; ]
+  repository_dispatch:
+    types: [docs_updated] # 对应文档仓库的 event_type 钩子
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - name: Checkout engine repo
+        uses: actions&#x2F;checkout@v3
+        with: 
+          ref: &#39;main&#39;
+          fetch-depth: 0
+          path: blog-engine # 指定检出到 blog-engine 目录
+          
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Checkout docs repo
+        uses: actions&#x2F;checkout@v3
+        with:
+          repository: username&#x2F;project # 文档仓库名称 
+          token: $&#123;&#123; secrets.BLOG_ACCESS_TOKEN &#125;&#125;
+          ref: &#39;main&#39;
+          fetch-depth: 0
+          path: blog-docs # 检出到 blog-docs 目录
+
+      - name: Sync docs to build repo
+        run: |
+          # 确保 source 目录存在
+          mkdir -p blog-engine&#x2F;source
+          # 把文档仓库对应文件夹内的所有内容，复制到 hexo 仓库 source 目录
+          cp -r blog-docs&#x2F;Blog&#x2F;. blog-engine&#x2F;source&#x2F;
+      
+      - name: Setup node
+
+      - name: Install dependencies
+
+      - name: Setup environment
+
+      - name: Deploy</code></pre>
+
+<h1 id="博客文章顺序变化、更新时间错误的问题"><a href="#博客文章顺序变化、更新时间错误的问题" class="headerlink" title="博客文章顺序变化、更新时间错误的问题"></a>博客文章顺序变化、更新时间错误的问题</h1><p>由于我的博客中使用 mtime（文件修改时间）来展示更新日期，所以会有时间错误的问题。</p>
+<p>可以尝试使用 git 的文件提交时间来修正文章的最后修改时间（以下为 AI 生成，仅供参考）</p>
+<pre class="line-numbers language-none"><code class="language-none">- name: Restore B repo Blog files modified time
+  run: |
+    # 进入文档仓库目录
+    cd blog-docs
+    # 遍历 B 仓库 Blog 下的所有 md 文件（包括子文件夹）
+    git ls-files -z &#39;Blog&#x2F;**&#x2F;*.md&#39; | while read -d &#39;&#39; doc_path; do
+      # 获取文件的最后提交时间戳
+      doc_timestamp&#x3D;$(git log -1 --format&#x3D;&quot;%ct&quot; &quot;$doc_path&quot;)
+      # 匹配 A 仓库 source 目录下的路径（去掉 Blog&#x2F; 前缀）
+      # 例：B 仓库 Blog&#x2F;folder&#x2F;article.md → A 仓库 source&#x2F;folder&#x2F;article.md
+      target_path&#x3D;&quot;..&#x2F;blog-engine&#x2F;source&#x2F;$&#123;doc_path#Blog&#x2F;&#125;&quot;
+      # 仅当文件存在时更新时间，避免报错
+      if [ -f &quot;$target_path&quot; ]; then
+        touch -d &quot;@$doc_timestamp&quot; &quot;$target_path&quot;
+        echo &quot;Restored time for: $target_path&quot;
+      fi
+    done
+    cd ..</code></pre>
+
+<h1 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h1><p>用上 Obsidian 之后，明显感觉到做笔记的频率变高了。在这个 AI 大行其道的时代，文字变得廉价，实现变得简单。保持写博客和记笔记，是用来提醒自己仍有学习能力的方式，可能也是某种无声抗议吧。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+  <div class="license cc">
+  
+    <div class="license-title">文档笔记迁移与发布</div>
+    <div class="license-link">
+      <a href="https://blog.kudryavka.site/posts/87663e155a1c/">https://blog.kudryavka.site/posts/87663e155a1c/</a>
+    </div>
+    <div class="license-meta">
+      <div class="license-meta-item">
+        <div class="license-meta-title">本文作者</div>
+        <div class="license-meta-text">
+          _-iX
+        </div>
+      </div>
+        <div class="license-meta-item">
+          <div class="license-meta-title">发布于</div>
+          <div class="license-meta-text">
+            2026-02-24
+          </div>
+        </div>
+        <div class="license-meta-item">
+          <div class="license-meta-title">更新于</div>
+          <div class="license-meta-text">
+            2026-02-25
+          </div>
+        </div>
+      <div class="license-meta-item">
+        <div class="license-meta-title">许可协议</div>
+        <div class="license-meta-text">
+          
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank">
+              <i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA 4.0</a>
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-statement">
+        转载或引用本文时，请遵守上述许可协议，注明出处，不得用于商业用途！
+      
+    </div>
+  </div>
+          <div class="post-tags">
+              <a href="/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" rel="tag"># 博客搭建</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/71eab5a4ebbf/" rel="prev" title="剪贴板那些事">
+                  <i class="fa fa-angle-left"></i> 剪贴板那些事
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/posts/2623c4723632/" rel="next" title="JS 原生事件和 React 合成事件">
+                  JS 原生事件和 React 合成事件 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2021 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fas fa-pray"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">_-iX</span>
+  </div><script>
+  const meting_api = 'https://api.injahow.cn/meting/?server=:server&type=:type&id=:id&auth=:auth&r=:r';
+  const isMobile = () => {
+    var userAgent = navigator.userAgent
+    return /Android|iPhone|iPad|iPod|BlackBerry|webOS|Windows Phone|SymbianOS|IEMobile|Opera Mini/i.test(userAgent);
+  }
+  const fontResource = document.createElement("link");
+  fontResource.setAttribute("rel", "stylesheet");
+  isMobile()
+    ? fontResource.setAttribute("href", "https://registry.npmmirror.com/lxgw-wenkai-screen-web/latest/files/lxgwwenkaiscreen/result.css")
+    : fontResource.setAttribute("href", "https://registry.npmmirror.com/@callmebill/lxgw-wenkai-web/latest/files/lxgwwenkai-regular/result.css");
+  document.body.appendChild(fontResource);
+</script>
+<div>
+  <a href="/tags/" class="footer-link">
+    <i class="fa fa-tags"></i>
+    文章标签
+  </a>
+</div>
+<script defer="defer" src="https://registry.npmmirror.com/aplayer/1.10.1/files/dist/APlayer.min.js"></script>
+<link href="https://registry.npmmirror.com/aplayer/1.10.1/files/dist/APlayer.min.css" rel="stylesheet"/>
+<link href="/resources/css/aplayer.custom.css" rel="stylesheet"/>
+<script defer="defer" src="https://registry.npmmirror.com/meting/1.2.0/files/dist/Meting.min.js"></script>
+<div
+  class="aplayer"
+  data-id="8201666696"
+  data-server="netease"
+  data-type="playlist"
+  data-fixed="true"
+  data-autoplay="false"
+  data-order="random"
+  data-volume="0.2"
+  data-theme="#1661ab"
+  data-preload="auto"
+  data-lrc-type="0"></div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js" integrity="sha256-4mJNT2bMXxcc1GCJaxBmMPdmah5ji0Ldnd79DKd1hoM=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha256-AjM0J5XIbiB590BrznLEgZGLnOQWrt62s3BEq65Q/I0=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha256-9cmf7tcLdXpKsPi/2AWE93PbZpTp4M4tqzFk+lWomjU=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.0.8/medium-zoom.min.js" integrity="sha256-7PhEpEWEW0XXQ0k6kQrPKwuoIomz8R8IYyuU1Qew4P8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.18.0/comments.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.18.0/utils.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.18.0/motion.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.18.0/next-boot.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.18.0/pjax.min.js"></script>
+
+  
+
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.18.0/third-party/pace.min.js"></script>
+
+
+  
+
+
+
+
+
+</body>
+</html>

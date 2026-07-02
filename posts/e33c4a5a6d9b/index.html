@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/resources/favicon/logo.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon/logo.svg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon/logo.svg">
+  <link rel="mask-icon" href="/resources/favicon/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/silver/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.kudryavka.site","root":"/","images":"/resources/images/","scheme":"Gemini","darkmode":true,"version":"8.18.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"flat"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":true,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.18.0/config.min.js"></script>
+
+    <meta name="description" content="Any application that can be written in JavaScript, will eventually be written in JavaScript.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WebAssembly 基础">
+<meta property="og:url" content="https://blog.kudryavka.site/posts/e33c4a5a6d9b/index.html">
+<meta property="og:site_name" content="渐渐">
+<meta property="og:description" content="Any application that can be written in JavaScript, will eventually be written in JavaScript.">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.kudryavka.site/blog/note-25-02-banner.webp">
+<meta property="og:image" content="https://i.kudryavka.site/blog/note-25-02-1.png">
+<meta property="article:published_time" content="2025-03-14T09:40:44.000Z">
+<meta property="article:modified_time" content="2026-01-20T15:58:42.000Z">
+<meta property="article:author" content="_-iX">
+<meta property="article:tag" content="WebAssembly">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.kudryavka.site/blog/note-25-02-banner.webp">
+
+
+<link rel="canonical" href="https://blog.kudryavka.site/posts/e33c4a5a6d9b/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://blog.kudryavka.site/posts/e33c4a5a6d9b/","path":"/posts/e33c4a5a6d9b/","title":"WebAssembly 基础"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>WebAssembly 基础 | 渐渐</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">渐渐</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">如重温往日邮寄</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-life"><a href="/life/" rel="section"><i class="fa fa-mug-saucer fa-fw"></i>生活</a></li><li class="menu-item menu-item-notes"><a href="/notes/" rel="section"><i class="fa fa-feather-pointed fa-fw"></i>笔记</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-paper-plane fa-fw"></i>归档</a></li><li class="menu-item menu-item-music"><a href="/collection/music/" rel="section"><i class="fa fa-guitar fa-fw"></i>音乐</a></li>
+  </ul>
+</nav>
+
+
+
+
+<div class="kitty-wrapper">
+  <div class="kitty-main">
+    <span class="stand"></span>
+    <div class="cat">
+      <div class="body"></div>
+      <div class="head">
+        <div class="ear"></div>
+        <div class="ear"></div>
+      </div>
+      <div class="face">
+        <div class="nose"></div>
+        <div class="whisker-container">
+          <div class="whisker"></div>
+          <div class="whisker"></div>
+        </div>
+        <div class="whisker-container">
+          <div class="whisker"></div>
+          <div class="whisker"></div>
+        </div>
+      </div>
+      <div class="tail-container">
+        <div class="tail">
+          <div class="tail">
+            <div class="tail">
+              <div class="tail">
+                <div class="tail">
+                  <div class="tail">
+                    <div class="tail"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-text">是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88"><span class="nav-text">为什么</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%A7%E5%9E%8B%E9%A1%B9%E7%9B%AE%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8"><span class="nav-text">大型项目中的应用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%8E%E4%B9%88%E5%81%9A"><span class="nav-text">怎么做</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JavaScript-API"><span class="nav-text">JavaScript API</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E7%9A%84%E5%8A%A0%E8%BD%BD%E4%B8%8E%E8%B0%83%E7%94%A8"><span class="nav-text">基础的加载与调用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9B%B4%E5%A5%BD%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F"><span class="nav-text">更好的使用方式</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#compile"><span class="nav-text">compile()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#instantiate"><span class="nav-text">instantiate()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#compileStreaming-amp-instantiateStreaming"><span class="nav-text">compileStreaming() &amp; instantiateStreaming()</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WASM-interface"><span class="nav-text">WASM interface</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-text">总结</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="_-iX"
+      src="/resources/images/avatar.webp">
+  <p class="site-author-name" itemprop="name">_-iX</p>
+  <div class="site-description" itemprop="description">Game / Harmonica / Front-End</div>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kudryavka1013" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kudryavka1013" rel="noopener me" target="_blank"><i class="fa-brands fa-github fa-lg fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/22735925" title="bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;22735925" rel="noopener me" target="_blank"><i class="fa-brands fa-bilibili fa-lg fa-fw"></i></a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.kudryavka.site/posts/e33c4a5a6d9b/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/resources/images/avatar.webp">
+      <meta itemprop="name" content="_-iX">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="渐渐">
+      <meta itemprop="description" content="Game / Harmonica / Front-End">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="WebAssembly 基础 | 渐渐">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          WebAssembly 基础
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-03-14 17:40:44" itemprop="dateCreated datePublished" datetime="2025-03-14T17:40:44+08:00">2025-03-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/notes/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/notes/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p><img data-src="https://i.kudryavka.site/blog/note-25-02-banner.webp" alt="banner"></p>
+<p>Any application that can be written in JavaScript, will eventually be written in JavaScript.</p>
+<h2 id="是什么"><a href="#是什么" class="headerlink" title="是什么"></a>是什么</h2><ul>
+<li>是一种二进制格式的低级的类汇编语言，相比 JavaScript 具备更好的性能</li>
+<li>是一种新的编码方式，以 <code>.wasm</code> 格式存在，可以在 Web 浏览器或 Node 环境里运行</li>
+<li>可以作为 C&#x2F;C++&#x2F;C#&#x2F;Rust 等语言的编译目标（通过某些工具将其编译为 WebAssembly）</li>
+<li>可以作为模块被 JavaScript 引入，和 JavaScript 一起使用</li>
+</ul>
+<p>对于 JavaScript 来说，它相当于是引入第三方插件（相对于 JavaScript 来说），不可直接使用。引入它的目的并非是完全替代掉 JavaScript，而是一个补充，用于弥补 JavaScript 在某些高复杂度场景下的缺陷。</p>
+<h2 id="为什么"><a href="#为什么" class="headerlink" title="为什么"></a>为什么</h2><ul>
+<li>前端的开发逻辑日益复杂，JavaScript 本身的性能限制了大型应用在 Web 上的运行效率</li>
+<li>WebAssembly 能使得以各种语言编写的代码都可以接近原生的速度在 Web 中运行</li>
+<li>WebAssembly 能让以前无法在 Web 上运行的客户端应用程序得以在 Web 上运行</li>
+</ul>
+<p><img data-src="https://i.kudryavka.site/blog/note-25-02-1.png" alt="example"></p>
+<h3 id="大型项目中的应用"><a href="#大型项目中的应用" class="headerlink" title="大型项目中的应用"></a>大型项目中的应用</h3><p>能够让一些计算量非常重的客户端应用在浏览器上相对流畅地运行，例如：</p>
+<ul>
+<li>AutoCAD</li>
+<li>Unity</li>
+<li>Google Earth</li>
+<li>Figma</li>
+</ul>
+<h2 id="怎么做"><a href="#怎么做" class="headerlink" title="怎么做"></a>怎么做</h2><blockquote>
+<p>这里把 API 放到前面，感觉比较符合逻辑</p>
+</blockquote>
+<h3 id="JavaScript-API"><a href="#JavaScript-API" class="headerlink" title="JavaScript API"></a>JavaScript API</h3><p>WebAssembly（下文简称 WASM）的一大用途就是作为一个库，提供一些函数，给 Web 上的 JavaScript（下文简称 JS）调用或者给通用的程序调用。将其看作是一个特殊的 module，我们只需要写一些胶水代码就可以像使用常规的 module 一样去使用它。</p>
+<p>假定现在已经有了一个 .wasm 文件，它内部实现的功能类似于下边这段伪代码：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">import &#123; import_func &#125; from js
+
+function wa_hello() &#123;
+    import_func(&#96;Hello WebAssembly!&#96;)
+&#125;
+
+export wa_hello</code></pre>
+
+<p>显然，这是引入了一个函数，同时向外提供一个函数。那么现在 JavaScript 中引入使用，可以分为以下三步：</p>
+<ul>
+<li>获取 <code>.wasm</code> 二进制文件，将它转换成类型数组或者 <code>ArrayBuffer</code></li>
+<li>将二进制数据编译成一个 <code>WebAssembly.Module</code></li>
+<li>外部传入该模块所需的 imports，并将其实例化；调用其实例 exports 提供的方法</li>
+</ul>
+<h4 id="基础的加载与调用"><a href="#基础的加载与调用" class="headerlink" title="基础的加载与调用"></a>基础的加载与调用</h4><p>获取文件就像常规的 <code>.js</code> 文件一样，可以从网络（XHR、Fetch）下载、从本地文件读取、从 IndexedDB 获取。</p>
+<p>编译和编译阶段，我们需要使用官方的 WebAssembly API 对文件进行编译，基本的几个方法如下：</p>
+<ul>
+<li><code>WebAssembly.Module</code>：构造函数，输入同步编译一个 WASM 模块</li>
+<li><code>WebAssembly.Instance</code> ：构造函数，同步实例化返回一个 WASM 模块</li>
+</ul>
+<p>将以上几步结合起来，我们可以得到最基本的 WASM 实例化方式：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">const importObject &#x3D; &#123;
+    js: &#123;
+        import_func: (arg) &#x3D;&gt; console.log(arg)
+    &#125;
+&#125;
+
+const instance &#x3D; fetch(&quot;simple.wasm&quot;)
+    .then((response) &#x3D;&gt; response.arrayBuffer())
+    .then((bytes) &#x3D;&gt; &#123;
+        const mod &#x3D; new WebAssembly.Module(bytes);
+        const instance &#x3D; new WebAssembly.Instance(module, importObject);
+        return instance;
+    &#125;)
+
+instance.exports.wa_hello(); &#x2F;&#x2F; 调用 WASM 导出的 hello 函数</code></pre>
+
+<p>注意到 <code>Instance()</code> 有个额外参数 <code>importObject</code>，这是什么东西？</p>
+<p>对于 WASM 模块来说，当需要引入 JS 函数、共享内存等特殊依赖时，就得从 <code>importObject</code> 获取。当然如果什么都不需要，<code>importObject</code> 给一个空对象 <code>&#123;&#125;</code> 就行了。</p>
+<p>那要怎么知道它要什么东西呢？这会在对 .wasm 文件进行解读的时候一并讨论。现在先暂时跳过 <code>importObject</code> 这部分，假设我们已经对这个模块知根知底，并且所有东西都准备好了。</p>
+<h4 id="更好的使用方式"><a href="#更好的使用方式" class="headerlink" title="更好的使用方式"></a>更好的使用方式</h4><p>出于速度和效率的考虑，官方贴心地提供了异步的加载方式：</p>
+<ul>
+<li><code>WebAssembly.compile()</code></li>
+<li><code>WebAssembly.instantiate()</code></li>
+<li><code>WebAssembly.compileStreaming()</code></li>
+<li><code>WebAssembly.instantiateStreaming()</code></li>
+</ul>
+<p>它们功能有重叠的部分，我们按需使用即可，下面一个个来介绍。</p>
+<h5 id="compile"><a href="#compile" class="headerlink" title="compile()"></a>compile()</h5><p>接收 bytes，然后异步编译一个 WASM 模块，会返回 Promise。</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">const module &#x3D; await WebAssembly.compile(bytes);</code></pre>
+
+<h5 id="instantiate"><a href="#instantiate" class="headerlink" title="instantiate()"></a>instantiate()</h5><p>可以接收 bytes 或编译后的模块，异步编译并实例化；如果传入的是模块，会直接实例化。</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">&#x2F;&#x2F; 传入 bytes 会同时返回实例和模块
+const &#123; instance, module &#125; &#x3D; await WebAssembly.instantiate(bytes, importObject);
+&#x2F;&#x2F; 传入 module 则只有实例
+const instance &#x3D; await WebAssembly.instantiate(module, importObject);</code></pre>
+
+<h5 id="compileStreaming-amp-instantiateStreaming"><a href="#compileStreaming-amp-instantiateStreaming" class="headerlink" title="compileStreaming() &amp; instantiateStreaming()"></a>compileStreaming() &amp; instantiateStreaming()</h5><p>对于流式方法，可以一边下载一边进行编译或实例化，它们直接对来自网络的原始字节流执行操作，从而无需执行 ArrayBuffer 步骤。但是只能接收 wasm Stream Promise，且请求头需要设置为 <code>Application/wasm</code> 。</p>
+<p>目前一般都用这两个 API，性能比较高。</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">&#x2F;&#x2F; 可以直接接收一个 fetch，返回一个模块
+const module &#x3D; await WebAssembly.compileStreaming(fetch(&#39;simple.wasm&#39;))
+&#x2F;&#x2F; 同理
+const &#123; module, instance &#125; &#x3D; await WebAssembly.instantiateStreaming(fetch(&#39;simple.wasm&#39;), importObject)</code></pre>
+
+<h3 id="WASM-interface"><a href="#WASM-interface" class="headerlink" title="WASM interface"></a>WASM interface</h3><p>一个 Module 所声明的 imports 和 exports 可以通过静态方法 <code>WebAssembly.Module.imports()</code> 和 <code>WebAssembly.Module.exports()</code> 获取。</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">const module &#x3D; await WebAssembly.compileStreaming(fetch(&quot;simple.wasm&quot;));
+const imports &#x3D; WebAssembly.Module.imports(module);
+const exports &#x3D; WebAssembly.Module.exports(module);
+console.log(imports, exports);</code></pre>
+
+<p>我们随便找个文件，解析后会得到类似下图的对象数组：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">&#x2F;&#x2F; imports
+[&#123;
+    module: &quot;my_namespace&quot;,
+    name: &quot;imported_func&quot;,
+    kind: &quot;function&quot;
+&#125;]
+&#x2F;&#x2F; exports
+[&#123;
+    name: &quot;exported_func&quot;,
+    kind: &quot;function&quot;
+&#125;]</code></pre>
+
+<p>更多可看 MDN 相关示例：<a target="_blank" rel="noopener" href="https://mdn.org.cn/en-US/docs/WebAssembly/JavaScript_interface/Module/imports_static#using_imports">导入</a> &amp; <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/WebAssembly/Reference/JavaScript_interface/Module/exports_static#examples">导出</a></p>
+<p>上面的结果可以看出，WebAssembly 使用两级命名空间 <code>module</code> + <code>name</code> 来表示导入的模块。 <code>kind</code> 表示导入的类型，除了 <code>function</code> 外，还有 <code>memory</code> 、 <code>table</code> 等。导出则只有一层空间，统一从 <code>exports</code> 访问。</p>
+<p>传入的 <code>importObject</code> 需要与 <code>imports</code> 的结构一一对应，以此为例，可以得到：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">const importObject &#x3D; &#123;
+    my_namespace: &#123;
+        imported_func: (p) &#x3D;&gt; &#123; your code &#125;
+    &#125;
+&#125;</code></pre>
+
+<p>至于其它的类型，可以用 <code>WebAssembly.Memory</code>、<code>WebAssembly.Table</code> 等相应 API 生成实例并传入。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>以上就是 WebAssembly 的基本使用方法，并不算非常复杂。</p>
+<p>其实 JS 主要就是写一些胶水代码，大部分实际运算都放在 WASM 里做，MDN 官网也有许多<a target="_blank" rel="noopener" href="https://github.com/mdn/webassembly-examples">示例</a>可供参考。要继续深入，则需要学习 .wasm 文件的结构以及了解相应的转换工具如 wasm2wat、Emscripten 等。</p>
+<p>关于 WebAssembly 的前世今生可以看<a target="_blank" rel="noopener" href="https://www.w3ctech.com/topic/2027">这里</a>。有意思的是，目前前端生态的工具链，大部分都不是用 JS 实现的，开头那句话的 JavaScript 现在看来改成 Web 似乎更合适。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+  <div class="license cc">
+  
+    <div class="license-title">WebAssembly 基础</div>
+    <div class="license-link">
+      <a href="https://blog.kudryavka.site/posts/e33c4a5a6d9b/">https://blog.kudryavka.site/posts/e33c4a5a6d9b/</a>
+    </div>
+    <div class="license-meta">
+      <div class="license-meta-item">
+        <div class="license-meta-title">本文作者</div>
+        <div class="license-meta-text">
+          _-iX
+        </div>
+      </div>
+        <div class="license-meta-item">
+          <div class="license-meta-title">发布于</div>
+          <div class="license-meta-text">
+            2025-03-14
+          </div>
+        </div>
+        <div class="license-meta-item">
+          <div class="license-meta-title">更新于</div>
+          <div class="license-meta-text">
+            2026-01-20
+          </div>
+        </div>
+      <div class="license-meta-item">
+        <div class="license-meta-title">许可协议</div>
+        <div class="license-meta-text">
+          
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank">
+              <i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA 4.0</a>
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-statement">
+        转载或引用本文时，请遵守上述许可协议，注明出处，不得用于商业用途！
+      
+    </div>
+  </div>
+          <div class="post-tags">
+              <a href="/tags/WebAssembly/" rel="tag"># WebAssembly</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/e95848201a70/" rel="prev" title="下划线的几种 CSS 实现方案">
+                  <i class="fa fa-angle-left"></i> 下划线的几种 CSS 实现方案
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/posts/71eab5a4ebbf/" rel="next" title="剪贴板那些事">
+                  剪贴板那些事 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2021 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fas fa-pray"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">_-iX</span>
+  </div><script>
+  const meting_api = 'https://api.injahow.cn/meting/?server=:server&type=:type&id=:id&auth=:auth&r=:r';
+  const isMobile = () => {
+    var userAgent = navigator.userAgent
+    return /Android|iPhone|iPad|iPod|BlackBerry|webOS|Windows Phone|SymbianOS|IEMobile|Opera Mini/i.test(userAgent);
+  }
+  const fontResource = document.createElement("link");
+  fontResource.setAttribute("rel", "stylesheet");
+  isMobile()
+    ? fontResource.setAttribute("href", "https://registry.npmmirror.com/lxgw-wenkai-screen-web/latest/files/lxgwwenkaiscreen/result.css")
+    : fontResource.setAttribute("href", "https://registry.npmmirror.com/@callmebill/lxgw-wenkai-web/latest/files/lxgwwenkai-regular/result.css");
+  document.body.appendChild(fontResource);
+</script>
+<div>
+  <a href="/tags/" class="footer-link">
+    <i class="fa fa-tags"></i>
+    文章标签
+  </a>
+</div>
+<script defer="defer" src="https://registry.npmmirror.com/aplayer/1.10.1/files/dist/APlayer.min.js"></script>
+<link href="https://registry.npmmirror.com/aplayer/1.10.1/files/dist/APlayer.min.css" rel="stylesheet"/>
+<link href="/resources/css/aplayer.custom.css" rel="stylesheet"/>
+<script defer="defer" src="https://registry.npmmirror.com/meting/1.2.0/files/dist/Meting.min.js"></script>
+<div
+  class="aplayer"
+  data-id="8201666696"
+  data-server="netease"
+  data-type="playlist"
+  data-fixed="true"
+  data-autoplay="false"
+  data-order="random"
+  data-volume="0.2"
+  data-theme="#1661ab"
+  data-preload="auto"
+  data-lrc-type="0"></div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js" integrity="sha256-4mJNT2bMXxcc1GCJaxBmMPdmah5ji0Ldnd79DKd1hoM=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha256-AjM0J5XIbiB590BrznLEgZGLnOQWrt62s3BEq65Q/I0=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha256-9cmf7tcLdXpKsPi/2AWE93PbZpTp4M4tqzFk+lWomjU=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.0.8/medium-zoom.min.js" integrity="sha256-7PhEpEWEW0XXQ0k6kQrPKwuoIomz8R8IYyuU1Qew4P8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.18.0/comments.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.18.0/utils.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.18.0/motion.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.18.0/next-boot.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.18.0/pjax.min.js"></script>
+
+  
+
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.18.0/third-party/pace.min.js"></script>
+
+
+  
+
+
+
+
+
+</body>
+</html>
